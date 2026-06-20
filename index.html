@@ -163,7 +163,8 @@ async function submitLead(e){
 function Hero(){
   const [on,setOn] = React.useState(false);
   React.useEffect(()=>{ const t=setTimeout(()=>setOn(true),60); return ()=>clearTimeout(t); },[]);
-  const r = (d)=>({ className:`adj-reveal${on?' adj-reveal--on':''}`, 'data-delay':String(d) });
+  // Merge any base classes with the reveal class so semantic styling (colors, layout) survives the spread.
+  const r = (d, base='')=>({ className:`${base?base+' ':''}adj-reveal${on?' adj-reveal--on':''}`, 'data-delay':String(d) });
   return (
     <section className="hero" id="top">
       {/* Muted-autoplay background video over a still poster fallback.
@@ -176,14 +177,14 @@ function Hero(){
       </div>
       <div className="hero__grid">
         <div>
-          <span className="u-eyebrow hero__eyebrow" {...r(0)}>Protect · Prepare · Recover</span>
+          <span {...r(0,'u-eyebrow hero__eyebrow')}>Protect · Prepare · Recover</span>
           <h1 {...r(1)}>When disaster strikes, you shouldn't face your insurer alone.</h1>
-          <p className="u-lead hero__lead" {...r(2)}>Adjustly's licensed public adjusters and nationwide restoration network represent property owners — never insurance companies — before, during, and after a claim.</p>
-          <div className="hero__cta" {...r(3)}>
+          <p {...r(2,'u-lead hero__lead')}>Adjustly's licensed public adjusters and nationwide restoration network represent property owners — never insurance companies — before, during, and after a claim.</p>
+          <div {...r(3,'hero__cta')}>
             <Button variant="primary" size="lg" href="#start" icon="arrow-right" iconPosition="right">Get a free policy review</Button>
             <Button variant="secondary" size="lg" href="#how">How it works</Button>
           </div>
-          <div className="hero__micro" {...r(4)}><i data-lucide="badge-check"></i>Licensed public adjusters · Free, no-obligation review</div>
+          <div {...r(4,'hero__micro')}><i data-lucide="badge-check"></i>Licensed public adjusters · Free, no-obligation review</div>
         </div>
         <div className={`crisis adj-reveal${on?' adj-reveal--on':''}`} data-delay="3">
           <img className="crisis__mark" src={MARKW} alt="" />

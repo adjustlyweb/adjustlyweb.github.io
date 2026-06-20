@@ -100,7 +100,8 @@ function App(){
   const [on,setOn] = React.useState(false);
   React.useEffect(()=>{ const t=setTimeout(()=>{setOn(true); window.lucide&&window.lucide.createIcons();},80); return ()=>clearTimeout(t); },[]);
   React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
-  const r=(d)=>({className:`adj-reveal${on?' adj-reveal--on':''}`,'data-delay':String(d)});
+  // Merge any base classes with the reveal class so semantic styling survives the spread.
+  const r=(d, base='')=>({className:`${base?base+' ':''}adj-reveal${on?' adj-reveal--on':''}`,'data-delay':String(d)});
   return (
     <div>
       <SiteHeader logoSrc={NAVY} currentHref="#services" />
@@ -108,9 +109,9 @@ function App(){
         <img className="lhero__mark" src={MARKW} alt="" />
         <div className="lhero__grid">
           <div>
-            <span className="lhero__crumb" {...r(0)}><a href="index.html">Services</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Storm &amp; hurricane</span>
+            <span {...r(0,'lhero__crumb')}><a href="index.html">Services</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Storm &amp; hurricane</span>
             <h1 {...r(1)}>Storm &amp; hurricane damage claims, handled for you.</h1>
-            <p className="lhero__lead" {...r(2)}>Wind, hail, and named-storm losses are routinely underestimated. Our licensed adjusters and local restoration specialists document the real scope — and we never work for your insurer.</p>
+            <p {...r(2,'lhero__lead')}>Wind, hail, and named-storm losses are routinely underestimated. Our licensed adjusters and local restoration specialists document the real scope — and we never work for your insurer.</p>
             <div {...r(3)} style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
               <Badge variant="accent" icon="map-pin">Nationwide network</Badge>
               <Badge variant="brand" icon="shield-check">Owner advocates</Badge>
