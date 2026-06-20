@@ -1,0 +1,31 @@
+/* ============================================================
+   ADJUSTLY — SPACING & LAYOUT TOKENS
+   8px base rhythm with a few half-steps. Generous negative space.
+   ============================================================ */
+:root {
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4  */
+  --space-2: 0.5rem;   /* 8  */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-5: 1.5rem;   /* 24 */
+  --space-6: 2rem;     /* 32 */
+  --space-7: 3rem;     /* 48 */
+  --space-8: 4rem;     /* 64 */
+  --space-9: 6rem;     /* 96 */
+  --space-10: 8rem;    /* 128 */
+
+  /* ---- Section rhythm (fluid vertical bands) ---- */
+  --section-y: clamp(4rem, 2.5rem + 6vw, 8rem); /* @kind spacing */
+  --section-y-sm: clamp(2.5rem, 1.8rem + 3vw, 4.5rem); /* @kind spacing */
+
+  /* ---- Container widths ---- */
+  --container: 1200px;       /* default editorial column field */
+  --container-wide: 1360px;  /* full marketing width */
+  --container-text: 720px;   /* long-form reading measure */
+  --gutter: clamp(1.25rem, 0.6rem + 3vw, 3rem); /* @kind spacing */
+
+  /* ---- Editorial grid ---- */
+  --grid-cols: 12; /* @kind other */
+  --grid-gap: clamp(1rem, 0.5rem + 1.6vw, 2rem);
+}

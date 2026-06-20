@@ -1,0 +1,51 @@
+<!-- @dsCard group="Components" viewport="700x760" name="Cards — service · benefit · article · specialty" subtitle="Editorial cards; hover for top-accent + lift" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body { margin: 0; padding: 26px 24px; background: var(--paper); }
+  .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing:0.1em; text-transform:uppercase; color: var(--text-secondary); margin: 22px 0 12px; }
+  .lbl:first-child { margin-top: 0; }
+  .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .navy { background: var(--navy-700); border-radius: var(--radius-md); padding: 22px; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+  const { ServiceCard, BenefitCard, ArticleCard, SpecialtyCard } = window.AdjustlyDesignSystem_e51731;
+  function Demo(){
+    return (<div>
+      <div className="lbl">Service cards</div>
+      <div className="g2">
+        <ServiceCard icon="droplets" title="Water & flood claims" href="#">We document hidden moisture, value the loss correctly, and handle the insurer.</ServiceCard>
+        <ServiceCard icon="flame" title="Fire & smoke claims" href="#">From structure to contents, we substantiate the full scope of fire and smoke loss.</ServiceCard>
+      </div>
+      <div className="lbl">Benefit cards (numbered)</div>
+      <div className="g2">
+        <BenefitCard number="01" icon="users" title="We work for you">Licensed public adjusters who represent property owners — never insurance companies.</BenefitCard>
+        <BenefitCard number="02" icon="file-text" title="We build the claim">Documented, valued, and substantiated so nothing is left on the table.</BenefitCard>
+      </div>
+      <div className="lbl">Article card · Specialty card</div>
+      <div className="g2">
+        <ArticleCard category="Guide" title="What to do in the first 48 hours after water damage" excerpt="Document first, mitigate second, call your adjuster third." readTime="6 min read" markSrc="../../assets/logo/adjustly-mark.png" href="#" />
+        <div style={{display:'flex',flexDirection:'column',gap:'14px'}}>
+          <SpecialtyCard icon="cloud-lightning" title="Storm & hurricane" tag="Nationwide network">Wind, hail, and named-storm damage, assessed by local restoration specialists.</SpecialtyCard>
+          <SpecialtyCard icon="home" title="Roof & structural">Hidden structural loss documented to the standard your policy requires.</SpecialtyCard>
+        </div>
+      </div>
+      <div className="lbl">Benefit cards on navy</div>
+      <div className="navy g2">
+        <BenefitCard inverse number="01" icon="shield-check" title="On your side">We never work for the insurer. Our duty is to you, the property owner.</BenefitCard>
+        <BenefitCard inverse number="02" icon="badge-check" title="Licensed & verified">Advocacy led by a licensed public adjuster you can verify by number.</BenefitCard>
+      </div>
+    </div>);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  setTimeout(()=>window.lucide&&window.lucide.createIcons(), 80);
+</script>
+</body></html>

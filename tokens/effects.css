@@ -1,0 +1,46 @@
+/* ============================================================
+   ADJUSTLY — EFFECTS: radii, hairline borders, engineered shadows, motion
+   Engineered precision: crisp small radii, 1px hairlines, restrained
+   shadows. No pillowy blur on everything.
+   ============================================================ */
+:root {
+  /* ---- Radii (crisp; 4–8px max, square for big surfaces) ---- */
+  --radius-0: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;   /* default — buttons, inputs, chips */
+  --radius-md: 6px;   /* cards */
+  --radius-lg: 8px;   /* large modules, images */
+  --radius-pill: 999px; /* badges/tags only */
+
+  /* ---- Hairlines ---- */
+  --border-1: 1px solid var(--border-hairline);
+  --border-strong-1: 1.5px solid var(--border-strong);
+  --border-accent-1: 2px solid var(--accent);
+
+  /* ---- Shadows — tight, low, directional. Not pillowy. ---- */
+  --shadow-none: none;
+  --shadow-xs: 0 1px 2px rgba(11, 37, 69, 0.06);
+  --shadow-sm: 0 1px 3px rgba(11, 37, 69, 0.08), 0 1px 1px rgba(11, 37, 69, 0.04);
+  --shadow-md: 0 8px 24px -12px rgba(11, 37, 69, 0.22);
+  --shadow-lg: 0 24px 48px -24px rgba(11, 37, 69, 0.30);
+  /* Lift on hover: a crisp ring + low shadow, not a blur cloud */
+  --shadow-card-hover: 0 16px 32px -20px rgba(11, 37, 69, 0.28);
+
+  /* ---- Focus ---- */
+  --focus-shadow: 0 0 0 3px rgba(91, 164, 214, 0.45);
+  --focus-offset: 2px; /* @kind other */
+
+  /* ---- Motion: restrained, confident, never bouncy ---- */
+  --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1); /* @kind other */
+  --dur-fast: 140ms; /* @kind other */
+  --dur-base: 220ms; /* @kind other */
+  --dur-slow: 420ms; /* @kind other */
+  --dur-reveal: 720ms; /* @kind other */
+
+  /* ---- Z layers ---- */
+  --z-header: 100; /* @kind other */
+  --z-overlay: 200; /* @kind other */
+  --z-modal: 300; /* @kind other */
+  --z-toast: 400; /* @kind other */
+}

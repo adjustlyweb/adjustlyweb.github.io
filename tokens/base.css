@@ -1,0 +1,119 @@
+/* ============================================================
+   ADJUSTLY — BASE ELEMENT STYLES & BRAND UTILITIES
+   Applied globally. Keep this lean; components own their detail.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-primary);
+  background: var(--surface-page);
+  font-feature-settings: "ss01", "cv05";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---- Display & headings (Newsreader) ---- */
+h1, h2, h3, h4, .u-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-display);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  color: var(--text-brand);
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); letter-spacing: var(--ls-display);
+     font-variation-settings: "opsz" var(--opsz-display); }
+h2 { font-size: var(--fs-h2); font-variation-settings: "opsz" var(--opsz-heading); }
+h3 { font-size: var(--fs-h3); font-variation-settings: "opsz" var(--opsz-heading); }
+h4 { font-size: var(--fs-h4); }
+
+p { margin: 0 0 1em; text-wrap: pretty; }
+.u-lead { font-size: var(--fs-lead); line-height: var(--lh-normal); color: var(--slate-600); }
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { color: var(--text-link-hover); }
+
+strong, b { font-weight: var(--fw-semibold); }
+
+/* ---- Brand eyebrow / kicker (mono, tracked, uppercase) ---- */
+.u-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+/* short tick mark before an eyebrow */
+.u-eyebrow::before {
+  content: "";
+  width: 1.5rem; height: 2px;
+  background: var(--accent);
+  display: inline-block;
+}
+
+/* ---- Oversized editorial section numeral ---- */
+.u-numeral {
+  font-family: var(--font-display);
+  font-size: var(--fs-numeral);
+  font-weight: var(--fw-regular);
+  line-height: 0.9;
+  color: var(--ice-200);
+  font-variation-settings: "opsz" 72;
+  letter-spacing: -0.04em;
+}
+
+/* ---- Layout helpers ---- */
+.u-container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+.u-container--wide { max-width: var(--container-wide); }
+.u-container--text { max-width: var(--container-text); }
+.u-section { padding-block: var(--section-y); }
+.u-tint { background: var(--surface-tint); }
+.u-inverse { background: var(--surface-inverse); color: var(--text-on-inverse); }
+.u-inverse h1, .u-inverse h2, .u-inverse h3, .u-inverse h4 { color: var(--text-on-inverse); }
+
+/* ---- Hairline rule used as an editorial divider ---- */
+.u-rule { border: 0; border-top: var(--border-1); margin: 0; }
+
+/* ---- Keyboard focus ---- */
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-radius: var(--radius-xs);
+}
+
+/* ---- Orchestrated page-load reveal (one per page) ----
+   Transition-based, not keyframes: the VISIBLE state is the resting/base style,
+   so content always shows when the animation isn't actively running (print,
+   PDF export, screenshot capture, frozen timelines). We only animate FROM hidden
+   while a node is not yet armed (`--on`), and only under reduced-motion: no-preference. */
+/* Opacity stays 1 at all times — only translateY animates — so a frozen or
+   un-run transition leaves content fully legible (merely offset), never hidden. */
+.adj-reveal {
+  transform: none;
+  transition: transform var(--dur-reveal) var(--ease-out);
+  will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .adj-reveal:not(.adj-reveal--on) { transform: translateY(12px); }
+  .adj-reveal--on[data-delay="1"] { transition-delay: 90ms; }
+  .adj-reveal--on[data-delay="2"] { transition-delay: 180ms; }
+  .adj-reveal--on[data-delay="3"] { transition-delay: 270ms; }
+  .adj-reveal--on[data-delay="4"] { transition-delay: 360ms; }
+  .adj-reveal--on[data-delay="5"] { transition-delay: 450ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .adj-reveal { transform: none !important; transition: none !important; }
+  * { scroll-behavior: auto !important; }
+}

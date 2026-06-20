@@ -1,0 +1,49 @@
+<!-- @dsCard group="Components" viewport="700x420" name="Trust & compliance — badges, license, disclaimers" subtitle="Badges, the License-Verified trust badge, and disclaimer callouts" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body { margin: 0; padding: 26px 24px; background: var(--paper); }
+  .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing:0.1em; text-transform:uppercase; color: var(--text-secondary); margin: 22px 0 12px; }
+  .lbl:first-child { margin-top: 0; }
+  .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .stack { display: flex; flex-direction: column; gap: 12px; max-width: 560px; }
+  .navy { background: var(--navy-700); border-radius: var(--radius-md); padding: 18px; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+  const { Badge, LicenseBadge, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+  function Demo(){
+    return (<div>
+      <div className="lbl">Badges</div>
+      <div className="row">
+        <Badge variant="neutral">Guide</Badge>
+        <Badge variant="accent" icon="map-pin">Nationwide network</Badge>
+        <Badge variant="brand" icon="shield-check">Owner advocates</Badge>
+        <Badge variant="success" icon="check">No obligation</Badge>
+        <Badge variant="warning" icon="clock">Deadline soon</Badge>
+        <Badge variant="outline">Storm</Badge>
+      </div>
+      <div className="lbl">License-verified trust badge</div>
+      <div className="row">
+        <LicenseBadge number="PA-1098842" state="Florida Public Adjuster" />
+        <div className="navy"><LicenseBadge inverse number="PA-1098842" state="Florida Public Adjuster" /></div>
+      </div>
+      <div className="lbl">Disclaimer callouts</div>
+      <div className="stack">
+        <DisclaimerCallout title="We represent property owners">Adjustly's licensed public adjusters advocate for policyholders, never insurance companies. This page is educational and not legal advice.</DisclaimerCallout>
+        <DisclaimerCallout variant="warning" title="Deadlines matter">Most policies limit how long you have to file a claim. Don't wait to document your loss.</DisclaimerCallout>
+        <DisclaimerCallout variant="info">Your free policy review carries no cost and no obligation.</DisclaimerCallout>
+      </div>
+    </div>);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  setTimeout(()=>window.lucide&&window.lucide.createIcons(), 80);
+</script>
+</body></html>

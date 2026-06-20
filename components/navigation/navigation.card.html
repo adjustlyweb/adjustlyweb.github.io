@@ -1,0 +1,46 @@
+<!-- @dsCard group="Components" viewport="1200x900" name="Navigation — header, trust, tracker, FAQ, footer" subtitle="The full site shell plus journey & trust modules" -->
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body { margin: 0; background: var(--paper); }
+  .sec { max-width: var(--container); margin-inline: auto; padding: 40px var(--gutter); }
+  .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing:0.1em; text-transform:uppercase; color: var(--text-secondary); margin: 0 0 18px; }
+  .navyband { background: var(--navy-700); }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script type="text/babel">
+  const { SiteHeader, SiteFooter, TrustBar, ProcessTracker, FaqAccordion } = window.AdjustlyDesignSystem_e51731;
+  const NAVY = '../../assets/logo/adjustly-logo-navy.png';
+  const WHITE = '../../assets/logo/adjustly-logo-white.png';
+  function Demo(){
+    return (<div>
+      <SiteHeader logoSrc={NAVY} currentHref="#services" />
+      <div className="sec"><p className="lbl">Trust bar</p><TrustBar /></div>
+      <div className="navyband"><div className="sec"><p className="lbl" style={{color:'#9CCBEA'}}>Process tracker · horizontal · on navy</p>
+        <ProcessTracker inverse orientation="horizontal" current={1} steps={[
+          {eyebrow:'Step 01', title:'Protect', desc:'Stabilize and document the loss safely.', icon:'shield'},
+          {eyebrow:'Step 02', title:'Prepare', desc:'We build and value the full claim.', icon:'file-text'},
+          {eyebrow:'Step 03', title:'Recover', desc:'We advocate until the claim is resolved.', icon:'circle-check'},
+        ]} />
+      </div></div>
+      <div className="sec" style={{maxWidth:'760px'}}><p className="lbl">FAQ accordion</p>
+        <FaqAccordion defaultOpen={[0]} items={[
+          {q:'What does a public adjuster actually do?', a:'A public adjuster represents you — the property owner — not your insurance company. We document the damage, value the loss, prepare the claim, and handle the back-and-forth with your insurer.'},
+          {q:'Is the policy review really free?', a:'Yes. The policy review is free and carries no obligation.'},
+          {q:'When should I call — before or after a loss?', a:'Both. We help you prepare before storm season and advocate for you after a loss occurs.'},
+        ]} />
+      </div>
+      <SiteFooter logoSrc={WHITE} />
+    </div>);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+  setTimeout(()=>window.lucide&&window.lucide.createIcons(), 100);
+</script>
+</body></html>

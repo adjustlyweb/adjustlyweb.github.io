@@ -1,0 +1,6 @@
+/* Adjustly webfonts.
+   Display: Newsreader — readable editorial serif with optical sizing (semibold headlines).
+   Text/UI: IBM Plex Sans — refined humanist grotesque with real character.
+   Mono:    IBM Plex Mono — license numbers, eyebrow labels, oversized numerals.
+   Served from Google Fonts; self-host the woff2 files for production if desired. */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');

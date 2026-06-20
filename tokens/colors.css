@@ -1,0 +1,63 @@
+/* ============================================================
+   ADJUSTLY — COLOR TOKENS
+   Sampled from the brand shield. Deep navy dominant, sharp blue
+   accents, no gold, never purple. AA-contrast pairings noted.
+   ============================================================ */
+:root {
+  /* ---- Brand scale (raw values) ---- */
+  --navy-900: #0B2545; /* Midnight — deepest ground, footers, overlays */
+  --navy-800: #0F2742;
+  --navy-700: #142D4A; /* Deep Navy — PRIMARY brand color */
+  --navy-600: #1D3D5E;
+  --blue-600: #245A8C;
+  --blue-500: #2E6CA6; /* Adjustly Blue — CTAs, links */
+  --blue-400: #3E83C0;
+  --sky-500:  #5BA4D6; /* Sky Blue — sharp accent, icons, hovers */
+  --sky-300:  #9CCBEA;
+  --ice-200:  #DCEBF7;
+  --ice-100:  #EAF3FA; /* Ice Blue — tinted section backgrounds */
+
+  --ink-900:  #0F172A; /* Ink — body text */
+  --slate-600:#475569;
+  --slate-500:#64748B; /* Slate — secondary text, captions */
+  --slate-300:#CBD5E1; /* hairline-on-light, disabled text */
+  --line-200: #E2E8F0; /* default hairline border */
+
+  --white:    #FFFFFF;
+  --paper:    #F8FAFC; /* Off-white — app/page ground */
+
+  /* ---- Status (muted, institutional — never neon) ---- */
+  --success-600: #1E7A55;
+  --success-100: #E3F2EA;
+  --warning-600: #9A6212;
+  --warning-100: #FBF0DC;
+  --danger-600:  #B42318;
+  --danger-100:  #FBE9E7;
+
+  /* ---- Semantic surfaces ---- */
+  --surface-page:      var(--paper);
+  --surface-card:      var(--white);
+  --surface-tint:      var(--ice-100);   /* alternating editorial bands */
+  --surface-tint-2:    var(--ice-200);
+  --surface-inverse:   var(--navy-700);  /* navy sections, footer */
+  --surface-inverse-2: var(--navy-900);
+
+  /* ---- Semantic text ---- */
+  --text-primary:    var(--ink-900);
+  --text-secondary:  var(--slate-500);
+  --text-on-inverse: var(--white);
+  --text-on-inverse-muted: #AFC3DA;
+  --text-link:       var(--blue-500);
+  --text-link-hover: var(--blue-600);
+  --text-brand:      var(--navy-700);
+
+  /* ---- Semantic lines / accents ---- */
+  --border-hairline:  var(--line-200);
+  --border-strong:    var(--navy-700);
+  --border-on-inverse:#274B6E;
+  --accent:           var(--sky-500);
+  --accent-strong:    var(--blue-500);
+
+  /* ---- Focus ring (keyboard a11y, AA) ---- */
+  --focus-ring: var(--sky-500);
+}
