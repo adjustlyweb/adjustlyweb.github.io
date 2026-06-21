@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Claim Settlement Calculator — an illustrative, educational tool showing how a deductible and depreciation can affect a property claim. It is not an estimate, an offer, or a guarantee of any settlement amount.">
+<title>Claim Settlement Calculator (Illustrative Only) — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .calc { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px,3vw,44px); align-items: start; }
+  @media (max-width: 880px){ .calc { grid-template-columns: 1fr; } }
+  .calc__panel { background: var(--surface-card); border: var(--border-1); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: clamp(22px,2.6vw,34px); }
+  .calc__panel h3 { margin: 0 0 4px; font-size: var(--fs-h4); color: var(--text-brand); }
+  .calc__panel .u-eyebrow { color: var(--accent-strong); }
+  .calc__fields { display: grid; gap: var(--space-4); margin-top: 18px; }
+  .calc__result-panel { background: var(--navy-700); color: #fff; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); padding: clamp(22px,2.6vw,34px); position: relative; overflow: hidden; }
+  .calc__result-panel .navy__mark { width: 320px; right: -80px; bottom: -90px; }
+  .calc__result-panel h3 { color: #fff; margin: 0 0 4px; font-size: var(--fs-h4); position: relative; }
+  .calc__result-panel .u-eyebrow { color: var(--sky-300); }
+  .calc__rows { position: relative; margin-top: 18px; display: grid; gap: 2px; border-radius: var(--radius-md); overflow: hidden; }
+  .calc__row { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 14px 16px; background: var(--navy-800); }
+  .calc__row span:first-child { color: var(--text-on-inverse-muted); font-size: var(--fs-sm); }
+  .calc__row span:last-child { font-family: var(--font-mono); font-size: var(--fs-base); color: #fff; font-variant-numeric: tabular-nums; }
+  .calc__row--head { background: rgba(91,164,214,0.18); }
+  .calc__row--head span:first-child { color: var(--sky-300); font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.06em; text-transform: uppercase; }
+  .calc__row--total { background: rgba(201,162,39,0.18); }
+  .calc__row--total span:first-child { color: #fff; font-weight: 600; font-size: var(--fs-base); }
+  .calc__row--total span:last-child { color: #fff; font-size: var(--fs-h4); font-weight: 600; }
+  .calc__illusflag { position: relative; display: inline-flex; align-items: center; gap: 7px; margin-top: 16px; font-family: var(--font-mono); font-size: var(--fs-xs);
+    letter-spacing: 0.05em; text-transform: uppercase; color: var(--navy-900); background: var(--accent); border-radius: 999px; padding: 6px 12px; }
+  .calc__illusflag svg { width: 14px; height: 14px; }
+  .calc__note { position: relative; color: #DDE8F3; font-size: var(--fs-sm); line-height: 1.6; margin: 18px 0 0; }
+  .calc__discwrap { margin-top: 16px; }
+  .calc__cta { position: relative; margin-top: 22px; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, Field, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+function money(n){
+  if (!isFinite(n)) n = 0;
+  return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+}
+function toNum(v){ const n = parseFloat(String(v).replace(/[^0-9.]/g, '')); return isFinite(n) ? n : 0; }
+
+function Calculator(){
+  const [cost, setCost] = React.useState('');
+  const [deductible, setDeductible] = React.useState('');
+  const [dep, setDep] = React.useState('');
+
+  React.useEffect(()=>{ window.lucide && window.lucide.createIcons(); });
+
+  const rcvBase = Math.max(0, toNum(cost));
+  const ded = Math.max(0, toNum(deductible));
+  const depPct = Math.min(100, Math.max(0, toNum(dep)));
+
+  // Illustrative figures ONLY — simplified, not a real estimate.
+  const rcvPayout = Math.max(0, rcvBase - ded);            // replacement-cost illustration, after deductible
+  const depAmount = rcvBase * (depPct / 100);
+  const acvPayout = Math.max(0, rcvBase - depAmount - ded); // actual-cash-value illustration, after deductible
+
+  return (
+    <div className="calc">
+      <div className="calc__panel">
+        <span className="u-eyebrow">Enter your figures</span>
+        <h3>Your numbers</h3>
+        <p style={{color:'var(--slate-600)',fontSize:'var(--fs-sm)',lineHeight:1.55,margin:'8px 0 0'}}>Type in rough figures to see how a deductible and depreciation can change an illustrative payout. Leave depreciation blank if you're not sure.</p>
+        <div className="calc__fields">
+          <Field label="Estimated repair or replacement cost" name="cost" type="text" inputMode="decimal" placeholder="e.g. 40,000" value={cost} onChange={(e)=>setCost(e.target.value)} hint="The estimated cost to repair or replace the damaged property." />
+          <Field label="Your policy deductible" name="deductible" type="text" inputMode="decimal" placeholder="e.g. 2,500" value={deductible} onChange={(e)=>setDeductible(e.target.value)} hint="Found on your policy declarations page." />
+          <Field label="Depreciation" name="dep" type="text" inputMode="decimal" placeholder="e.g. 20" optional value={dep} onChange={(e)=>setDep(e.target.value)} hint="Optional. Enter a percentage (0–100) to illustrate Actual Cash Value vs. Replacement Cost." />
+        </div>
+        <div className="calc__discwrap">
+          <DisclaimerCallout title="Not an estimate" variant="warning">
+            This calculator is for illustration and education only. It is not an estimate, an offer, or a guarantee of any settlement amount. Actual claim outcomes depend on your specific policy, the facts of the loss, and your insurer's determination.
+          </DisclaimerCallout>
+        </div>
+      </div>
+
+      <div className="calc__result-panel">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <span className="u-eyebrow">Illustration</span>
+        <h3>What the numbers show</h3>
+        <div className="calc__rows">
+          <div className="calc__row calc__row--head"><span>Replacement Cost (RCV) illustration</span><span></span></div>
+          <div className="calc__row"><span>Repair / replacement cost</span><span>{money(rcvBase)}</span></div>
+          <div className="calc__row"><span>Less deductible</span><span>&minus; {money(ded)}</span></div>
+          <div className="calc__row calc__row--total"><span>Illustrative RCV figure</span><span>{money(rcvPayout)}</span></div>
+
+          <div className="calc__row calc__row--head" style={{marginTop:'10px'}}><span>Actual Cash Value (ACV) illustration</span><span></span></div>
+          <div className="calc__row"><span>Repair / replacement cost</span><span>{money(rcvBase)}</span></div>
+          <div className="calc__row"><span>Less depreciation ({depPct || 0}%)</span><span>&minus; {money(depAmount)}</span></div>
+          <div className="calc__row"><span>Less deductible</span><span>&minus; {money(ded)}</span></div>
+          <div className="calc__row calc__row--total"><span>Illustrative ACV figure</span><span>{money(acvPayout)}</span></div>
+        </div>
+
+        <div className="calc__illusflag"><i data-lucide="alert-triangle" aria-hidden="true"></i>Illustrative only — not a settlement</div>
+
+        <p className="calc__note">Many policies pay Actual Cash Value first, then release the remaining recoverable depreciation after repairs are completed and documented. Whether that applies to you — and how depreciation, code upgrades, and other coverages are handled — depends entirely on your policy.</p>
+
+        <div className="calc__cta">
+          <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right" fullWidth>Request a real, free claim review</Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="education.html">Education Center</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Claim Settlement Calculator</span>
+          <h1>Claim Settlement Calculator</h1>
+          <p className="phero__lead">A simple, illustrative tool to help you understand how a deductible and depreciation can affect a property claim — and the difference between Actual Cash Value and Replacement Cost. It does not estimate your claim or predict any outcome.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="accent" icon="calculator">Illustrative only</Badge>
+            <Badge variant="brand" icon="shield-check">No outcome implied</Badge>
+            <Badge variant="outline" icon="check" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Educational tool</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <Calculator />
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Read this first</span>
+            <h2>Why this is illustrative only.</h2>
+          </div>
+          <div className="prose">
+            <p>Real property claims are rarely as simple as "cost minus deductible." A complete claim can involve hidden damage, matching issues, code and ordinance upgrades, business interruption, additional living expenses, recoverable depreciation, sublimits, and endorsements — none of which a quick calculator can account for.</p>
+            <p>That's exactly why this tool deliberately shows only a rough illustration. The figures above are not a quote, an estimate, or anything your insurer is obligated to pay. The only way to understand what you may be owed is to review your actual policy and the facts of your loss with a licensed professional.</p>
+          </div>
+          <div style={{marginTop:'22px'}}>
+            <DisclaimerCallout title="Educational, not advice" variant="default">
+              This page is general education, not legal or coverage advice, and creates no client relationship. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company and guarantees no claim outcome.
+            </DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Want a real number you can trust?</h2>
+          <p>Skip the guesswork. A licensed public adjuster can review your policy and your loss and explain your options — free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="settlement-audit.html">Request a free settlement audit</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

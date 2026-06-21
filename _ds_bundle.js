@@ -1160,6 +1160,22 @@ const CSS = `
   .adj-header__burger { display: inline-flex; }
   .adj-header__mobile--open { display: block; }
 }
+/* Dropdown nav (added for full-site IA) */
+.adj-header__navitem { position: relative; display: inline-flex; align-items: center; }
+.adj-header__navitem > .adj-header__link { display: inline-flex; align-items: center; gap: 4px; }
+.adj-header__navitem > .adj-header__link svg { width: 14px; height: 14px; opacity: 0.65; transition: transform var(--dur-fast) var(--ease-out); }
+.adj-header__navitem:hover > .adj-header__link svg, .adj-header__navitem:focus-within > .adj-header__link svg { transform: rotate(180deg); }
+.adj-header__dropdown { position: absolute; top: calc(100% + 8px); left: 0; min-width: 256px; background: #fff;
+  border: var(--border-1); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); padding: var(--space-2);
+  display: flex; flex-direction: column; gap: 2px; opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), visibility var(--dur-fast); z-index: 20; }
+.adj-header__navitem:hover .adj-header__dropdown, .adj-header__navitem:focus-within .adj-header__dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.adj-header__dropitem { display: block; padding: 10px 12px; border-radius: var(--radius-sm); font-size: var(--fs-sm);
+  font-weight: 500; color: var(--navy-700); text-decoration: none; white-space: nowrap; transition: background var(--dur-fast), color var(--dur-fast); }
+.adj-header__dropitem:hover { background: var(--surface-tint); color: var(--blue-600); }
+.adj-header__mgroup { border-bottom: var(--border-1); }
+.adj-header__mgroup > a:first-child { font-weight: 700; color: var(--navy-900) !important; }
+.adj-header__mgroup .adj-header__mchild { border-bottom: 0 !important; padding: 8px 0 8px 16px !important; color: var(--slate-600) !important; font-weight: 500; }
 `;
 if (typeof document !== 'undefined' && !document.getElementById('adj-header-css')) {
   const s = document.createElement('style');
@@ -1221,7 +1237,22 @@ function SiteHeader({
   })), /*#__PURE__*/React.createElement("nav", {
     className: "adj-header__nav",
     "aria-label": "Primary"
-  }, links.map(l => /*#__PURE__*/React.createElement("a", {
+  }, links.map(l => l.children ? /*#__PURE__*/React.createElement("div", {
+    key: l.label,
+    className: "adj-header__navitem"
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "adj-header__link",
+    href: l.href
+  }, l.label, /*#__PURE__*/React.createElement("i", {
+    "data-lucide": "chevron-down",
+    "aria-hidden": "true"
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "adj-header__dropdown"
+  }, l.children.map(c => /*#__PURE__*/React.createElement("a", {
+    key: c.href,
+    className: "adj-header__dropitem",
+    href: c.href
+  }, c.label)))) : /*#__PURE__*/React.createElement("a", {
     key: l.href,
     className: "adj-header__link",
     href: l.href,
@@ -1252,7 +1283,18 @@ function SiteHeader({
     "aria-hidden": "true"
   })))), /*#__PURE__*/React.createElement("div", {
     className: `adj-header__mobile${open ? ' adj-header__mobile--open' : ''}`
-  }, links.map(l => /*#__PURE__*/React.createElement("a", {
+  }, links.map(l => l.children ? /*#__PURE__*/React.createElement("div", {
+    key: l.label,
+    className: "adj-header__mgroup"
+  }, /*#__PURE__*/React.createElement("a", {
+    href: l.href,
+    onClick: () => setOpen(false)
+  }, l.label), l.children.map(c => /*#__PURE__*/React.createElement("a", {
+    key: c.href,
+    className: "adj-header__mchild",
+    href: c.href,
+    onClick: () => setOpen(false)
+  }, c.label))) : /*#__PURE__*/React.createElement("a", {
     key: l.href,
     href: l.href,
     onClick: () => setOpen(false)

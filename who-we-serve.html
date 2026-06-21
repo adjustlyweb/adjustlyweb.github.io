@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Who we serve — Adjustly represents homeowners, business owners, commercial property owners, HOAs, churches, schools, municipalities, and more. We advocate for property owners, never insurance companies.">
+<title>Who We Serve — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .audcard { background: var(--surface-card); border: var(--border-1); border-radius: var(--radius-lg); padding: clamp(24px,2.4vw,34px); display: flex; flex-direction: column; box-shadow: var(--shadow-sm); }
+  .audcard__icon { width: 52px; height: 52px; display: inline-flex; align-items: center; justify-content: center; border: 1.5px solid var(--navy-700); border-radius: var(--radius-sm); color: var(--navy-700); background: var(--ice-100); margin-bottom: 16px; }
+  .audcard__icon svg { width: 26px; height: 26px; }
+  .audcard h3 { margin: 0 0 8px; }
+  .audcard p { color: var(--slate-600); font-size: var(--fs-base); line-height:1.55; margin: 0 0 20px; flex: 1; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const AUDIENCES = [
+  ['home','Homeowners'],
+  ['briefcase','Business Owners'],
+  ['building-2','Commercial Property Owners'],
+  ['trending-up','Real Estate Investors'],
+  ['building','Apartment Owners'],
+  ['key-round','Property Managers'],
+  ['users','HOAs'],
+  ['layers','Condominium Associations'],
+  ['church','Churches'],
+  ['school','Schools'],
+  ['landmark','Municipalities'],
+  ['factory','Industrial Facilities'],
+  ['hotel','Hospitality'],
+  ['stethoscope','Healthcare Facilities'],
+  ['tractor','Agricultural Properties'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero phero--split">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb"><a href="index.html">Adjustly</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Who We Serve</span>
+            <h1>Who we serve.</h1>
+            <p className="phero__lead">From a single-family home to an industrial complex, property owners across the spectrum face the same imbalance: the insurance company has experts, and you should too. Adjustly advocates for property owners — never insurance companies.</p>
+            <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'18px'}}>
+              <Badge variant="brand" icon="shield-check">Owners, not insurers</Badge>
+              <Badge variant="accent" icon="home">Residential</Badge>
+              <Badge variant="outline" icon="building-2" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Commercial</Badge>
+            </div>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+              {icon:'map-pin', label:'Nationwide network'},
+            ]} />
+          </div>
+          <div className="formcol">
+            <div className="phero__cta" style={{flexDirection:'column',alignItems:'stretch'}}>
+              <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right" fullWidth>Get a free claim review</Button>
+              <Button variant="secondary" size="lg" href="risk-assessment.html" fullWidth>Free Property Risk Assessment</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">The property owners we advocate for</span>
+            <h2>Different properties, the same right to representation.</h2>
+            <p>Most people file only a few claims in a lifetime. Insurance companies handle thousands every year. Whatever you own, you have the right to an experienced advocate on your side.</p>
+          </div>
+          <div className="pills" style={{marginTop:'8px'}}>
+            {AUDIENCES.map((a,i)=>(
+              <span className="pill" key={i} style={{display:'inline-flex',alignItems:'center',gap:'8px'}}><i data-lucide={a[0]} style={{width:'16px',height:'16px',color:'var(--blue-500)'}}></i>{a[1]}</span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Two paths</span>
+            <h2>Find the advocacy that fits your property.</h2>
+          </div>
+          <div className="grid grid-2" style={{marginTop:'8px'}}>
+            <div className="audcard">
+              <span className="audcard__icon"><i data-lucide="home" aria-hidden="true"></i></span>
+              <h3>Residential</h3>
+              <p>Homeowners facing wind, hail, fire, smoke, water, or storm damage. We help you document the loss, understand your coverage, and pursue a fair claim — and we can help you prepare before disaster strikes.</p>
+              <Button variant="primary" href="residential.html" icon="arrow-right" iconPosition="right">For homeowners</Button>
+            </div>
+            <div className="audcard">
+              <span className="audcard__icon"><i data-lucide="building-2" aria-hidden="true"></i></span>
+              <h3>Commercial</h3>
+              <p>Apartment complexes, hotels, retail, industrial facilities, offices, churches, schools, and healthcare. Large, complex losses — including business interruption — handled by advocates who answer to you.</p>
+              <Button variant="primary" href="commercial.html" icon="arrow-right" iconPosition="right">For commercial owners</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="Educational, not legal advice">This page is general information about the property owners we serve and is not legal or insurance advice. Coverage and outcomes depend on your specific policy and the facts of your loss. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company and does not guarantee any claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Whatever you own, you don't have to face your insurer alone.</h2>
+          <p>Talk to a licensed public adjuster about your property and your claim. Free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="services.html">See our services</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

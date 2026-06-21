@@ -49,14 +49,16 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
 <script type="text/babel">
 const {
   SiteHeader, SiteFooter, TrustBar, ProcessTracker, FaqAccordion,
   SpecialtyCard, LeadForm, DisclaimerCallout, Badge, Button
 } = window.AdjustlyDesignSystem_e51731;
-const NAVY = './assets/logo/adjustly-logo-navy.png';
-const WHITE = './assets/logo/adjustly-logo-white.png';
-const MARKW = './assets/logo/adjustly-mark-white.png';
+const A = window.ADJUSTLY;
+const NAVY = A.LOGO_NAVY;
+const WHITE = A.LOGO_WHITE;
+const MARKW = A.MARK_WHITE;
 
 /* Web3Forms access key — PUBLIC client-side key (safe in HTML, not a secret).
    Replace the placeholder with the real key from web3forms.com to make forms deliver. */
@@ -104,7 +106,7 @@ function App(){
   const r=(d, base='')=>({className:`${base?base+' ':''}adj-reveal${on?' adj-reveal--on':''}`,'data-delay':String(d)});
   return (
     <div>
-      <SiteHeader logoSrc={NAVY} currentHref="#services" />
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
       <section className="lhero">
         <img className="lhero__mark" src={MARKW} alt="" />
         <div className="lhero__grid">

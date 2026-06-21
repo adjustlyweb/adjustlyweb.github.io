@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Business Interruption claims help — when a covered loss forces a business to suspend or reduce operations, your policy may cover lost income, continuing expenses, and extra expense. Our advocates help identify and document these complex claims.">
+<title>Business Interruption Claims — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .bi-lead { background: var(--surface-tint); border:var(--border-1); border-radius:var(--radius-md); padding:16px 18px; display:flex; gap:12px; align-items:flex-start; }
+  .bi-lead i, .bi-lead svg { color: var(--blue-500); flex:none; margin-top:2px; }
+  .bi-lead span { font-size: var(--fs-base); line-height:1.6; color: var(--ink); }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, SpecialtyCard, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const COVERAGES = [
+  ['trending-down','Lost business income','The net income your business would have earned, plus normal operating expenses that continue while operations are suspended or reduced during a covered loss.','What it covers'],
+  ['plus-circle','Extra expense','Additional costs incurred to keep the business running or to speed the return to normal operations — temporary relocation, rented equipment, or expedited shipping, for example.','What it covers'],
+  ['calendar-clock','Period of restoration','The window during which lost income may be covered — typically from the date of loss until the property is (or reasonably should be) repaired or replaced. Many policies define this period precisely.','Key term'],
+  ['hourglass','Extended business income','Coverage that may continue for a period after repairs are complete, while the business works to return to the income level it had before the loss.','What it covers'],
+  ['shield-alert','Civil authority','Coverage that may apply when a government order prevents access to your property because of a nearby covered loss — even if your own property was not directly damaged.','What it covers'],
+];
+
+const WHONEEDS = ['Restaurants & food service','Retail & storefronts','Hotels & hospitality','Manufacturers','Professional offices','Warehouses & distribution','Medical & dental practices','Auto dealerships & service','Salons, gyms & studios','Any business that stops or slows after a loss'];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero phero--split">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb"><a href="services-commercial.html">Commercial Claims</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Business Interruption</span>
+            <h1>When your business stops, the losses don't.</h1>
+            <p className="phero__lead">A covered loss can force a business to suspend or reduce operations. Beyond the physical damage, your policy may cover the income you lose and the expenses that keep coming. These are some of the most complex claims in insurance — and our advocates help business owners identify and document them.</p>
+            <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'18px'}}>
+              <Badge variant="brand" icon="building-2">Commercial claims</Badge>
+              <Badge variant="accent" icon="trending-down">Income loss</Badge>
+              <Badge variant="outline" icon="file-search" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Documentation-driven</Badge>
+            </div>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'shield-check', label:'We represent owners, not insurers'},
+              {icon:'building-2', label:'Large & complex commercial losses'},
+            ]} />
+          </div>
+          <div className="formcol">
+            <div className="phero__cta" style={{flexDirection:'column',alignItems:'stretch'}}>
+              <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right" fullWidth>Talk to a commercial advocate</Button>
+              <Button variant="secondary" size="lg" href="services-commercial.html" fullWidth>Explore commercial claims</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What it is</span>
+            <h2>What is a Business Interruption claim?</h2>
+          </div>
+          <div className="prose">
+            <p>When a covered loss — fire, water, storm, or other peril named in your policy — forces a business to suspend or reduce operations, the policy may cover more than just the repair of the building. Business interruption coverage is designed to address the financial fallout: the income the business would have earned, the operating expenses that continue while it's closed, and the extra costs of getting back to normal.</p>
+            <p>Because these claims turn on financial records, policy definitions, and a carefully measured period of restoration, they are frequently underpaid or overlooked entirely. We help business owners understand what their policy may provide and assemble the documentation a thorough claim requires.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">What a policy may cover</span>
+            <h2>The pieces of a business interruption claim.</h2>
+            <p>Coverage varies by policy. These are the components our advocates commonly review and document on commercial claims.</p>
+          </div>
+          <div className="grid grid-2" style={{marginTop:'8px'}}>
+            {COVERAGES.map((c,i)=>(
+              <SpecialtyCard key={i} icon={c[0]} title={c[1]} tag={c[3]}>{c[2]}</SpecialtyCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap split split--even">
+          <div>
+            <span className="u-eyebrow">Who needs it</span>
+            <h2 style={{marginTop:'8px'}}>Any business that can be forced to slow down or stop.</h2>
+            <p style={{color:'var(--slate-600)',marginTop:'14px',maxWidth:'46ch'}}>If your operations depend on a physical location, equipment, or access, a covered loss can cut off your income. Business interruption claims are common across industries.</p>
+            <div className="pills" style={{marginTop:'18px'}}>{WHONEEDS.map((t,i)=>(<span className="pill" key={i}>{t}</span>))}</div>
+          </div>
+          <div>
+            <span className="u-eyebrow">Why these claims are hard</span>
+            <h2 style={{marginTop:'8px'}}>Complex by design — we help you document them.</h2>
+            <div className="bi-lead" style={{marginTop:'18px'}}>
+              <i data-lucide="info" aria-hidden="true"></i>
+              <span>Business interruption claims hinge on financial records, policy definitions, and a precisely measured period of restoration. The numbers aren't on the wall — they're in your books. Our advocates help identify the coverage that may apply and assemble the income statements, expense records, and supporting documentation a complete claim requires.</span>
+            </div>
+            <ul className="checklist" style={{marginTop:'18px'}}>
+              <li><i data-lucide="check"></i><span>Identifying which coverages your policy actually includes</span></li>
+              <li><i data-lucide="check"></i><span>Establishing the period of restoration</span></li>
+              <li><i data-lucide="check"></i><span>Documenting lost income and continuing expenses</span></li>
+              <li><i data-lucide="check"></i><span>Capturing extra expense and extended business income</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--navy">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap--narrow" style={{position:'relative'}}>
+          <span className="u-eyebrow" style={{color:'var(--sky-300)'}}>An honest word on outcomes</span>
+          <h2 style={{margin:'10px 0 14px'}}>Every policy and every loss is different.</h2>
+          <p style={{color:'var(--text-on-inverse-muted)',fontSize:'var(--fs-lead)',lineHeight:'1.6',maxWidth:'64ch'}}>What a business interruption claim may recover depends entirely on your specific policy language, the facts of the loss, your financial records, and applicable deadlines. No outcome can be guaranteed. Our role is to help you understand your coverage and document your claim thoroughly.</p>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="Educational, not legal advice">This page explains business interruption coverage in general terms and is not legal, financial, or insurance advice. Coverage depends on the specific terms of your policy and the facts of your loss. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company and does not guarantee any claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Did a covered loss interrupt your business?</h2>
+          <p>Let an experienced commercial advocate help you identify and document what your policy may provide. Free, no-obligation review.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Talk to a commercial advocate</Button>
+            <Button variant="secondary" size="lg" href="services-commercial.html">See commercial claims</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

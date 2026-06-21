@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Property Damage Consultation from Adjustly — not sure if you have damage or a claim? Free, no-obligation consultations help property owners understand their options before they decide what to do.">
+<title>Property Damage Consultation — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 760px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid var(--sky-300); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); letter-spacing: 0.08em; }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 6px; }
+  .step p { color: var(--slate-600); font-size: var(--fs-sm); margin: 0; line-height: 1.5; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, FaqAccordion, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STEPS = [
+  ['Tell us what you\'re seeing','Describe the condition you\'re worried about — a stain on the ceiling, a roof after a storm, a musty smell, a contractor\'s comment. No question is too small.'],
+  ['We help you understand it','A licensed advocate talks through what the signs may mean, whether it could be a covered loss, and what your options are. We explain — we don\'t pressure.'],
+  ['You decide your next step','You might document and watch it, get an inspection, or file a claim. Whatever you choose, you\'ll be more informed than when you started — at no cost.'],
+];
+
+const WHO = [
+  'Homeowners who notice possible damage but aren\'t sure it\'s "claim-worthy"',
+  'Owners after a storm, leak, or other event who don\'t know if they have a covered loss',
+  'Anyone told by a contractor that they "might have a claim"',
+  'People who want an honest second opinion before contacting their insurer',
+  'Property owners who simply want to understand their options first',
+];
+
+const FAQS = [
+  ['What is a property damage consultation?','It\'s a free, no-obligation conversation with a licensed advocate to help you understand a condition you\'re worried about — whether it may be a covered loss, and what your options are. It\'s designed to inform your decision, not to pressure you into one.'],
+  ['Do I need to have a claim already?','No. This service is specifically for people who aren\'t sure whether they have damage or a claim at all. We help you figure that out before you decide what, if anything, to do next.'],
+  ['Is it really free?','Yes — genuinely free and with no obligation. Our position is that informed property owners make better decisions, and we want you better prepared whether or not you ever become a client.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="services.html">Services</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Property Damage Consultation</span>
+          <h1>Not sure if you have damage? Let's talk it through.</h1>
+          <p className="phero__lead">Property Damage Consultation is a free, no-obligation conversation to help you understand what you're seeing and what your options are — before you decide what to do next.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap',margin:'4px 0 22px'}}>
+            <Badge variant="accent" icon="gift">100% free</Badge>
+            <Badge variant="brand" icon="shield-check">No obligation</Badge>
+          </div>
+          <div className="phero__cta">
+            <Button variant="primary" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Ask an advocate</Button>
+            <Button variant="secondary" size="lg" href="risk-assessment.html">Get a Free Risk Assessment</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What it is</span>
+            <h2>What is a Property Damage Consultation?</h2>
+          </div>
+          <div className="prose">
+            <p>Property damage isn't always obvious. A faint water stain, a roof after a wind storm, a smell that wasn't there last month — many owners notice <em>something</em> but have no idea whether it's a real problem, a covered loss, or nothing at all. Calling the insurance company feels like a big step when you're not even sure you have a claim.</p>
+            <p>That's exactly what this consultation is for. A licensed advocate listens to what you're seeing, helps you understand what it might mean, and walks you through your options — with no cost and no pressure. If it makes sense to look closer, our free <a href="risk-assessment.html">Property Risk Assessment</a> can put eyes on the property.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">How it works</span>
+            <h2>From "is this anything?" to a clear next step.</h2>
+          </div>
+          <div className="steps" style={{marginTop:'24px'}}>
+            {STEPS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Who it's for</span>
+            <h2>Is a consultation right for you?</h2>
+          </div>
+          <ul className="checklist checklist--2" style={{marginTop:'8px'}}>
+            {WHO.map((t,i)=>(<li key={i}><i data-lucide="user-check"></i><span>{t}</span></li>))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Common questions</span>
+            <h2>Consultations, explained.</h2>
+          </div>
+          <FaqAccordion items={FAQS.map(([q,a])=>({q,a}))} defaultOpen={[0]} />
+          <div className="discrow">
+            <DisclaimerCallout title="Educational, not legal advice">Adjustly represents property owners, never insurers. We do not sell insurance. This page is educational and is not legal advice, and we do not guarantee any claim outcome.</DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Seeing something and not sure what it means?</h2>
+          <p>Ask a licensed advocate — free, with no obligation. Or schedule a free Property Risk Assessment to take a closer look.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Ask an advocate</Button>
+            <Button variant="secondary" size="lg" href="risk-assessment.html">Get a Free Risk Assessment</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

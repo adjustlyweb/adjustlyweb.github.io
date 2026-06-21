@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Public adjuster vs. insurance adjuster: who works for whom? A plain-English explainer on who each adjuster represents, what they do, and when to consider hiring your own licensed public adjuster. Educational, not legal advice.">
+<title>Public Adjuster vs. Insurance Adjuster — Adjustly Education Center</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .artmeta { font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:0.04em; color:var(--slate-500); display:flex; gap:14px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
+  .prose .lede { font-size:var(--fs-lead); line-height:1.6; color:var(--slate-600); }
+  .prose .discwrap { margin:2em 0 0; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, TextLink, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="education.html">Education Center</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Article</span>
+          <h1>Public Adjuster vs. Insurance Adjuster: Who Works for Whom?</h1>
+          <p className="phero__lead">The single most useful thing to understand about your claim is which adjuster answers to you — and which one answers to the insurance company.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="brand" icon="book-open">Claims explainer</Badge>
+            <Badge variant="outline" icon="graduation-cap" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>5 min read</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <article className="prose wrap--narrow">
+          <div className="artmeta"><span>Education Center</span><span>·</span><span>Claims</span><span>·</span><span>5 min read</span></div>
+          <p className="lede">When property damage happens, the word "adjuster" gets used a lot — often for two very different people with two very different jobs. Knowing the difference is the foundation of every decision you'll make about your claim.</p>
+
+          <h2>Both are called "adjusters." They don't work for the same person.</h2>
+          <p>An <strong>adjuster</strong> is someone who investigates an insurance claim, evaluates the damage, interprets the policy, and arrives at a value for the loss. The job title is the same in both cases. What differs — and what matters — is <em>who that adjuster represents.</em></p>
+          <p>There are, broadly, three kinds of adjuster you may encounter:</p>
+          <ul>
+            <li><strong>The insurance company adjuster (staff or independent).</strong> Assigned and paid by your insurer to evaluate the claim on the company's behalf.</li>
+            <li><strong>The public adjuster.</strong> A licensed professional you can hire to represent <em>you</em>, the policyholder — and only you.</li>
+            <li><strong>The independent adjuster.</strong> A contractor the insurer hires when it needs extra capacity. Despite the name "independent," they are working the claim for the insurance company, not for you.</li>
+          </ul>
+
+          <h2>What the insurance company's adjuster does</h2>
+          <p>After you report a loss, your insurer assigns an adjuster — sometimes a salaried staff adjuster, sometimes an independent adjuster contracted for the job. This person inspects the damage, takes their own photos, writes an estimate using the carrier's software and pricing, applies the policy's terms, deductibles, and depreciation, and recommends a settlement amount.</p>
+          <p>It's important to be clear and fair here: many insurance adjusters are diligent, decent professionals. But their duty runs to the company that employs them. Their estimate reflects the insurer's interpretation of the policy and the insurer's view of the scope of damage. That isn't wrongdoing — it's simply whose side of the table they sit on.</p>
+          <h3>Why that matters to you</h3>
+          <p>Because the same loss can be valued in more than one reasonable way. Scope can be read narrowly or broadly. Hidden damage may or may not be pursued. Code-upgrade and ordinance-and-law coverages may or may not be applied. The insurer's adjuster makes those calls from the insurer's perspective — and you have no one making them from yours unless you bring someone in.</p>
+
+          <h2>What a public adjuster does</h2>
+          <p>A <strong>public adjuster</strong> is a licensed insurance professional who works exclusively for policyholders — never for insurance companies. In most states, public adjusters must be licensed and regulated, and in Pennsylvania they are licensed by the Pennsylvania Insurance Department. You can verify any Pennsylvania public adjuster's license through the department's public lookup.</p>
+          <p>A public adjuster represents your interests throughout the claim. Typically that includes:</p>
+          <ul>
+            <li>Reading and interpreting your full policy — coverages, endorsements, exclusions, and limits.</li>
+            <li>Independently inspecting and documenting the damage, including damage that isn't immediately visible.</li>
+            <li>Preparing a detailed estimate and inventory of the loss.</li>
+            <li>Identifying coverages and benefits that may apply, such as additional living expenses, code upgrades, or business interruption.</li>
+            <li>Communicating and negotiating with the insurance company on your behalf.</li>
+            <li>Helping organize the documentation a claim requires, and keeping the process on track.</li>
+          </ul>
+          <p>In short: the insurer has an experienced professional evaluating the claim. A public adjuster gives <em>you</em> one too.</p>
+
+          <h2>A simple way to remember it</h2>
+          <blockquote>The insurance company's adjuster works for the insurance company. A public adjuster works for the policyholder. An "independent" adjuster is still working for the insurer that hired them.</blockquote>
+
+          <h2>When to consider a public adjuster</h2>
+          <p>You're never required to hire one — many straightforward claims are handled directly with the insurer. But property owners often consider a public adjuster when:</p>
+          <ul>
+            <li>The loss is large, complex, or involves significant hidden or structural damage.</li>
+            <li>It's a commercial loss, especially one with business interruption or income loss.</li>
+            <li>The insurer's estimate seems low, or a contractor says repairs will cost meaningfully more.</li>
+            <li>Part of the claim has been denied, delayed, or disputed.</li>
+            <li>You simply don't have the time, energy, or expertise to manage the documentation and negotiation yourself — often while also recovering from the event.</li>
+          </ul>
+
+          <h2>Questions worth asking</h2>
+          <p>If you do speak with a public adjuster, a few good questions help you decide whether it's the right fit:</p>
+          <ul>
+            <li>Are you licensed, and in which states? (In Pennsylvania, can I verify your license with the Insurance Department?)</li>
+            <li>How are your fees structured, and what would they be for a claim like mine?</li>
+            <li>What does your process look like, from first inspection to settlement?</li>
+            <li>What kinds of losses — residential, commercial, this specific type of damage — have you handled?</li>
+            <li>What can and can't you promise me about the outcome?</li>
+          </ul>
+          <p>That last question matters. No honest adjuster can guarantee a particular result. What an experienced advocate offers is thorough documentation, careful policy interpretation, and someone whose job is to represent your side of the claim.</p>
+
+          <p>Adjustly was founded by a Pennsylvania-licensed public adjuster (Pennsylvania Public Adjuster #{A.LICENSE.number}), part of a second-generation family of public adjusters. We represent property owners — never insurers. If you'd like to talk through your own situation, a licensed advocate will review it free, with no obligation.</p>
+
+          <div className="discwrap">
+            <DisclaimerCallout title="Educational, not legal advice">This article is general information about how property insurance claims work. It represents property owners' interests, never insurers', and it is not legal advice. Every policy and loss is different, and we do not guarantee any claim outcome. To verify a Pennsylvania public adjuster's license, visit the <a href={A.LICENSE.verifyUrl} target="_blank" rel="noopener">Pennsylvania Insurance Department</a>.</DisclaimerCallout>
+          </div>
+
+          <p style={{marginTop:'1.8em'}}><TextLink href="education.html" icon="arrow-left">Back to the Education Center</TextLink></p>
+        </article>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Want someone reviewing your claim from your side?</h2>
+          <p>A licensed public adjuster will look at your situation and explain your options honestly — free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="settlement-audit.html">Already paid? Get a free audit</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

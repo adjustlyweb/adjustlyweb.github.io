@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Commercial property owner advocacy — Adjustly serves apartment complexes, hotels, retail, industrial, offices, churches, schools, and healthcare facilities. Large-loss and business interruption expertise. We represent owners, never insurers.">
+<title>For Commercial Property Owners — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, SpecialtyCard, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const PROPERTIES = [
+  ['building','Apartment Complexes','Multi-unit residential properties where a single loss can affect many tenants and units.'],
+  ['layers','Condominiums','Condominium and homeowner associations navigating shared-structure and unit-owner coverage.'],
+  ['hotel','Hotels & Hospitality','Lodging and hospitality properties where downtime directly affects revenue.'],
+  ['store','Retail','Storefronts and shopping centers facing damage that disrupts business.'],
+  ['factory','Industrial Facilities','Manufacturing and processing facilities with specialized equipment and operations.'],
+  ['warehouse','Warehouses','Distribution and storage facilities, including inventory and equipment exposure.'],
+  ['briefcase','Office Buildings','Professional and corporate office properties of all sizes.'],
+  ['church','Churches','Houses of worship and faith-based organizations.'],
+  ['school','Schools','Educational facilities, from individual buildings to campuses.'],
+  ['stethoscope','Healthcare Facilities','Medical, dental, and care facilities with operational and regulatory considerations.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero phero--split">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb"><a href="who-we-serve.html">Who We Serve</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Commercial</span>
+            <h1>Commercial losses are bigger. So is the imbalance.</h1>
+            <p className="phero__lead">Commercial claims involve larger losses, complex policies, and real income on the line. Adjustly serves commercial property owners with experienced advocacy — including large-loss and business interruption expertise — and we answer only to you, never your insurer.</p>
+            <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'18px'}}>
+              <Badge variant="brand" icon="building-2">Commercial owners</Badge>
+              <Badge variant="accent" icon="shield-check">Owners, not insurers</Badge>
+              <Badge variant="outline" icon="trending-down" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Large-loss expertise</Badge>
+            </div>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+              {icon:'building-2', label:'Large & complex commercial losses'},
+            ]} />
+          </div>
+          <div className="formcol">
+            <div className="phero__cta" style={{flexDirection:'column',alignItems:'stretch'}}>
+              <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right" fullWidth>Talk to a commercial advocate</Button>
+              <Button variant="secondary" size="lg" href="services-commercial.html" fullWidth>Explore commercial claims</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">Commercial property advocacy</span>
+            <h2>We serve commercial property owners.</h2>
+          </div>
+          <div className="prose">
+            <p>Commercial property claims are rarely simple. Policies run hundreds of pages, losses can reach into the millions, and a covered event often does more than damage a building — it interrupts the income the property generates. Insurance carriers bring teams of adjusters, engineers, and consultants to evaluate these claims. Commercial owners deserve experienced advocates of their own.</p>
+            <p>Adjustly represents commercial property owners through the full claims process — inspection, documentation, policy interpretation, claim preparation, and negotiation — always working for the owner, never the insurance company.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Properties we serve</span>
+            <h2>The commercial properties we advocate for.</h2>
+            <p>From multi-unit residential to industrial and institutional, we help owners across commercial property types.</p>
+          </div>
+          <div className="grid grid-2" style={{marginTop:'8px'}}>
+            {PROPERTIES.map((p,i)=>(
+              <SpecialtyCard key={i} icon={p[0]} title={p[1]}>{p[2]}</SpecialtyCard>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap split split--even">
+          <div>
+            <span className="u-eyebrow">Income on the line</span>
+            <h2 style={{marginTop:'8px'}}>Business interruption.</h2>
+            <p style={{color:'var(--slate-600)',marginTop:'14px',maxWidth:'46ch'}}>For commercial owners, the physical damage is often only part of the loss. When a covered event suspends or reduces operations, your policy may cover lost income, continuing expenses, and extra expense. These are complex claims — we help identify and document them.</p>
+            <div style={{marginTop:'18px'}}><Button variant="primary" href="business-interruption.html" icon="arrow-right" iconPosition="right">Business interruption claims</Button></div>
+          </div>
+          <div>
+            <span className="u-eyebrow">Scale and complexity</span>
+            <h2 style={{marginTop:'8px'}}>Large-loss expertise.</h2>
+            <p style={{color:'var(--slate-600)',marginTop:'14px',maxWidth:'46ch'}}>Large commercial losses demand detailed estimating, thorough documentation, and disciplined negotiation. Our commercial claims practice is built for exactly this kind of complexity.</p>
+            <ul className="checklist" style={{marginTop:'18px'}}>
+              <li><i data-lucide="check"></i><span>Detailed scoping and professional estimating</span></li>
+              <li><i data-lucide="check"></i><span>Policy interpretation for complex coverage</span></li>
+              <li><i data-lucide="check"></i><span>Business interruption and income loss documentation</span></li>
+              <li><i data-lucide="check"></i><span>Negotiation with commercial carriers</span></li>
+            </ul>
+            <div style={{marginTop:'18px'}}><Button variant="secondary" href="services-commercial.html" icon="arrow-right" iconPosition="right">Commercial claims service</Button></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--navy">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap--narrow" style={{position:'relative'}}>
+          <span className="u-eyebrow" style={{color:'var(--sky-300)'}}>An honest word on outcomes</span>
+          <h2 style={{margin:'10px 0 14px'}}>Experienced advocacy — never a guarantee.</h2>
+          <p style={{color:'var(--text-on-inverse-muted)',fontSize:'var(--fs-lead)',lineHeight:'1.6',maxWidth:'64ch'}}>Every commercial policy and loss is different. What a claim may recover depends on your specific coverage, your financial records, the facts of the loss, and applicable deadlines — and no outcome can be guaranteed. Our role is thorough, owner-side advocacy.</p>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="Educational, not legal advice">This page is general information for commercial property owners and is not legal, financial, or insurance advice. Coverage and outcomes depend on your specific policy and the facts of your loss. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company and does not guarantee any claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>A commercial loss is too big to handle alone.</h2>
+          <p>Talk to an experienced commercial advocate about your property and your claim. Free, no-obligation review.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Talk to a commercial advocate</Button>
+            <Button variant="secondary" size="lg" href="business-interruption.html">Business interruption</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!--
+  ============================================================
+  STATE PAGE TEMPLATE — duplicate this file once per state.
+  Find/replace the [STATE] token with the state name
+  (e.g. "Pennsylvania") and rename the file (e.g. pennsylvania.html).
+  Confirm licensure before publishing any state where [STATES_SERVED]
+  does not include it — do NOT imply licensure where it doesn't exist.
+  Keep <meta name="robots" content="noindex, nofollow"> until launch.
+  ============================================================
+-->
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Public adjusters and property damage advocates serving [STATE] property owners. We represent owners — not insurance companies — before, during, and after a claim. Free, no-obligation reviews.">
+<title>Public Adjusters in [STATE] — Property Damage Advocates — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .freecard { background: var(--surface-card); border: var(--border-1); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+    padding: clamp(22px,2.4vw,32px); display: flex; flex-direction: column; height: 100%; }
+  .freecard__tag { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--accent-strong); }
+  .freecard h3 { margin: 10px 0 8px; font-size: var(--fs-h4); }
+  .freecard p { color: var(--slate-600); font-size: var(--fs-base); margin: 0 0 20px; flex: 1; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const HELP = [
+  'Inspect and document your property damage thoroughly',
+  'Review your insurance policy and explain your coverage',
+  'Prepare a detailed, professional claim and estimate',
+  'Communicate and negotiate with your insurance carrier',
+  'Identify hidden or overlooked damage',
+  'Pursue a fair resolution based on your policy',
+];
+const LOSSES = ['Wind','Hail','Water','Fire','Smoke','Storm','Roof','Lightning','Frozen Pipes','Tree Damage','Flood','Vandalism'];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="coverage-map.html">Where We Help</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> [STATE]</span>
+          <h1>[STATE] Property Damage Advocates.</h1>
+          <p className="phero__lead">When property damage strikes in [STATE], you don't have to face your insurance company alone. Adjustly represents [STATE] property owners — never insurers — before, during, and after a claim, with a free, no-obligation review to start.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="accent" icon="shield-check">We represent owners, not insurers</Badge>
+            <Badge variant="brand" icon="map-pin">Serving [STATE]</Badge>
+            <Badge variant="outline" icon="check" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Free, no-obligation review</Badge>
+          </div>
+          <div style={{marginTop:'26px'}}>
+            <Button variant="primary" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap split split--even">
+          <div>
+            <span className="u-eyebrow">How we help</span>
+            <h2 style={{marginTop:'8px'}}>How we help [STATE] property owners.</h2>
+            <p style={{color:'var(--slate-600)',maxWidth:'46ch',marginTop:'12px'}}>Insurance companies have experienced teams working to evaluate every claim. We believe [STATE] homeowners and business owners deserve experienced professionals working for them, too.</p>
+            <ul className="checklist" style={{marginTop:'20px'}}>
+              {HELP.map((t,i)=>(<li key={i}><i data-lucide="check"></i><span>{t}</span></li>))}
+            </ul>
+          </div>
+          <div>
+            <span className="u-eyebrow">Common [STATE] losses</span>
+            <h2 style={{marginTop:'8px'}}>Damage we help [STATE] owners with.</h2>
+            <p style={{color:'var(--slate-600)',maxWidth:'46ch',marginTop:'12px'}}>From seasonal storms to sudden accidents, these are among the most common property losses [STATE] owners face.</p>
+            <div className="pills" style={{marginTop:'18px'}}>{LOSSES.map((t,i)=>(<span className="pill" key={i}>{t}</span>))}</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Free for [STATE] property owners</span>
+            <h2>Start before you ever file a claim.</h2>
+            <p>Two genuinely free, no-obligation services help [STATE] owners protect their property before a loss and double-check their settlement after one.</p>
+          </div>
+          <div className="grid grid-2">
+            <div className="freecard">
+              <span className="freecard__tag">Before a loss</span>
+              <h3>Free Property Risk Assessment</h3>
+              <p>A proactive review of your [STATE] property and your insurance policy to find coverage gaps and document your property before disaster strikes.</p>
+              <Button variant="primary" href="risk-assessment.html" icon="arrow-right" iconPosition="right">Learn about the assessment</Button>
+            </div>
+            <div className="freecard">
+              <span className="freecard__tag">After a payment</span>
+              <h3>Free Claim Settlement Audit</h3>
+              <p>Already received an insurance payment on your [STATE] property? We'll review it to see whether additional compensation may still be available.</p>
+              <Button variant="primary" href="settlement-audit.html" icon="arrow-right" iconPosition="right">Request a free audit</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Licensing in [STATE]</span>
+            <h2>A note on licensing.</h2>
+          </div>
+          <div className="prose">
+            <p>Public adjusters are licensed at the state level. We tailor the services we offer to the states where licensure exists, and we'll always be clear about how we can help in [STATE] specifically. Adjustly's confirmed licensed jurisdiction is Pennsylvania (Pennsylvania Public Adjuster #1289230); additional states are served through our professional network where permitted. Confirmed states served: [STATES_SERVED].</p>
+          </div>
+          <div style={{marginTop:'22px'}}>
+            <DisclaimerCallout title="Licensing is state-specific" variant="warning">
+              This page does not imply licensure in [STATE] unless [STATE] is among our confirmed served states — [STATES_SERVED]. Experience is attributed to our licensed principal, Pennsylvania Public Adjuster #1289230, and a second-generation family of public adjusters. This is general information, not legal or coverage advice, and no claim outcome is guaranteed.
+            </DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Damage to your [STATE] property?</h2>
+          <p>Talk to a licensed public adjuster about your [STATE] claim — free, with no obligation. We'll explain your options honestly.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="coverage-map.html">See where else we help</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

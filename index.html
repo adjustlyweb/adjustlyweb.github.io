@@ -1,29 +1,20 @@
-<!-- @dsCard group="Marketing site" viewport="1360x900" name="Homepage" subtitle="Editorial hero, Protect·Prepare·Recover, services, navy proof band, education, FAQ, lead form" -->
-<!-- @startingPoint section="Marketing site" subtitle="Adjustly homepage" viewport="1360x900" -->
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- STAGING CONTAINMENT — keep this site out of every index until the Open Risk Log (CLAUDE.md §2) is cleared. -->
 <meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Adjustly Property Damage Advocacy Group represents property owners — not insurance companies — before, during, and after a claim. Licensed public adjusters, damage appraisers, umpires, and a nationwide restoration network.">
 <title>Adjustly — Property Damage Advocacy Group</title>
 <link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
-  body { margin: 0; background: var(--surface-page); }
-  .wrap { max-width: var(--container-wide); margin-inline: auto; padding-inline: var(--gutter); }
-  .wrap--text { max-width: var(--container); }
-
-  /* HERO */
+  /* HERO (homepage-specific) */
   .hero { position: relative; overflow: hidden; background: var(--navy-900); border-bottom: var(--border-1); isolation: isolate; }
-  /* Full-bleed background: a muted-autoplay video layered over a still poster fallback. */
   .hero__media { position: absolute; inset: 0; z-index: 0; background: var(--navy-900); }
-  /* Both layers fill the media box and crop identically; video sits ABOVE the poster. */
   .hero__media > img, .hero__media > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 80% 50%; display: block; }
   .hero__media > img { z-index: 0; }
   .hero__media > video { z-index: 1; }
-  /* No motion preference → hide the video and let the poster show through. */
   @media (prefers-reduced-motion: reduce){ .hero__media > video { display: none; } }
-  /* Navy scrim: darkest on the LEFT for white-headline legibility, fading toward the RIGHT to reveal the scorched laundry-room doorway. Must sit ABOVE the video. */
   .hero__media::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
       linear-gradient(96deg, rgba(11,37,69,0.95) 0%, rgba(11,37,69,0.88) 22%, rgba(11,37,69,0.66) 44%, rgba(11,37,69,0.34) 64%, rgba(11,37,69,0.12) 82%, rgba(11,37,69,0.03) 100%),
@@ -32,13 +23,12 @@
     display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,4vw,64px); align-items: center; }
   .hero__eyebrow { color: var(--sky-300); }
   .hero h1 { font-size: var(--fs-display); margin: 18px 0 22px; color: #fff; text-shadow: 0 1px 28px rgba(11,37,69,0.5); }
-  .hero__lead { max-width: 46ch; margin-bottom: 30px; color: #D7E3F0; }
+  .hero__lead { max-width: 48ch; margin-bottom: 30px; color: #D7E3F0; }
   .hero__cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
   .hero .adj-btn--secondary { border-color: rgba(255,255,255,0.55); color: #fff; }
   .hero .adj-btn--secondary:hover { background: #fff; color: var(--navy-700); border-color: #fff; }
   .hero__micro { margin-top: 22px; font-family: var(--font-mono); font-size: var(--fs-xs); color: #AFC3DA; letter-spacing: 0.03em; display:flex; align-items:center; gap:8px; }
   .hero__micro svg { width: 15px; height: 15px; color: var(--sky-300); }
-  /* crisis panel — pulled to the LEFT of its column (justify-self:start) so the scorched doorway stays visible to its right */
   .crisis { position: relative; justify-self: start; max-width: 360px; background: var(--navy-700); border-radius: var(--radius-lg); padding: clamp(24px,2.4vw,34px);
     color: #fff; overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--border-on-inverse); }
   .crisis__mark { position: absolute; right: -70px; top: -40px; width: 320px; opacity: 0.08; pointer-events: none; }
@@ -51,54 +41,43 @@
   .crisis__num { font-family: var(--font-mono); font-size: 12px; color: var(--navy-900); background: var(--sky-500); width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;font-weight:600;margin-top:1px; }
   .crisis__step span:last-child { font-size: var(--fs-sm); color: #DDE8F3; line-height:1.4; }
 
-  /* SECTION SCAFFOLD */
-  .section { padding-block: var(--section-y); }
-  .section--tint { background: var(--surface-tint); }
-  .section--navy { background: var(--navy-700); color: #fff; position: relative; overflow: hidden; }
-  .shead { display: grid; grid-template-columns: auto 1fr; gap: clamp(18px,3vw,44px); align-items: end; margin-bottom: clamp(28px,3vw,48px); }
-  .shead__num { font-family: var(--font-display); font-size: clamp(3rem,2rem+5vw,7rem); font-weight: 400; line-height: 0.8; color: var(--ice-200); font-variation-settings:"opsz" 72; letter-spacing:-0.04em; }
-  .section--navy .shead__num { color: rgba(91,164,214,0.22); }
-  .shead__txt h2 { margin: 8px 0 0; max-width: 18ch; }
-  .shead__txt p { margin: 12px 0 0; color: var(--slate-600); max-width: 56ch; }
-  .section--navy .shead__txt p { color: var(--text-on-inverse-muted); }
+  /* Three Ways We Help */
+  .ways { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--grid-gap); }
+  @media (max-width: 880px){ .ways { grid-template-columns: 1fr; } }
+  .way { background: #fff; border: var(--border-1); border-radius: var(--radius-lg); padding: clamp(24px,2.4vw,34px); display: flex; flex-direction: column; box-shadow: var(--shadow-sm); }
+  .way__tag { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--blue-500); }
+  .way h3 { margin: 10px 0 8px; }
+  .way p { color: var(--slate-600); font-size: var(--fs-base); margin: 0 0 20px; flex: 1; }
 
-  .services { display: grid; grid-template-columns: repeat(12,1fr); gap: var(--grid-gap); }
-  .services > *:nth-child(1){ grid-column: span 6; } .services > *:nth-child(2){ grid-column: span 6; }
-  .services > *:nth-child(3){ grid-column: span 4; } .services > *:nth-child(4){ grid-column: span 4; } .services > *:nth-child(5){ grid-column: span 4; }
-  @media (max-width: 820px){ .services > *{ grid-column: span 12 !important; } }
-
-  .benefits { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(20px,2.5vw,40px); position: relative; }
-  .navy__mark { position: absolute; right: -100px; bottom: -120px; width: 460px; opacity: 0.05; pointer-events: none; }
-  @media (max-width: 900px){ .benefits { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 520px){ .benefits { grid-template-columns: 1fr; } }
-
+  .services-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--grid-gap); }
+  @media (max-width: 900px){ .services-grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 600px){ .services-grid { grid-template-columns: 1fr; } }
   .articles { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--grid-gap); }
   @media (max-width: 900px){ .articles { grid-template-columns: 1fr 1fr; } .articles > *:last-child { display:none; } }
   @media (max-width: 600px){ .articles { grid-template-columns: 1fr; } .articles > *:last-child { display:block; } }
 
-  .faq { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(28px,4vw,64px); align-items: start; }
-  .faq__aside h2 { margin: 8px 0 14px; }
-  .faq__aside p { color: var(--slate-600); margin: 0 0 22px; max-width: 38ch; }
-  @media (max-width: 820px){ .faq { grid-template-columns: 1fr; } }
+  /* 8-step process grid */
+  .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 900px){ .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid var(--sky-300); }
+  .section--navy .step { border-top-color: rgba(91,164,214,0.45); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); letter-spacing: 0.08em; }
+  .section--navy .step__n { color: var(--sky-300); }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 0; }
 
   .leadcta { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px,4vw,72px); align-items: center; }
   .leadcta__copy .u-eyebrow { color: var(--sky-300); }
   .leadcta__copy h2 { color: #fff; margin: 16px 0 16px; }
-  .leadcta__copy p { color: var(--text-on-inverse-muted); max-width: 44ch; margin: 0 0 24px; }
-  .leadcta__list { list-style:none; margin:0 0 8px; padding:0; display:flex; flex-direction:column; gap:14px; }
-  .leadcta__list li { display:flex; gap:12px; align-items:flex-start; color:#DDE8F3; font-size: var(--fs-base); }
-  .leadcta__list svg { width:20px;height:20px;color:var(--sky-300);flex:none;margin-top:2px; }
+  .leadcta__copy p { color: var(--text-on-inverse-muted); max-width: 46ch; margin: 0 0 24px; }
+  .verify-link { display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--sky-300); text-decoration: none; }
+  .verify-link:hover { text-decoration: underline; }
+  .verify-link svg { width: 14px; height: 14px; }
   @media (max-width: 820px){ .leadcta { grid-template-columns: 1fr; } }
-  .discrow { margin-top: var(--space-7); }
-
-  /* Inline lead-form status line (success / error / staging notice). */
-  .adj-lead-status { margin: 16px 0 0; font-family: var(--font-mono); font-size: var(--fs-xs); line-height: 1.55; color: var(--blue-700); }
-  .adj-leadform--inverse .adj-lead-status { color: #DDE8F3; }
 
   @media (max-width: 860px){
     .hero__grid { grid-template-columns: 1fr; }
     .hero__media > img, .hero__media > video { object-position: 70% 50%; }
-    /* stacked: card sits below the copy; darken the whole poster so white text stays legible full-width */
     .hero__media::after { background: linear-gradient(180deg, rgba(11,37,69,0.82) 0%, rgba(11,37,69,0.9) 100%); }
     .crisis { order: 2; justify-self: stretch; max-width: none; }
   }
@@ -109,66 +88,22 @@
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
 <script type="text/babel">
 const {
-  SiteHeader, SiteFooter, TrustBar, ProcessTracker, FaqAccordion,
-  ServiceCard, BenefitCard, ArticleCard, Button, LeadForm, DisclaimerCallout, LicenseBadge
+  SiteHeader, SiteFooter, TrustBar, FaqAccordion,
+  ServiceCard, ArticleCard, Button, LeadForm, DisclaimerCallout, LicenseBadge
 } = window.AdjustlyDesignSystem_e51731;
-
-const NAVY = './assets/logo/adjustly-logo-navy.png';
-const WHITE = './assets/logo/adjustly-logo-white.png';
-const MARKW = './assets/logo/adjustly-mark-white.png';
-const MARK  = './assets/logo/adjustly-mark.png';
+const A = window.ADJUSTLY;
 const POSTER = './assets/img/kitchen-hero-poster.jpg';
 const VIDEO  = './assets/video/kitchen-hero.mp4';
-
-/* Web3Forms access key — PUBLIC client-side key (safe in HTML, not a secret).
-   Replace the placeholder with the real key from web3forms.com to make forms deliver. */
-const WEB3FORMS_KEY = '[WEB3FORMS_KEY]';
-
-async function submitLead(e){
-  const form = e.target;
-  let status = form.querySelector('.adj-lead-status');
-  if(!status){
-    status = document.createElement('p');
-    status.className = 'adj-lead-status';
-    status.setAttribute('role','status');
-    status.setAttribute('aria-live','polite');
-    form.appendChild(status);
-  }
-  // Staging guard: until a real key is pasted in, don't hit the API — show a clear notice instead.
-  if(WEB3FORMS_KEY.charAt(0) === '['){
-    status.textContent = 'Staging preview — online submission isn’t live yet. To reach a licensed public adjuster now, please email us and we’ll respond personally.';
-    return;
-  }
-  status.textContent = 'Sending…';
-  const data = new FormData(form);                 // all input is treated as untrusted; Web3Forms sanitizes server-side
-  data.append('access_key', WEB3FORMS_KEY);
-  data.append('subject', 'New Adjustly lead — Free policy review');
-  data.append('from_name', 'Adjustly Website');
-  try{
-    const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
-    const json = await res.json();
-    if(json.success){
-      status.textContent = 'Thank you — a licensed public adjuster will review your details and reach out. No cost, no obligation.';
-      form.reset();
-    } else {
-      status.textContent = 'Something went wrong sending your request. Please try again, or email us directly.';
-    }
-  }catch(err){
-    status.textContent = 'Network error — please try again, or email us directly.';
-  }
-}
 
 function Hero(){
   const [on,setOn] = React.useState(false);
   React.useEffect(()=>{ const t=setTimeout(()=>setOn(true),60); return ()=>clearTimeout(t); },[]);
-  // Merge any base classes with the reveal class so semantic styling (colors, layout) survives the spread.
   const r = (d, base='')=>({ className:`${base?base+' ':''}adj-reveal${on?' adj-reveal--on':''}`, 'data-delay':String(d) });
   return (
     <section className="hero" id="top">
-      {/* Muted-autoplay background video over a still poster fallback.
-          Under prefers-reduced-motion the video is hidden via CSS and only the poster shows. */}
       <div className="hero__media">
         <img src={POSTER} alt="Smoke- and water-damaged kitchen with a fire-scorched laundry-room doorway" />
         <video autoPlay muted loop playsInline preload="auto" poster={POSTER} aria-hidden="true" tabIndex={-1}>
@@ -178,16 +113,16 @@ function Hero(){
       <div className="hero__grid">
         <div>
           <span {...r(0,'u-eyebrow hero__eyebrow')}>Protect · Prepare · Recover</span>
-          <h1 {...r(1)}>When disaster strikes, you shouldn't face your insurer alone.</h1>
-          <p {...r(2,'u-lead hero__lead')}>Adjustly's licensed public adjusters and nationwide restoration network represent property owners — never insurance companies — before, during, and after a claim.</p>
+          <h1 {...r(1)}>Property Damage Happens. Don't Face Your Insurance Company Alone.</h1>
+          <p {...r(2,'u-lead hero__lead')}>Adjustly helps homeowners, business owners, and commercial property owners maximize their insurance claim recovery — through experienced public adjusters, damage appraisers, umpires, and a nationwide network of restoration professionals. We represent property owners, never insurance companies.</p>
           <div {...r(3,'hero__cta')}>
-            <Button variant="primary" size="lg" href="#start" icon="arrow-right" iconPosition="right">Get a free policy review</Button>
-            <Button variant="secondary" size="lg" href="#how">How it works</Button>
+            <Button variant="primary" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a Free Claim Review</Button>
+            <Button variant="secondary" size="lg" href="risk-assessment.html">Schedule a Property Consultation</Button>
           </div>
           <div {...r(4,'hero__micro')}><i data-lucide="badge-check"></i>Licensed public adjusters · Free, no-obligation review</div>
         </div>
         <div className={`crisis adj-reveal${on?' adj-reveal--on':''}`} data-delay="3">
-          <img className="crisis__mark" src={MARKW} alt="" />
+          <img className="crisis__mark" src={A.MARK_WHITE} alt="" />
           <span className="crisis__eyebrow"><i data-lucide="life-buoy"></i>Just had a loss?</span>
           <h2>Start here.</h2>
           <p>Take three steps now — we'll take it from there.</p>
@@ -196,143 +131,203 @@ function Hero(){
             <div className="crisis__step"><span className="crisis__num">2</span><span>Photograph and video everything before you move or discard it.</span></div>
             <div className="crisis__step"><span className="crisis__num">3</span><span>Talk to a licensed adjuster before you speak with your insurer.</span></div>
           </div>
-          <Button variant="inverse" size="md" fullWidth href="#start" icon="phone">Talk to an adjuster now</Button>
+          <Button variant="inverse" size="md" fullWidth href={A.CTA.href} icon="phone">Talk to an adjuster now</Button>
         </div>
       </div>
     </section>
   );
 }
 
+const BENEFITS = [
+  ['We work exclusively for you','Unlike the insurance company\'s adjuster, a public adjuster represents only the policyholder.'],
+  ['Maximize your settlement','Proper documentation, estimating, and policy interpretation often uncover benefits many property owners never knew existed.'],
+  ['Understand your coverage','Insurance policies can be hundreds of pages long. We help explain your rights, responsibilities, and available coverages.'],
+  ['Save time','Claims can consume hundreds of hours. We manage much of the paperwork, inspections, documentation, and negotiations.'],
+  ['Reduce stress','Recovering from property damage is difficult enough. Experienced advocates let you focus on your family or business.'],
+  ['Professional documentation','We prepare detailed damage reports, estimates, inventories, and supporting documentation required for proper claim evaluation.'],
+  ['Expert negotiation','We negotiate directly with insurance carriers to pursue a fair resolution based on the policy.'],
+  ['Business interruption expertise','Commercial clients often have significant income losses beyond physical damage. We help identify and document these complex claims.'],
+  ['Hidden damage investigation','Many losses involve damage that isn\'t immediately visible. Proper inspections can identify issues that may otherwise go unnoticed.'],
+  ['Policy interpretation','Insurance language is technical. We help identify applicable coverages, endorsements, and claim provisions.'],
+  ['Faster claim resolution','Proper organization and communication often help streamline the claims process.'],
+  ['Accurate estimating','Using professional estimating software and industry standards, we prepare detailed repair estimates.'],
+  ['Appraisal representation','When disputes arise, our network includes experienced damage appraisers and umpires to assist in the appraisal process where appropriate.'],
+  ['Nationwide experience','Our professionals have handled residential and commercial claims across multiple states.'],
+  ['Peace of mind','Knowing experienced professionals are protecting your interests provides confidence during one of life\'s most stressful events.'],
+];
+
+const PROCESS = [
+  'Schedule your free consultation','Property inspection','Policy review','Damage documentation',
+  'Claim preparation','Insurance company negotiation','Settlement resolution','Restoration support',
+];
+
 function App(){
   React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),120); return ()=>clearTimeout(t); });
   return (
     <div>
-      <SiteHeader logoSrc={NAVY} currentHref="#how" />
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
       <Hero/>
 
-      <div className="wrap"><TrustBar /></div>
+      <div className="wrap"><TrustBar items={[
+        {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+        {icon:'users', label:'Second-Generation Family of Adjusters'},
+        {icon:'map-pin', label:'Nationwide Network'},
+        {icon:'hand-coins', label:'Free, No-Obligation Review'},
+      ]} /></div>
 
-      {/* HOW IT WORKS */}
+      {/* THREE WAYS WE HELP */}
       <section className="section section--tint" id="how">
         <div className="wrap">
           <div className="shead">
             <div className="shead__num">01</div>
-            <div className="shead__txt"><span className="u-eyebrow">How it works</span>
-              <h2>One clear path, from first damage to final recovery.</h2>
-              <p>Whether you're preparing for storm season or staring at a flooded living room, the path is the same — and you're not walking it alone.</p>
+            <div className="shead__txt"><span className="u-eyebrow">Protect · Prepare · Recover</span>
+              <h2>Three ways we help property owners.</h2>
+              <p>Every other public adjuster says "call us after you have damage." Adjustly is with you before the loss, during the claim, and after the insurer has already paid.</p>
             </div>
           </div>
-          <ProcessTracker orientation="horizontal" current={1} steps={[
-            {eyebrow:'Step 01', title:'Protect', desc:'Stabilize the property and document the loss the right way, from the start.', icon:'shield'},
-            {eyebrow:'Step 02', title:'Prepare', desc:'We build, value, and substantiate the full claim your policy owes.', icon:'file-text'},
-            {eyebrow:'Step 03', title:'Recover', desc:'We advocate and handle the insurer until your claim is resolved.', icon:'circle-check'},
-          ]} />
+          <div className="ways">
+            <div className="way">
+              <span className="way__tag">Before the loss</span>
+              <h3>Free Property Risk Assessment</h3>
+              <p>Protect your home, identify hidden risks, review your insurance policy, and prepare before disaster strikes — completely free.</p>
+              <Button variant="primary" href="risk-assessment.html" icon="arrow-right" iconPosition="right">Schedule assessment</Button>
+            </div>
+            <div className="way">
+              <span className="way__tag">During the claim</span>
+              <h3>Professional Claim Representation</h3>
+              <p>Our licensed public adjusters advocate on your behalf throughout the insurance claims process — never for the insurer.</p>
+              <Button variant="secondary" href="services-public-adjusting.html" icon="arrow-right" iconPosition="right">Learn more</Button>
+            </div>
+            <div className="way">
+              <span className="way__tag">After the claim</span>
+              <h3>Free Claim Settlement Audit</h3>
+              <p>Already received an insurance payment? We'll review it to determine whether additional compensation may still be available.</p>
+              <Button variant="primary" href="settlement-audit.html" icon="arrow-right" iconPosition="right">Request your audit</Button>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="section" id="services">
+      {/* WHO WE ARE / MISSION / VISION */}
+      <section className="section" id="about">
         <div className="wrap">
           <div className="shead">
             <div className="shead__num">02</div>
-            <div className="shead__txt"><span className="u-eyebrow">What we handle</span>
-              <h2>Damage we help property owners recover from.</h2>
-              <p>Every claim is documented and valued by people who answer to you — not your insurance company.</p>
+            <div className="shead__txt"><span className="u-eyebrow">Who we are</span>
+              <h2>We are property damage advocates.</h2>
+              <p>Insurance companies employ teams of adjusters, engineers, consultants, and attorneys to evaluate claims. We believe property owners deserve experienced professionals on their side as well.</p>
             </div>
           </div>
-          <div className="services">
-            <ServiceCard icon="cloud-lightning" title="Storm & hurricane" href="#">Wind, hail, and named-storm losses, assessed by local restoration specialists and built into a claim that reflects the real scope.</ServiceCard>
-            <ServiceCard icon="droplets" title="Water & flood" href="#">Burst pipes, appliance failures, and flooding — including the hidden moisture insurers routinely overlook.</ServiceCard>
-            <ServiceCard icon="flame" title="Fire & smoke" href="#">Structure and contents, including smoke and soot damage that's easy to undervalue.</ServiceCard>
-            <ServiceCard icon="home" title="Roof & structural" href="#">Hidden structural loss documented to the standard your policy actually requires.</ServiceCard>
-            <ServiceCard icon="file-search" title="Denied & underpaid claims" href="#">Already filed and came up short? We review the file and prepare your case for re-evaluation.</ServiceCard>
+          <div className="split split--even">
+            <div className="split__aside">
+              <span className="u-eyebrow">Our mission</span>
+              <p>To educate property owners about their rights under their insurance policies while providing access to experienced advocates who help ensure every covered loss is fully investigated, properly documented, professionally negotiated, and fairly resolved.</p>
+            </div>
+            <div className="split__aside">
+              <span className="u-eyebrow">Our vision</span>
+              <p>To become America's most trusted property damage advocacy organization by connecting homeowners, businesses, and commercial property owners with experienced claims professionals and restoration experts.</p>
+            </div>
+          </div>
+          <div className="discrow">
+            <DisclaimerCallout title="On experience">Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company and does not guarantee any claim outcome.</DisclaimerCallout>
           </div>
         </div>
       </section>
 
-      {/* WHY — NAVY PROOF BAND */}
-      <section className="section section--navy" id="about">
-        <img className="navy__mark" src={MARKW} alt="" />
-        <div className="wrap" style={{position:'relative'}}>
+      {/* WHY HIRE A PA + TOP 15 BENEFITS */}
+      <section className="section section--tint" id="why">
+        <div className="wrap">
           <div className="shead">
             <div className="shead__num">03</div>
-            <div className="shead__txt"><span className="u-eyebrow" style={{color:'var(--sky-300)'}}>Why Adjustly</span>
-              <h2>A new name, built on seasoned, second-generation experience.</h2>
-              <p>Adjustly the brand is new. The people are not — our advocacy is led by a licensed public adjuster and a second-generation family of adjusters who have spent careers on the property owner's side of the table.</p>
+            <div className="shead__txt"><span className="u-eyebrow">Why hire a public adjuster</span>
+              <h2>Most property owners don't know they have the right to representation.</h2>
+              <p>Insurance policies are complex legal contracts. Most people file only a few claims in a lifetime; insurance companies handle thousands every year. A licensed public adjuster works exclusively for the policyholder — never the insurance company.</p>
             </div>
           </div>
-          <div className="benefits">
-            <BenefitCard inverse number="01" icon="users" title="We work for you">Public adjusters represent property owners. We never work for the insurance company.</BenefitCard>
-            <BenefitCard inverse number="02" icon="badge-check" title="Licensed & verifiable">Advocacy led by a licensed public adjuster you can verify by license number.</BenefitCard>
-            <BenefitCard inverse number="03" icon="file-text" title="We build the claim">Documented, valued, and substantiated so nothing is quietly left on the table.</BenefitCard>
-            <BenefitCard inverse number="04" icon="map-pin" title="Nationwide network">A national restoration network means qualified specialists close to your property.</BenefitCard>
-          </div>
-          <div className="discrow" style={{maxWidth:'760px'}}>
-            <DisclaimerCallout variant="inverse" title="On experience">Experience is attributed to our licensed principal and second-generation family of adjusters. Adjustly does not guarantee any claim outcome.</DisclaimerCallout>
-          </div>
+          <FaqAccordion items={BENEFITS.map(([q,a])=>({q,a}))} defaultOpen={[0]} />
         </div>
       </section>
 
-      {/* EDUCATION */}
-      <section className="section section--tint" id="learn">
+      {/* SERVICES SNAPSHOT */}
+      <section className="section" id="services">
         <div className="wrap">
           <div className="shead">
             <div className="shead__num">04</div>
-            <div className="shead__txt"><span className="u-eyebrow">Learn before you need us</span>
-              <h2>Plain-English guides for property owners.</h2>
-              <p>The best time to understand your policy is before a loss. Start here.</p>
+            <div className="shead__txt"><span className="u-eyebrow">Our services</span>
+              <h2>How we advocate for property owners.</h2>
+              <p>Every claim is documented and valued by people who answer to you — not your insurance company.</p>
+            </div>
+          </div>
+          <div className="services-grid">
+            <ServiceCard icon="file-check" title="Public Adjusting" href="services-public-adjusting.html">Professional claim representation from inspection through settlement.</ServiceCard>
+            <ServiceCard icon="scale" title="Damage Appraisal" href="services-damage-appraisal.html">Independent appraisal representation when claim disputes arise.</ServiceCard>
+            <ServiceCard icon="gavel" title="Umpire Services" href="services-umpire.html">Experienced neutral umpire professionals for insurance appraisal proceedings.</ServiceCard>
+            <ServiceCard icon="search" title="Property Damage Consultation" href="services-consultation.html">Not sure if you have damage? We help property owners understand their options.</ServiceCard>
+            <ServiceCard icon="file-search" title="Claim Review" href="services-claim-review.html">Already received a settlement? We'll review your documentation for additional benefits.</ServiceCard>
+            <ServiceCard icon="building-2" title="Commercial Claims" href="services-commercial.html">Large-loss specialists — business interruption, income loss, and complex claims.</ServiceCard>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR PROCESS — 8 STEPS */}
+      <section className="section section--navy">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap" style={{position:'relative'}}>
+          <div className="shead">
+            <div className="shead__num">05</div>
+            <div className="shead__txt"><span className="u-eyebrow" style={{color:'var(--sky-300)'}}>Our process</span>
+              <h2>One clear path, from first damage to final recovery.</h2>
+              <p>You're not walking it alone. Here's how an Adjustly engagement works, step by step.</p>
+            </div>
+          </div>
+          <div className="steps">
+            {PROCESS.map((t,i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* EDUCATION TEASER */}
+      <section className="section section--tint" id="learn">
+        <div className="wrap">
+          <div className="shead">
+            <div className="shead__num">06</div>
+            <div className="shead__txt"><span className="u-eyebrow">Education Center</span>
+              <h2>Learn before you need us.</h2>
+              <p>The best time to understand your policy is before a loss. Our Education Center breaks the claims process down in plain English.</p>
             </div>
           </div>
           <div className="articles">
-            <ArticleCard category="Guide" title="What to do in the first 48 hours after water damage" excerpt="Document first, mitigate second, call your adjuster third — in that order." readTime="6 min read" markSrc={MARK} href="#" />
-            <ArticleCard category="Before a loss" title="How to read your homeowners policy before storm season" excerpt="The four sections that decide what you're actually owed." readTime="8 min read" markSrc={MARK} href="#" />
-            <ArticleCard category="Claims" title="Public adjuster vs. insurance adjuster: who works for whom" excerpt="A simple breakdown of who's on which side of your claim." readTime="5 min read" markSrc={MARK} href="#" />
+            <ArticleCard category="Guide" title="What to do in the first 48 hours after water damage" excerpt="Document first, mitigate second, call your adjuster third — in that order." readTime="6 min read" markSrc={A.MARK} href="education.html" />
+            <ArticleCard category="Before a loss" title="How to read your homeowners policy before storm season" excerpt="The four sections that decide what you're actually owed." readTime="8 min read" markSrc={A.MARK} href="education.html" />
+            <ArticleCard category="Claims" title="Public adjuster vs. insurance adjuster: who works for whom" excerpt="A simple breakdown of who's on which side of your claim." readTime="5 min read" markSrc={A.MARK} href="education.html" />
           </div>
           <div style={{marginTop:'32px'}}>
-            <Button variant="secondary" href="#" icon="arrow-right" iconPosition="right">Browse all guides</Button>
+            <Button variant="secondary" href="education.html" icon="arrow-right" iconPosition="right">Browse the Education Center</Button>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section" id="faq">
-        <div className="wrap faq">
-          <div className="faq__aside">
-            <span className="u-eyebrow">Common questions</span>
-            <h2>Answers, before you ask.</h2>
-            <p>Still unsure? A licensed adjuster will walk you through your specific situation — free.</p>
-            <Button variant="primary" href="#start" icon="arrow-right" iconPosition="right">Get a free policy review</Button>
-          </div>
-          <FaqAccordion defaultOpen={[0]} items={[
-            {q:'What does a public adjuster actually do?', a:'A public adjuster represents you — the property owner — not your insurance company. We document the damage, value the loss, prepare and file the claim, and handle the negotiation with your insurer so you can focus on getting your property back.'},
-            {q:'Is the policy review really free?', a:'Yes. The policy review is genuinely free and carries no cost and no obligation.'},
-            {q:'Should I call before or after a loss?', a:'Both. We help you understand your coverage before storm season, and we advocate for you after a loss has occurred. Earlier is always better — many policies limit how long you have to act.'},
-            {q:'Do you work with my insurance company?', a:'We work for you. We deal with your insurance company on your behalf, but our duty is to you, the policyholder — never the insurer.'},
-            {q:'What does it cost to work with Adjustly?', a:'The initial policy review is free. Public-adjusting fees, where they apply, are disclosed up front by the licensed public adjuster before any engagement begins.'},
-          ]} />
-        </div>
-      </section>
-
-      {/* LEAD CTA */}
+      {/* CLOSING LEAD CTA */}
       <section className="section section--navy" id="start">
-        <img className="navy__mark" src={MARKW} alt="" style={{right:'auto', left:'-120px', top:'-100px', bottom:'auto'}} />
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" style={{right:'auto', left:'-120px', top:'-100px', bottom:'auto'}} />
         <div className="wrap leadcta" style={{position:'relative'}}>
           <div className="leadcta__copy">
-            <span className="u-eyebrow">Free policy review</span>
-            <h2>See what your policy really owes you.</h2>
-            <p>Send a few details and a licensed public adjuster will review your situation — free, with no obligation.</p>
-            <ul className="leadcta__list">
-              <li><i data-lucide="check"></i><span>A licensed adjuster reviews your policy and loss</span></li>
-              <li><i data-lucide="check"></i><span>Clear next steps for your specific situation</span></li>
-              <li><i data-lucide="check"></i><span>No cost, no obligation, no pressure</span></li>
-            </ul>
-            <div style={{marginTop:'24px'}}><LicenseBadge inverse number="PA-1098842" state="Florida Public Adjuster" /></div>
+            <span className="u-eyebrow">Free claim review</span>
+            <h2>Don't leave your insurance claim to chance.</h2>
+            <p>Whether you've just experienced property damage or simply want to understand your rights before disaster strikes, a licensed public adjuster will review your situation — free, with no obligation.</p>
+            <div style={{marginTop:'8px'}}><LicenseBadge inverse number={A.LICENSE.number} state={A.LICENSE.label} /></div>
+            <a className="verify-link" href={A.LICENSE.verifyUrl} target="_blank" rel="noopener"><i data-lucide="external-link"></i>Verify license #{A.LICENSE.number} at the PA Insurance Department</a>
           </div>
-          <LeadForm inverse onSubmit={submitLead} />
+          <LeadForm inverse onSubmit={(e)=>A.submitLead(e,'New Adjustly lead — Free claim review (home)')} />
         </div>
       </section>
 
-      <SiteFooter logoSrc={WHITE} />
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
     </div>
   );
 }

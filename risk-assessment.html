@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="The Adjustly Property Protection Review™ — a free, no-obligation property risk assessment: coverage gap review, claim education, property health inspection, digital documentation, and personalized recommendations.">
+<title>Free Property Risk Assessment — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .five { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px,2.5vw,36px); }
+  @media (max-width: 820px){ .five { grid-template-columns: 1fr; } }
+  .five__item { background:#fff; border:var(--border-1); border-radius:var(--radius-lg); padding:clamp(22px,2.2vw,32px); box-shadow:var(--shadow-sm); }
+  .five__n { font-family:var(--font-mono); font-size:var(--fs-xs); letter-spacing:0.08em; color:var(--blue-500); }
+  .five__item h3 { margin:8px 0 10px; }
+  .five__item p { color:var(--slate-600); margin:0 0 14px; font-size:var(--fs-base); }
+  .trademark { background:var(--surface-tint); border:var(--border-1); border-left:4px solid var(--gold-500,#C9A227); border-radius:var(--radius-md); padding:clamp(22px,2.4vw,34px); }
+  .trademark h3 { margin:0 0 8px; }
+  .trademark p { color:var(--slate-600); margin:0; max-width:62ch; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, Field, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+function AssessmentForm(){
+  return (
+    <form className="adj-leadform adj-leadform--inverse" noValidate onSubmit={(e)=>{e.preventDefault(); A.submitLead(e,'New Adjustly lead — Free Property Risk Assessment');}}>
+      <div className="adj-leadform__eyebrow"><i data-lucide="shield-check" aria-hidden="true"></i>Free Property Protection Review™</div>
+      <h3 className="adj-leadform__title">Schedule your complimentary assessment</h3>
+      <p className="adj-leadform__sub">No cost. No obligation. A licensed advocate will reach out to schedule.</p>
+      <div className="adj-leadform__grid">
+        <Field label="Full name" name="name" autoComplete="name" required inverse placeholder="Jordan Rivera" />
+        <Field label="Phone" name="phone" type="tel" autoComplete="tel" required inverse placeholder="(555) 010-2837" />
+        <div style={{gridColumn:'1 / -1'}}><Field label="Email" name="email" type="email" autoComplete="email" required inverse placeholder="you@email.com" /></div>
+        <div style={{gridColumn:'1 / -1'}}><Field label="Property address" name="address" autoComplete="street-address" inverse placeholder="123 Main St, City, State ZIP" /></div>
+        <Field label="Best time to call" name="best_time" as="select" inverse options={['Select one','Morning','Afternoon','Evening','Anytime']} />
+        <Field label="Property type" name="property_type" as="select" inverse options={['Select one','Single-family home','Condo / townhome','Multi-family','Commercial','Other']} />
+      </div>
+      <div className="adj-leadform__actions">
+        <Button type="submit" variant="inverse" size="lg" fullWidth icon="arrow-right" iconPosition="right">Schedule appointment</Button>
+        <p className="adj-leadform__note">Free and no obligation. We do not sell insurance. This is educational and not legal advice.</p>
+      </div>
+    </form>
+  );
+}
+
+const FIVE = [
+  ['Insurance Coverage Gap Review','Many homeowners assume their policy covers "everything." Often it doesn\'t. Our advocates review your current policy to help identify potential coverage gaps, limitations, exclusions, deductibles, and endorsements that may leave you exposed after a loss. We do not sell insurance — we help you make informed decisions before disaster strikes.'],
+  ['Insurance Claim Education','Most people file only a handful of claims in a lifetime, while insurers handle thousands every day. We explain your legal right to representation, how claims really work, common mistakes, documentation tips, hidden coverages, depreciation, replacement cost vs. actual cash value, supplemental claims, and the appraisal process.'],
+  ['Property Health & Risk Inspection','Your home may already show signs of damage that could become much larger problems. We inspect for visible conditions — roof deterioration, storm damage, water intrusion, moisture, drainage, foundation concerns, tree hazards, ventilation, potential mold, and safety hazards. If we find evidence of damage that may be covered, we\'ll explain your options.'],
+  ['Digital Property Documentation','One of the most overlooked steps in preparing for a claim is documenting your property\'s condition before a loss. We photograph important areas to help create a visual record. Many homeowners wish they had "before" photos after a loss — we help provide them.'],
+  ['Personalized Risk Reduction Recommendations','After the assessment you\'ll receive practical recommendations that may help reduce future risks — maintenance suggestions, safety improvements, documentation tips, and insurance questions to discuss with your professional.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero phero--split">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb"><a href="index.html">Free Property Protection</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Risk Assessment</span>
+            <h1>Protect your home before disaster strikes.</h1>
+            <p className="phero__lead">Our comprehensive Property Risk Assessment helps you discover risks, strengthen your insurance position, and better protect your family — absolutely free, with no obligation.</p>
+            <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'18px'}}>
+              <Badge variant="accent" icon="gift">100% free</Badge>
+              <Badge variant="brand" icon="shield-check">No obligation</Badge>
+              <Badge variant="outline" icon="badge-check" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Licensed advocates</Badge>
+            </div>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'shield-check', label:'We represent owners, not insurers'},
+              {icon:'camera', label:'Digital "before" documentation included'},
+            ]} />
+          </div>
+          <div className="formcol"><AssessmentForm /></div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What it is</span>
+            <h2>What is a Property Risk Assessment?</h2>
+          </div>
+          <div className="prose">
+            <p>Most homeowners only think about their insurance after something bad happens. By then, it may be too late. Adjustly believes the best insurance claim is the one you're prepared for <em>before</em> disaster strikes.</p>
+            <p>Our Property Risk Assessment is a comprehensive consultation designed to educate homeowners while identifying potential property and insurance risks before they become expensive problems. Best of all — there is absolutely no cost or obligation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead">
+            <div className="shead__num">5</div>
+            <div className="shead__txt"><span className="u-eyebrow">What's included</span>
+              <h2>Five valuable services during your complimentary assessment.</h2>
+              <p>Each one is designed to leave you better prepared than when we arrived — whether you ever become a client or not.</p>
+            </div>
+          </div>
+          <div className="five">
+            {FIVE.map(([t,d],i)=>(
+              <div className="five__item" key={i}>
+                <div className="five__n">0{i+1}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap split split--even">
+          <div className="split__aside">
+            <span className="u-eyebrow">Why it's free</span>
+            <h2>Because our mission is education.</h2>
+            <p>We believe informed property owners make better decisions, and we want families to understand their insurance policies before they ever need to use them. Whether you become a client or not, we want you to leave better prepared.</p>
+          </div>
+          <div className="trademark">
+            <h3>The Adjustly Property Protection Review™</h3>
+            <p>Our signature, education-first program — a free, memorable assessment that referral partners (roofers, realtors, mortgage professionals, plumbers, HVAC, and restoration contractors) can confidently recommend. It could help a homeowner save thousands before they ever have a claim.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="Educational, not legal advice">Adjustly represents property owners, never insurers. We do not sell insurance. This assessment is educational and is not legal advice, and we do not guarantee any claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Protect your home before disaster strikes.</h2>
+          <p>Schedule your complimentary Property Risk Assessment today — free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="#top" icon="arrow-right" iconPosition="right">Schedule my assessment</Button>
+            <Button variant="secondary" size="lg" href="settlement-audit.html">Already had a loss? Get a free audit</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

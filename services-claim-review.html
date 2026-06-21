@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Claim Review from Adjustly — already received a settlement? We review your claim documentation to determine whether additional benefits may still be available. Free, no obligation.">
+<title>Claim Review — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 760px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid var(--sky-300); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); letter-spacing: 0.08em; }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 6px; }
+  .step p { color: var(--slate-600); font-size: var(--fs-sm); margin: 0; line-height: 1.5; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, FaqAccordion, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STEPS = [
+  ['Send us your documents','Share what you have — your insurance estimate, the settlement letter, photos, and any contractor estimates. The more complete the file, the more thorough the review.'],
+  ['We review the file','We compare what was paid against the documented loss and your policy — looking for overlooked damage, missing scope, miscalculated depreciation, and benefits that may not have been applied.'],
+  ['We explain your options','If we believe additional benefits may be available, we\'ll explain honestly what those options are. Every claim is different, and no additional recovery can be guaranteed.'],
+];
+
+const WHO = [
+  'Anyone who has already received an insurance payment',
+  'Owners who feel their claim was underpaid or rushed',
+  'Anyone whose contractor says repairs will cost more than the settlement',
+  'Owners who later discovered hidden or additional damage',
+  'Anyone whose claim was partially denied or closed too quickly',
+];
+
+const FAQS = [
+  ['I already got paid — can my claim really be reopened?','Many owners assume a claim is final once a payment arrives. That isn\'t always true. Depending on your policy, the facts of the loss, and applicable deadlines, additional benefits or a supplemental claim may still be possible. A review is how you find out.'],
+  ['What\'s the difference between Claim Review and the Settlement Audit?','They\'re closely related. The free Claim Settlement Audit is our structured, point-by-point examination of a completed settlement. Claim Review is the broader service of looking at your documentation to determine whether additional benefits may still be available — and it often starts with that audit.'],
+  ['Is the review free?','Yes — reviewing your documentation is free and carries no obligation. If additional recovery looks possible, we\'ll explain your options before you decide anything.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="services.html">Services</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Claim Review</span>
+          <h1>Already received a settlement? Let's review it.</h1>
+          <p className="phero__lead">A payment doesn't always mean the claim is finished. We review your documentation to determine whether additional benefits may still be available — free, with no obligation.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap',margin:'4px 0 22px'}}>
+            <Badge variant="accent" icon="gift">100% free</Badge>
+            <Badge variant="brand" icon="shield-check">No obligation</Badge>
+          </div>
+          <div className="phero__cta">
+            <Button variant="primary" size="lg" href="settlement-audit.html" icon="arrow-right" iconPosition="right">Request a Free Settlement Audit</Button>
+            <Button variant="secondary" size="lg" href="contact.html#start">Talk to an adjuster</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What it is</span>
+            <h2>What is a Claim Review?</h2>
+          </div>
+          <div className="prose">
+            <p>Insurance claims are complex, and settlements aren't always complete. Damage gets overlooked, estimates come in short, depreciation is miscalculated, and policy benefits that should have applied sometimes never make it into the final number. Once the check arrives, most people assume the matter is closed.</p>
+            <p>A Claim Review takes a careful second look. We examine your claim documentation against your policy and the documented loss to determine whether additional benefits may still be available. For a completed settlement, the natural starting point is our free, structured <a href="settlement-audit.html">Claim Settlement Audit</a> — a point-by-point examination of what was paid versus what your loss actually involved.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">How it works</span>
+            <h2>From "claim closed" to a clear answer.</h2>
+          </div>
+          <div className="steps" style={{marginTop:'24px'}}>
+            {STEPS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Who it's for</span>
+            <h2>Is a Claim Review right for you?</h2>
+          </div>
+          <ul className="checklist checklist--2" style={{marginTop:'8px'}}>
+            {WHO.map((t,i)=>(<li key={i}><i data-lucide="user-check"></i><span>{t}</span></li>))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Common questions</span>
+            <h2>Claim Review, explained.</h2>
+          </div>
+          <FaqAccordion items={FAQS.map(([q,a])=>({q,a}))} defaultOpen={[0]} />
+          <div className="discrow">
+            <DisclaimerCallout title="Educational, not legal advice">Adjustly represents property owners, never insurers. This page is educational and is not legal advice, and we do not guarantee any claim outcome. Every claim is different and no additional recovery can be guaranteed.</DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Think your settlement came up short?</h2>
+          <p>Start with a free Claim Settlement Audit — a structured review of what you were paid versus what your loss involved.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="settlement-audit.html" icon="arrow-right" iconPosition="right">Request my free audit</Button>
+            <Button variant="secondary" size="lg" href="contact.html#start">Talk to an adjuster</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

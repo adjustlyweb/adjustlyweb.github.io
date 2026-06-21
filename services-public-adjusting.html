@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Public adjusting from Adjustly — a licensed public adjuster works exclusively for the policyholder, documenting, valuing, preparing, filing, and negotiating your insurance claim. We represent owners, never insurers.">
+<title>Public Adjusting — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 760px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid var(--sky-300); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); letter-spacing: 0.08em; }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 6px; }
+  .step p { color: var(--slate-600); font-size: var(--fs-sm); margin: 0; line-height: 1.5; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, FaqAccordion, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STEPS = [
+  ['We document & value the loss','We inspect the property, capture the full scope of damage — including damage that isn\'t immediately visible — and prepare a detailed, professionally estimated valuation of your loss.'],
+  ['We prepare & file the claim','We read your policy, identify the coverages that apply, and assemble the claim with the reports, inventories, and supporting documentation the carrier needs to evaluate it properly.'],
+  ['We negotiate to resolution','We deal directly with the insurance company on your behalf and negotiate toward a fair settlement based on your policy and the documented facts of the loss.'],
+];
+
+const WHO = [
+  'Homeowners who have suffered fire, water, storm, wind, hail, or other covered damage',
+  'Property owners who feel overwhelmed by the claims process',
+  'Owners whose claim has been underpaid, delayed, or partially denied',
+  'Anyone who wants an experienced advocate working only for them — not the insurer',
+  'Business and commercial property owners facing complex or large losses',
+];
+
+const FAQS = [
+  ['What is a public adjuster?','A public adjuster is a licensed insurance claims professional who represents the policyholder — not the insurance company. The insurer\'s adjuster works for the insurer. A public adjuster works exclusively for you, documenting, valuing, preparing, filing, and negotiating your claim.'],
+  ['How is this different from the adjuster my insurance company sends?','The carrier\'s adjuster is paid by and answers to the insurance company. A public adjuster answers only to you. The same loss can be documented and valued very differently depending on who is doing the work and whose interests they represent.'],
+  ['Do I really need representation for my claim?','Most people file only a few claims in a lifetime, while insurers handle thousands every year. You have the right to professional representation. Whether it makes sense for your situation is exactly what a free, no-obligation review is designed to help you decide.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="services.html">Services</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Public Adjusting</span>
+          <h1>Public Adjusting — professional claim representation.</h1>
+          <p className="phero__lead">A licensed public adjuster works exclusively for the policyholder, not the insurer. We document, value, prepare, file, and negotiate your insurance claim — from first inspection through final settlement.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap',margin:'4px 0 22px'}}>
+            <Badge variant="brand" icon="shield-check">We work only for you</Badge>
+            <Badge variant="outline" icon="badge-check" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Licensed PA adjuster</Badge>
+          </div>
+          <div className="phero__cta">
+            <Button variant="primary" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a Free Claim Review</Button>
+            <Button variant="secondary" size="lg" href="contact.html#start">Talk to an adjuster</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What it is</span>
+            <h2>What is public adjusting?</h2>
+          </div>
+          <div className="prose">
+            <p>When you file an insurance claim, the company sends its own adjuster to evaluate your loss. That adjuster is paid by, and answers to, the insurance company. A <strong>public adjuster</strong> is a licensed claims professional who represents the other side of the table — the policyholder.</p>
+            <p>We document the damage, interpret your policy, prepare a detailed and professionally estimated claim, file it correctly, and negotiate directly with the carrier on your behalf. The goal is simple: that your covered loss is fully investigated, properly documented, and fairly resolved based on what your policy actually provides.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">How it works</span>
+            <h2>Three things a public adjuster does for you.</h2>
+          </div>
+          <div className="steps" style={{marginTop:'24px'}}>
+            {STEPS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Who it's for</span>
+            <h2>Is public adjusting right for you?</h2>
+          </div>
+          <ul className="checklist checklist--2" style={{marginTop:'8px'}}>
+            {WHO.map((t,i)=>(<li key={i}><i data-lucide="user-check"></i><span>{t}</span></li>))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Common questions</span>
+            <h2>Public adjusting, explained.</h2>
+          </div>
+          <FaqAccordion items={FAQS.map(([q,a])=>({q,a}))} defaultOpen={[0]} />
+          <div className="discrow">
+            <DisclaimerCallout title="Educational, not legal advice">Adjustly represents property owners, never insurers. This page is educational and is not legal advice, and we do not guarantee any claim outcome. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters.</DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Have a claim? Don't face your insurer alone.</h2>
+          <p>A licensed public adjuster will review your situation — free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a Free Claim Review</Button>
+            <Button variant="secondary" size="lg" href="services.html">See all services</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Contact Adjustly for a free, no-obligation claim review. Speak with a licensed Pennsylvania public adjuster who represents property owners — never insurance companies. Verify our license at the PA Insurance Department.">
+<title>Contact — Get a Free Claim Review — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .verify-link { display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--sky-300); text-decoration: none; }
+  .verify-link:hover { text-decoration: underline; }
+  .verify-link svg { width: 14px; height: 14px; }
+  .contactlist { list-style:none; margin:0; padding:0; display:grid; gap:18px; margin-top:22px; }
+  .contactlist li { display:flex; gap:14px; align-items:flex-start; }
+  .contactlist__ic { width:40px; height:40px; flex:none; border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center;
+    background: rgba(255,255,255,0.08); border:1px solid var(--border-on-inverse); }
+  .contactlist__ic svg { width:19px; height:19px; color: var(--sky-300); }
+  .contactlist__lbl { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--sky-300); }
+  .contactlist__val { color:#fff; font-size: var(--fs-base); line-height:1.5; margin-top:2px; }
+  .trustblk { margin-top:30px; padding-top:24px; border-top:1px solid var(--border-on-inverse); }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, Field, DisclaimerCallout, LicenseBadge } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+function ContactForm(){
+  return (
+    <form className="adj-leadform adj-leadform--inverse" noValidate onSubmit={(e)=>{e.preventDefault(); A.submitLead(e,'New Adjustly lead — Contact / Free Claim Review');}}>
+      <div className="adj-leadform__eyebrow"><i data-lucide="shield-check" aria-hidden="true"></i>Free, no-obligation review</div>
+      <h3 className="adj-leadform__title">Request your free claim review</h3>
+      <p className="adj-leadform__sub">Tell us what happened and a licensed public adjuster will reach out. No cost, no obligation.</p>
+      <div className="adj-leadform__grid">
+        <Field label="Full name" name="name" autoComplete="name" required inverse placeholder="Jordan Rivera" />
+        <Field label="Phone" name="phone" type="tel" autoComplete="tel" required inverse placeholder="(555) 010-2837" />
+        <div style={{gridColumn:'1 / -1'}}><Field label="Email" name="email" type="email" autoComplete="email" required inverse placeholder="you@email.com" /></div>
+        <div style={{gridColumn:'1 / -1'}}><Field label="Property address" name="address" autoComplete="street-address" inverse placeholder="123 Main St, City, State ZIP" /></div>
+        <div style={{gridColumn:'1 / -1'}}><Field label="How can we help?" name="help_topic" as="select" inverse required options={['Free Claim Review','Free Property Risk Assessment','Free Claim Settlement Audit','Public Adjusting','Commercial Claim','Other']} /></div>
+        <div style={{gridColumn:'1 / -1'}}><Field label="Tell us what happened" name="message" as="textarea" inverse placeholder="A few details about your property and your loss — type of damage, when it happened, and whether you've filed a claim yet." rows={5} /></div>
+      </div>
+      <div className="adj-leadform__actions">
+        <Button type="submit" variant="inverse" size="lg" fullWidth icon="arrow-right" iconPosition="right">Request my free review</Button>
+        <p className="adj-leadform__note">Free and no obligation. This is educational and not legal advice.</p>
+      </div>
+    </form>
+  );
+}
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),120); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero phero--split" id="start">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb">Contact Adjustly</span>
+            <h1>Get a free claim review.</h1>
+            <p className="phero__lead">Whether you've just had a loss or simply want to understand your rights, a licensed public adjuster will review your situation — free, with no obligation. We represent property owners, never insurance companies.</p>
+
+            <ul className="contactlist">
+              <li>
+                <span className="contactlist__ic"><i data-lucide="phone" aria-hidden="true"></i></span>
+                <span><span className="contactlist__lbl">Phone</span><span className="contactlist__val">{A.PHONE}</span></span>
+              </li>
+              <li>
+                <span className="contactlist__ic"><i data-lucide="mail" aria-hidden="true"></i></span>
+                <span><span className="contactlist__lbl">Email</span><span className="contactlist__val">{A.EMAIL}</span></span>
+              </li>
+              <li>
+                <span className="contactlist__ic"><i data-lucide="map-pin" aria-hidden="true"></i></span>
+                <span><span className="contactlist__lbl">Office</span><span className="contactlist__val">[BUSINESS_ADDRESS]</span></span>
+              </li>
+            </ul>
+
+            <div className="trustblk">
+              <span className="u-eyebrow" style={{color:'var(--sky-300)'}}>Licensed & verifiable</span>
+              <p style={{color:'#DDE8F3', fontSize:'var(--fs-base)', lineHeight:1.6, margin:'8px 0 14px', maxWidth:'46ch'}}>You don't have to take our word for it. Confirm our license directly with the Pennsylvania Insurance Department.</p>
+              <LicenseBadge inverse number={A.LICENSE.number} state={A.LICENSE.label} />
+              <a className="verify-link" href={A.LICENSE.verifyUrl} target="_blank" rel="noopener"><i data-lucide="external-link"></i>Verify license #{A.LICENSE.number} at the PA Insurance Department</a>
+            </div>
+          </div>
+          <div className="formcol"><ContactForm /></div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="What to expect" variant="default">Submitting this form starts a free, no-obligation conversation — it does not create a public adjuster engagement, and no claim outcome is guaranteed. Any public adjuster fees, where they apply, are disclosed and agreed to in writing before any engagement begins. Experience referenced on this site is attributed to our licensed principal — Pennsylvania Resident Public Adjuster #{A.LICENSE.number} — and a second-generation family of public adjusters; Adjustly is a new, independent company.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Prefer to start with a free assessment?</h2>
+          <p>Explore our free, no-obligation services for before, during, and after a loss.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="risk-assessment.html" icon="arrow-right" iconPosition="right">Free Property Risk Assessment</Button>
+            <Button variant="secondary" size="lg" href="settlement-audit.html">Free Claim Settlement Audit</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

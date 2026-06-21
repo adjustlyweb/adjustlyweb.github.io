@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Free Property Damage Emergency Checklist — the practical first-48-hours steps to take after a loss: stay safe, stop further damage, document everything, and protect your claim before you speak with your insurer. Educational, not legal advice.">
+<title>Property Damage Emergency Checklist — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .res__head { display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap; justify-content:space-between; margin-bottom:6px; }
+  .res__ico { width:44px; height:44px; border-radius:var(--radius-md); background:var(--surface-tint); display:flex; align-items:center; justify-content:center; color:var(--blue-500); flex:none; }
+  .res__ico svg { width:24px; height:24px; }
+  .res__step { margin:1.6em 0 0; padding-top:1.2em; border-top:var(--border-1); }
+  .res__step h3 { display:flex; align-items:center; gap:10px; margin:0 0 0.4em; }
+  .res__step h3 .res__n { font-family:var(--font-mono); font-size:var(--fs-sm); color:#fff; background:var(--blue-500); width:26px; height:26px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex:none; }
+  @media print {
+    .adj-header, .ctaband, .adj-footer, .res__print { display:none !important; }
+    .phero { background:#fff !important; color:#000 !important; }
+    .phero h1, .phero__crumb, .phero__lead { color:#000 !important; }
+    .phero__mark { display:none !important; }
+    body { background:#fff; }
+  }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STEPS = [
+  ['Make sure everyone is safe','Your safety comes first — always before the property. If there is fire, gas, structural collapse, or live electrical hazard, get everyone out and call 911. Do not re-enter until it is safe to do so.'],
+  ['Stop further damage — only if you safely can','Insurance policies generally expect you to take reasonable steps to prevent additional damage. If it is safe, shut off the water, cover a roof opening or broken window, or move undamaged belongings away from the affected area. Keep receipts for anything you buy to do this.'],
+  ['Document everything before you move or discard anything','This is the step people most often skip — and most often regret. Photograph and video all of the damage from multiple angles, wide and close-up, before you clean up, move, or throw anything away. Capture the source of the damage too if you can.'],
+  ['Keep the damaged items','Don\'t throw damaged property away until it has been documented and your claim has been evaluated. Set damaged items aside if possible. They can be important evidence of the loss.'],
+  ['Record the details while they\'re fresh','Write down the date and time of the loss, what happened, the weather if relevant, and which areas and items were affected. Memory fades fast during a stressful event — a few notes now will help later.'],
+  ['Review your policy','Locate your insurance policy and declarations page so you understand your coverages, deductibles, and any deadlines for reporting a claim. If you can\'t find it, your insurer or agent can provide a copy.'],
+  ['Talk to a licensed public adjuster before you speak with your insurer','A licensed public adjuster represents you — not the insurance company. Speaking with one first can help you understand your rights and avoid early mistakes. A free, no-obligation review is available.'],
+  ['Keep a claim diary','From this point forward, log every phone call, email, and visit: the date, who you spoke with, and what was said or agreed. A simple running record keeps your claim organized and protects you.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="education.html">Education Center</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Free resource</span>
+          <h1>Property Damage Emergency Checklist</h1>
+          <p className="phero__lead">What to do in the first 48 hours after a loss — to stay safe, limit the damage, and protect your claim. Free to keep, print, or save.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="accent" icon="gift">100% free</Badge>
+            <Badge variant="outline" icon="clipboard-list" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>8-step checklist</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <article className="prose wrap--narrow">
+          <div className="res__head">
+            <div className="res__ico"><i data-lucide="clipboard-list"></i></div>
+            <div className="res__print"><Button variant="secondary" icon="download" onClick={()=>window.print()}>Print / Save as PDF</Button></div>
+          </div>
+          <p className="lede" style={{fontSize:'var(--fs-lead)',color:'var(--slate-600)',lineHeight:'1.6'}}>The hours right after property damage are stressful, and it's easy to do things in the wrong order. This free checklist walks you through it. Work top to bottom — safety first, documentation early, your insurer last.</p>
+
+          {STEPS.map(([t,d],i)=>(
+            <div className="res__step" key={i}>
+              <h3><span className="res__n">{i+1}</span>{t}</h3>
+              <p>{d}</p>
+            </div>
+          ))}
+
+          <div style={{margin:'2em 0 0'}}>
+            <DisclaimerCallout title="Educational, not legal advice">This checklist is free general guidance for property owners — it represents owners' interests, never insurers', and it is not legal advice. Every policy and loss is different, and we do not guarantee any claim outcome. When in doubt, prioritize your safety and consult a licensed professional.</DisclaimerCallout>
+          </div>
+
+          <p style={{marginTop:'1.6em'}}>
+            <Button variant="primary" icon="download" onClick={()=>window.print()}>Print / Save as PDF</Button>
+          </p>
+        </article>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Just had a loss?</h2>
+          <p>Don't navigate it alone. A licensed public adjuster will review your situation free, with no obligation — and we represent you, never your insurer.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="resource-documentation-guide.html">See the documentation guide</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

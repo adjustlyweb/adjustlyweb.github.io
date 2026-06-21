@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Residential property damage advocacy — Adjustly helps homeowners with wind, hail, fire, smoke, water, storm, and other covered losses. We represent homeowners, never insurance companies.">
+<title>For Homeowners — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const LOSSES = ['Wind','Hail','Fire','Smoke','Water Damage','Burst Pipes','Frozen Pipes','Roof Damage','Storm','Hurricane','Tornado','Lightning','Tree Impact','Ice Damage','Collapse','Mold','Hidden Water Damage'];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero phero--split">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb"><a href="who-we-serve.html">Who We Serve</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Residential</span>
+            <h1>Your home is more than a building. Treat the claim that way.</h1>
+            <p className="phero__lead">When damage hits your home, the last thing you should face alone is your insurance company's process. Adjustly helps homeowners document the loss, understand their coverage, and pursue a fair claim — and we can help you prepare before disaster ever strikes.</p>
+            <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'18px'}}>
+              <Badge variant="brand" icon="home">For homeowners</Badge>
+              <Badge variant="accent" icon="shield-check">Owners, not insurers</Badge>
+              <Badge variant="outline" icon="gift" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Free review</Badge>
+            </div>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+              {icon:'hand-coins', label:'Free, no-obligation review'},
+            ]} />
+          </div>
+          <div className="formcol">
+            <div className="phero__cta" style={{flexDirection:'column',alignItems:'stretch'}}>
+              <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right" fullWidth>Get a free claim review</Button>
+              <Button variant="secondary" size="lg" href="risk-assessment.html" fullWidth>Free Property Risk Assessment</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">How we help homeowners</span>
+            <h2>We help homeowners with residential property damage.</h2>
+          </div>
+          <div className="prose">
+            <p>Most homeowners file only a handful of insurance claims in their lifetime. Insurance companies handle thousands every year, with teams of adjusters, estimators, and consultants evaluating each one. That imbalance is exactly why representation exists.</p>
+            <p>An Adjustly advocate works exclusively for you — the policyholder. We help inspect and document the damage, interpret your policy, prepare a detailed claim, and communicate with your carrier, so your loss is fully investigated and fairly presented. We never work for the insurance company.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Types of residential losses</span>
+            <h2>Home damage we help with.</h2>
+            <p>Whatever caused the damage, the question is the same: is your claim being valued fairly? These are common residential losses we help homeowners document.</p>
+          </div>
+          <div className="pills" style={{marginTop:'8px'}}>{LOSSES.map((t,i)=>(<span className="pill" key={i}>{t}</span>))}</div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap split split--even">
+          <div>
+            <span className="u-eyebrow">Before a loss</span>
+            <h2 style={{marginTop:'8px'}}>Free Property Risk Assessment.</h2>
+            <p style={{color:'var(--slate-600)',marginTop:'14px',maxWidth:'46ch'}}>The best time to understand your policy is before you need it. Our free assessment reviews your coverage, inspects for hidden risks, and documents your property — so you're prepared if disaster ever strikes.</p>
+            <div style={{marginTop:'18px'}}><Button variant="primary" href="risk-assessment.html" icon="arrow-right" iconPosition="right">Schedule a free assessment</Button></div>
+          </div>
+          <div>
+            <span className="u-eyebrow">After a loss</span>
+            <h2 style={{marginTop:'8px'}}>Public adjusting for your claim.</h2>
+            <p style={{color:'var(--slate-600)',marginTop:'14px',maxWidth:'46ch'}}>If your home has already been damaged, a licensed public adjuster can represent you through the entire claims process — from inspection and documentation to negotiation and resolution.</p>
+            <ul className="checklist" style={{marginTop:'18px'}}>
+              <li><i data-lucide="check"></i><span>Property inspection and damage documentation</span></li>
+              <li><i data-lucide="check"></i><span>Policy review and coverage interpretation</span></li>
+              <li><i data-lucide="check"></i><span>Detailed claim preparation and estimating</span></li>
+              <li><i data-lucide="check"></i><span>Negotiation with your insurance carrier</span></li>
+            </ul>
+            <div style={{marginTop:'18px'}}><Button variant="secondary" href="services-public-adjusting.html" icon="arrow-right" iconPosition="right">How public adjusting works</Button></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--navy">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap--narrow" style={{position:'relative'}}>
+          <span className="u-eyebrow" style={{color:'var(--sky-300)'}}>An honest word on outcomes</span>
+          <h2 style={{margin:'10px 0 14px'}}>We advocate; we don't guarantee.</h2>
+          <p style={{color:'var(--text-on-inverse-muted)',fontSize:'var(--fs-lead)',lineHeight:'1.6',maxWidth:'64ch'}}>Every home, policy, and loss is different. What a claim may recover depends on your specific coverage, the facts of the loss, and applicable deadlines — and no outcome can be guaranteed. What we promise is experienced, thorough advocacy that works only for you.</p>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="Educational, not legal advice">This page is general information for homeowners and is not legal or insurance advice. Coverage and outcomes depend on your specific policy and the facts of your loss. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company and does not guarantee any claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Damage to your home? Don't face your insurer alone.</h2>
+          <p>Talk to a licensed public adjuster who works only for you. Free claim review, no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="risk-assessment.html">Free Property Risk Assessment</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Umpire services from Adjustly — experienced, impartial umpire professionals for insurance appraisal proceedings. The umpire is a neutral third party who resolves differences between the two appraisers.">
+<title>Umpire Services — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 760px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid var(--sky-300); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); letter-spacing: 0.08em; }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 6px; }
+  .step p { color: var(--slate-600); font-size: var(--fs-sm); margin: 0; line-height: 1.5; }
+  .neutral { background: var(--surface-tint); border:var(--border-1); border-left:4px solid var(--gold-500,#C9A227); border-radius:var(--radius-md); padding:clamp(22px,2.4vw,34px); }
+  .neutral h3 { margin:0 0 8px; }
+  .neutral p { color: var(--slate-600); margin:0; max-width:64ch; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, FaqAccordion, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STEPS = [
+  ['The umpire is appointed','When the two appraisers cannot agree, the policy calls for a neutral umpire. The umpire is impartial — appointed to serve both parties fairly, not to advocate for either side.'],
+  ['The umpire reviews the dispute','The umpire examines the points of disagreement between the appraisers, considers the documentation and the loss, and forms an independent, impartial assessment of the contested items.'],
+  ['A determination is reached','An agreement signed by any two of the three — the two appraisers and the umpire — sets the amount of the loss. The umpire\'s role is to break the deadlock fairly, not to favor anyone.'],
+];
+
+const FAQS = [
+  ['What does an umpire do?','An umpire is a neutral third party in the insurance appraisal process. When the policyholder\'s appraiser and the insurer\'s appraiser cannot agree on the amount of a loss, the umpire impartially resolves the remaining differences. An agreement by any two of the three parties is binding on the amount.'],
+  ['Is the umpire on my side?','No — and that is the point. The umpire is neutral by design. They do not advocate for the policyholder or the insurer. Their role is to be fair, experienced, and impartial so that a stalled dispute can be resolved on the merits.'],
+  ['When is an umpire needed?','An umpire is engaged when appraisal has been invoked and the two appointed appraisers reach a deadlock on the amount of the loss. The policy\'s appraisal clause typically provides for the appointment of an umpire in that situation.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="services.html">Services</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Umpire Services</span>
+          <h1>Umpire Services — neutral resolution for appraisal disputes.</h1>
+          <p className="phero__lead">When two appraisers reach a deadlock, an experienced umpire resolves the difference. The umpire is an impartial third party — serving the process fairly, not either side.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap',margin:'4px 0 22px'}}>
+            <Badge variant="brand" icon="scale">Neutral &amp; impartial</Badge>
+            <Badge variant="outline" icon="gavel" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Appraisal proceedings</Badge>
+          </div>
+          <div className="phero__cta">
+            <Button variant="primary" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Request an umpire</Button>
+            <Button variant="secondary" size="lg" href="services-damage-appraisal.html">Learn about appraisal</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What it is</span>
+            <h2>What does an umpire do?</h2>
+          </div>
+          <div className="prose">
+            <p>The insurance appraisal process is built to resolve disputes over the <em>amount</em> of a covered loss. Each side appoints its own appraiser. When those two appraisers cannot agree, the policy calls for an <strong>umpire</strong> — a neutral third party who resolves the remaining differences between them.</p>
+            <p>The umpire's defining quality is <strong>neutrality</strong>. Unlike the appraisers, who each represent a party, the umpire advocates for no one. They bring experience and impartial judgment so that a deadlocked claim can be settled fairly on the facts. An agreement signed by any two of the three parties determines the amount of the loss.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">How it works</span>
+            <h2>How umpire services resolve a deadlock.</h2>
+          </div>
+          <div className="steps" style={{marginTop:'24px'}}>
+            {STEPS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+          <div className="neutral" style={{marginTop:'28px'}}>
+            <h3>A note on neutrality</h3>
+            <p>When Adjustly serves as umpire, the engagement is fundamentally different from our advocacy work. As umpire we are impartial and serve both parties — that role exists to keep the appraisal process fair. When you need someone on <em>your</em> side, that's public adjusting or appraisal representation, not the umpire role.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Common questions</span>
+            <h2>Umpire services, explained.</h2>
+          </div>
+          <FaqAccordion items={FAQS.map(([q,a])=>({q,a}))} defaultOpen={[0]} />
+          <div className="discrow">
+            <DisclaimerCallout title="Educational, not legal advice">Adjustly represents property owners, never insurers. The umpire role, by contrast, is a neutral one. This page is educational and is not legal advice, and we do not guarantee any claim outcome.</DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Need a neutral umpire for an appraisal?</h2>
+          <p>Contact us to discuss an experienced, impartial umpire for your appraisal proceeding.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Request an umpire</Button>
+            <Button variant="secondary" size="lg" href="services.html">See all services</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

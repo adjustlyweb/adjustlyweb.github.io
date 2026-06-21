@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Adjustly coverage map — Pennsylvania is our licensed home state, and we connect property owners with experienced professionals across much of the United States. Public adjusters are licensed at the state level.">
+<title>Where We Help — Coverage Map — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .mapgrid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 12px; margin-top: 8px; }
+  @media (max-width: 900px){ .mapgrid { grid-template-columns: repeat(6, 1fr); } }
+  @media (max-width: 640px){ .mapgrid { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 380px){ .mapgrid { grid-template-columns: repeat(3, 1fr); } }
+  .statetile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-decoration: none;
+    background: var(--surface-card); border: var(--border-1); border-radius: var(--radius-md); padding: 14px 8px; text-align: center;
+    transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out); }
+  .statetile:hover { border-color: var(--blue-500); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+  .statetile__ab { font-family: var(--font-mono); font-size: var(--fs-base); font-weight: 600; color: var(--text-brand); letter-spacing: 0.04em; }
+  .statetile__name { font-family: var(--font-sans); font-size: 11px; color: var(--slate-600); line-height: 1.1; }
+  .statetile--home { background: var(--navy-700); border-color: var(--navy-700); box-shadow: var(--shadow-md); position: relative; }
+  .statetile--home .statetile__ab { color: #fff; }
+  .statetile--home .statetile__name { color: var(--sky-300); }
+  .statetile--home:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .statetile__star { position: absolute; top: 6px; right: 6px; }
+  .statetile__star svg { width: 13px; height: 13px; color: var(--accent); }
+  .maplegend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 26px; }
+  .maplegend__item { display: flex; align-items: center; gap: 9px; font-size: var(--fs-sm); color: var(--slate-600); }
+  .maplegend__swatch { width: 16px; height: 16px; border-radius: 4px; flex: none; }
+  .maplegend__swatch--home { background: var(--navy-700); }
+  .maplegend__swatch--network { background: var(--surface-card); border: var(--border-1); }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STATES = [
+  ['AL','Alabama'],['AK','Alaska'],['AZ','Arizona'],['AR','Arkansas'],['CA','California'],['CO','Colorado'],
+  ['CT','Connecticut'],['DE','Delaware'],['DC','D.C.'],['FL','Florida'],['GA','Georgia'],['HI','Hawaii'],
+  ['ID','Idaho'],['IL','Illinois'],['IN','Indiana'],['IA','Iowa'],['KS','Kansas'],['KY','Kentucky'],
+  ['LA','Louisiana'],['ME','Maine'],['MD','Maryland'],['MA','Massachusetts'],['MI','Michigan'],['MN','Minnesota'],
+  ['MS','Mississippi'],['MO','Missouri'],['MT','Montana'],['NE','Nebraska'],['NV','Nevada'],['NH','New Hampshire'],
+  ['NJ','New Jersey'],['NM','New Mexico'],['NY','New York'],['NC','North Carolina'],['ND','North Dakota'],['OH','Ohio'],
+  ['OK','Oklahoma'],['OR','Oregon'],['PA','Pennsylvania'],['RI','Rhode Island'],['SC','South Carolina'],['SD','South Dakota'],
+  ['TN','Tennessee'],['TX','Texas'],['UT','Utah'],['VT','Vermont'],['VA','Virginia'],['WA','Washington'],
+  ['WV','West Virginia'],['WI','Wisconsin'],['WY','Wyoming'],
+];
+
+function StateTile({ ab, name }){
+  const home = ab === 'PA';
+  return (
+    <a className={`statetile${home ? ' statetile--home' : ''}`} href="state.html" aria-label={`Property damage advocates in ${name}`}>
+      {home && <span className="statetile__star"><i data-lucide="map-pin" aria-hidden="true"></i></span>}
+      <span className="statetile__ab">{ab}</span>
+      <span className="statetile__name">{name}</span>
+    </a>
+  );
+}
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="about.html">About</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Where We Help</span>
+          <h1>Where We Help</h1>
+          <p className="phero__lead">Adjustly is founded and licensed in Pennsylvania, and we connect property owners with experienced professionals across much of the United States — [STATES_SERVED]. Select a state to learn more about how we help property owners there.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="accent" icon="map-pin">Licensed in Pennsylvania</Badge>
+            <Badge variant="brand" icon="shield-check">We represent owners, not insurers</Badge>
+            <Badge variant="outline" icon="map" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Nationwide network</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Coverage map</span>
+            <h2>Pennsylvania home base, national reach.</h2>
+            <p>Pennsylvania is our licensed home state. Across the rest of the country, Adjustly provides access to experienced public adjusters, damage appraisers, and restoration professionals through our network — subject to state licensing. Network availability: [STATES_SERVED].</p>
+          </div>
+
+          <div className="mapgrid">
+            {STATES.map(([ab,name])=>(<StateTile key={ab} ab={ab} name={name} />))}
+          </div>
+
+          <div className="maplegend">
+            <div className="maplegend__item"><span className="maplegend__swatch maplegend__swatch--home"></span>Licensed home state (Pennsylvania)</div>
+            <div className="maplegend__item"><span className="maplegend__swatch maplegend__swatch--network"></span>Network availability — [STATES_SERVED]</div>
+          </div>
+
+          <div style={{marginTop:'30px',maxWidth:'820px'}}>
+            <DisclaimerCallout title="Licensing is state-specific" variant="warning">
+              Public adjusters are licensed individually in each state, and the services we can offer depend on where licensure exists. Listing a state here does not imply licensure in that state. Adjustly's confirmed licensed jurisdiction is Pennsylvania (Pennsylvania Public Adjuster #1289230); other states are served through our professional network where permitted. Confirmed states served: [STATES_SERVED].
+            </DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Not sure if we cover your area?</h2>
+          <p>Tell us where your property is. A licensed public adjuster will let you know how we can help — free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Ask about my area</Button>
+            <Button variant="secondary" size="lg" href="about.html">Learn about our network</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

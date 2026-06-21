@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Commercial Claims from Adjustly — large-loss specialists for business interruption, income loss, extra expense, property damage, equipment, and inventory. We represent commercial property owners, never insurers.">
+<title>Commercial Claims — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 760px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid var(--sky-300); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); letter-spacing: 0.08em; }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 6px; }
+  .step p { color: var(--slate-600); font-size: var(--fs-sm); margin: 0; line-height: 1.5; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, FaqAccordion, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const COVERS = [
+  ['Business Interruption','Lost income while operations are suspended or reduced because of a covered loss.'],
+  ['Income Loss','The revenue your business would have earned had the damage never occurred.'],
+  ['Extra Expense','The added costs of staying open or resuming operations sooner after a loss.'],
+  ['Property Damage','Physical damage to buildings, structures, and the premises themselves.'],
+  ['Equipment & Machinery','Damaged or destroyed equipment essential to running the business.'],
+  ['Inventory & Stock','Product, materials, and inventory lost or rendered unsellable by the event.'],
+];
+
+const PROPS = ['Apartment Complexes','Hotels','Retail','Industrial','Warehouses','Office Buildings','Churches','Schools'];
+
+const STEPS = [
+  ['Full-scope documentation','Large losses involve more than visible structural damage. We document the building, equipment, inventory, and the financial impact on operations.'],
+  ['Policy & financial analysis','Commercial policies are intricate. We interpret coverages, endorsements, and limits, and work with your financial records to quantify income and extra-expense losses.'],
+  ['Negotiation to resolution','We present the complete, documented claim and negotiate directly with the carrier — so the full impact on your business is on the table, not just the obvious repairs.'],
+];
+
+const FAQS = [
+  ['What makes commercial claims different?','Scale and complexity. A commercial loss often involves structural damage, equipment, inventory, and — critically — the financial impact of interrupted operations. Quantifying lost income and extra expense requires reading both the policy and the business\'s financial records carefully.'],
+  ['What is business interruption coverage?','Business interruption coverage helps replace income a business loses while a covered loss keeps it from operating normally, and can include extra expenses incurred to resume operations. It\'s one of the most overlooked and most valuable parts of a commercial claim. Learn more on our <a href="business-interruption.html">Business Interruption</a> page.'],
+  ['What types of commercial property do you handle?','Our professionals have worked across apartment complexes, hotels, retail, industrial and manufacturing sites, warehouses, office buildings, churches, and schools — residential-scale up through complex large losses.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="services.html">Services</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Commercial Claims</span>
+          <h1>Commercial Claims — large-loss specialists on your side.</h1>
+          <p className="phero__lead">When a loss disrupts a business, the claim is about more than repairs. We handle business interruption, income loss, extra expense, property damage, equipment, and inventory — and we represent owners, never insurers.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap',margin:'4px 0 22px'}}>
+            <Badge variant="brand" icon="building-2">Complex &amp; large losses</Badge>
+            <Badge variant="outline" icon="shield-check" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>We work only for you</Badge>
+          </div>
+          <div className="phero__cta">
+            <Button variant="primary" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a Free Claim Review</Button>
+            <Button variant="secondary" size="lg" href="business-interruption.html">Business interruption</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What it is</span>
+            <h2>What are commercial claims?</h2>
+          </div>
+          <div className="prose">
+            <p>A commercial loss rarely stops at the building. When a business is damaged, the real cost includes the equipment that can't run, the inventory that can't be sold, and — often most significant of all — the income lost while operations are suspended or reduced. Commercial policies are intricate, and the financial side of the claim is easy to under-document.</p>
+            <p>Adjustly handles large and complex commercial losses end to end. We document the physical damage and the financial impact, interpret the policy, and negotiate directly with the carrier so that the full effect on your business is accounted for. <a href="business-interruption.html">Business interruption</a> is frequently the most overlooked — and most valuable — part of these claims.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">What we handle</span>
+            <h2>The full impact of a commercial loss.</h2>
+          </div>
+          <div className="steps" style={{marginTop:'24px'}}>
+            {COVERS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">{String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Property types we serve</span>
+            <h2>From apartment complexes to schools.</h2>
+          </div>
+          <div className="pills" style={{marginTop:'16px'}}>{PROPS.map((t,i)=>(<span className="pill" key={i}>{t}</span>))}</div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">How it works</span>
+            <h2>How we handle a large loss.</h2>
+          </div>
+          <div className="steps" style={{marginTop:'24px'}}>
+            {STEPS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <div className="shead shead--plain"><span className="u-eyebrow">Common questions</span>
+            <h2>Commercial claims, explained.</h2>
+          </div>
+          <FaqAccordion items={FAQS.map(([q,a])=>({q,a}))} defaultOpen={[0]} />
+          <div className="discrow">
+            <DisclaimerCallout title="Educational, not legal advice">Adjustly represents property owners, never insurers. This page is educational and is not legal advice, and we do not guarantee any claim outcome.</DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>A loss disrupted your business?</h2>
+          <p>Let large-loss specialists review your situation — free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a Free Claim Review</Button>
+            <Button variant="secondary" size="lg" href="business-interruption.html">Learn about business interruption</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

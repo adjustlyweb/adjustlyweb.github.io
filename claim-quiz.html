@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Do I Have a Claim? — a short, educational self-assessment that helps property owners decide whether it may be worth speaking with a licensed public adjuster. Educational only — not legal or coverage advice.">
+<title>Do I Have a Claim? — Educational Assessment — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .quizcard { background: var(--surface-card); border: var(--border-1); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+    padding: clamp(24px,3vw,44px); max-width: 720px; margin-inline: auto; }
+  .quiz__bar { height: 6px; border-radius: 999px; background: var(--surface-tint); overflow: hidden; margin-bottom: 22px; }
+  .quiz__bar > span { display: block; height: 100%; background: var(--blue-500); border-radius: 999px; transition: width var(--dur-base) var(--ease-out); }
+  .quiz__step { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--slate-600); margin-bottom: 12px; }
+  .quiz__q { font-family: var(--font-display); font-size: var(--fs-h3); font-weight: 600; color: var(--text-brand); line-height: 1.2; margin: 0 0 8px; }
+  .quiz__help { color: var(--slate-600); font-size: var(--fs-base); line-height: 1.55; margin: 0 0 24px; }
+  .quiz__yn { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 520px){ .quiz__yn { grid-template-columns: 1fr; } }
+  .quiz__opt { display: flex; align-items: center; justify-content: center; gap: 10px; font-family: var(--font-sans); font-weight: 600;
+    font-size: var(--fs-base); color: var(--text-brand); background: var(--surface-page); border: var(--border-1); border-radius: var(--radius-md);
+    padding: 16px 18px; cursor: pointer; transition: border-color var(--dur-fast) var(--ease-out), background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out); }
+  .quiz__opt:hover { border-color: var(--blue-500); background: var(--surface-tint); transform: translateY(-1px); }
+  .quiz__opt svg { width: 18px; height: 18px; color: var(--blue-500); }
+  .quiz__back { background: none; border: none; cursor: pointer; font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--slate-600); display: inline-flex; align-items: center; gap: 6px; margin-top: 20px; padding: 4px 0; }
+  .quiz__back:hover { color: var(--blue-500); }
+  .quiz__back svg { width: 14px; height: 14px; }
+  .quiz__result { text-align: left; }
+  .quiz__result-ico { width: 56px; height: 56px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+  .quiz__result-ico svg { width: 28px; height: 28px; color: var(--navy-700); }
+  .quiz__result h3 { font-size: var(--fs-h3); color: var(--text-brand); margin: 0 0 12px; }
+  .quiz__result p { color: var(--text-primary); font-size: var(--fs-base); line-height: 1.65; margin: 0 0 16px; }
+  .quiz__result-actions { display: flex; flex-direction: column; gap: 10px; margin: 22px 0 8px; }
+  .quiz__yescount { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--slate-600); letter-spacing: 0.04em; margin-bottom: 18px; }
+  .quiz__disc { margin-top: 22px; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, TextLink, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const QUESTIONS = [
+  { q: 'Did your property suffer sudden, accidental damage?',
+    help: 'Most insurance policies are built to respond to sudden, accidental events — not gradual wear and tear or long-term neglect.' },
+  { q: 'Was it caused by a covered peril like wind, water, fire, storm, or hail?',
+    help: 'Common covered perils include wind, hail, fire, smoke, lightning, and certain types of water damage. Coverage always depends on your specific policy.' },
+  { q: 'Do you have an active insurance policy on the property?',
+    help: 'An in-force homeowners, commercial, or property policy is what gives you the right to file a claim.' },
+  { q: 'Has it been a relatively short time since the loss occurred?',
+    help: 'Policies and many states set deadlines for reporting losses and filing claims. The sooner you act, the more options you tend to have.' },
+  { q: 'Are you unsure whether your settlement was complete — or whether you were paid fairly?',
+    help: 'Even after a payment, damage is sometimes overlooked or policy benefits are missed. If you are not sure, a review can help you understand your position.' },
+];
+
+function Quiz(){
+  const [step, setStep] = React.useState(0);       // 0..QUESTIONS.length-1, or QUESTIONS.length = result
+  const [answers, setAnswers] = React.useState([]); // array of booleans
+
+  React.useEffect(()=>{ window.lucide && window.lucide.createIcons(); });
+
+  const total = QUESTIONS.length;
+  const atResult = step >= total;
+  const progress = atResult ? 100 : Math.round((step / total) * 100);
+
+  function answer(val){
+    const next = answers.slice(0, step);
+    next[step] = val;
+    setAnswers(next);
+    setStep(step + 1);
+  }
+  function back(){ if (step > 0) setStep(step - 1); }
+  function restart(){ setAnswers([]); setStep(0); }
+
+  if (atResult){
+    const yesCount = answers.filter(Boolean).length;
+    return (
+      <div className="quizcard">
+        <div className="quiz__result">
+          <div className="quiz__result-ico"><i data-lucide="help-circle" aria-hidden="true"></i></div>
+          <div className="quiz__yescount">You answered "Yes" to {yesCount} of {total} questions</div>
+          <h3>It may be worth a conversation.</h3>
+          <p>Based on your answers, it could be worthwhile to speak with a licensed public adjuster for a free, no-obligation review of your situation. Many property owners are surprised by what a careful look at their policy and their loss can reveal.</p>
+          <p>This quiz does not — and cannot — tell you whether you have a valid claim or what any claim might be worth. Only a review of your actual policy and the facts of your loss can do that, and no outcome can be guaranteed.</p>
+          <div className="quiz__result-actions">
+            <Button variant="primary" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right" fullWidth>Get a free, no-obligation review</Button>
+            <Button variant="secondary" size="md" href="settlement-audit.html">Already paid? Request a free settlement audit</Button>
+          </div>
+          <button className="quiz__back" onClick={restart}><i data-lucide="rotate-ccw" aria-hidden="true"></i>Start the assessment over</button>
+          <div className="quiz__disc">
+            <DisclaimerCallout title="Educational only" variant="default">
+              This tool is for general education only. It is not legal advice, coverage advice, or a coverage determination, and it does not establish whether you have a valid claim. Whether a loss is covered depends entirely on your specific policy and the facts of your loss. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters.
+            </DisclaimerCallout>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const item = QUESTIONS[step];
+  return (
+    <div className="quizcard">
+      <div className="quiz__bar"><span style={{width: progress + '%'}}></span></div>
+      <div className="quiz__step">Question {step + 1} of {total}</div>
+      <h2 className="quiz__q">{item.q}</h2>
+      <p className="quiz__help">{item.help}</p>
+      <div className="quiz__yn">
+        <button className="quiz__opt" onClick={()=>answer(true)}><i data-lucide="check" aria-hidden="true"></i>Yes</button>
+        <button className="quiz__opt" onClick={()=>answer(false)}><i data-lucide="x" aria-hidden="true"></i>No / Not sure</button>
+      </div>
+      {step > 0 && (
+        <button className="quiz__back" onClick={back}><i data-lucide="arrow-left" aria-hidden="true"></i>Previous question</button>
+      )}
+    </div>
+  );
+}
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="education.html">Education Center</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Do I Have a Claim?</span>
+          <h1>Do I Have a Claim?</h1>
+          <p className="phero__lead">A few quick questions to help you decide whether it may be worth speaking with a licensed public adjuster. There are no right or wrong answers, and nothing here determines coverage — it simply points you toward your next step.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="accent" icon="help-circle">Educational only</Badge>
+            <Badge variant="brand" icon="shield-check">We represent owners, not insurers</Badge>
+            <Badge variant="outline" icon="check" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>5 quick questions</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <Quiz />
+          <div style={{maxWidth:'720px',margin:'28px auto 0'}}>
+            <DisclaimerCallout title="This is not a coverage determination" variant="warning">
+              "Do I Have a Claim?" is an educational self-assessment. It cannot review your policy, evaluate your loss, or tell you whether a claim is valid or what it may be worth. Only a licensed professional reviewing your actual policy and the facts of your loss can do that — and no result or recovery is ever guaranteed.
+            </DisclaimerCallout>
+          </div>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Prefer to just talk it through?</h2>
+          <p>You don't have to take the quiz first. A licensed public adjuster will review your situation — free, with no obligation, and no pressure.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="education.html">Visit the Education Center</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

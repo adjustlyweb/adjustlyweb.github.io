@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Free Insurance Claim Documentation Guide — how to photograph, inventory, and log your property loss so your claim file tells the full story: room-by-room photos, video walkthroughs, contents inventory, receipts, and a communication log. Educational, not legal advice.">
+<title>Insurance Claim Documentation Guide — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .res__head { display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap; justify-content:space-between; margin-bottom:6px; }
+  .res__ico { width:44px; height:44px; border-radius:var(--radius-md); background:var(--surface-tint); display:flex; align-items:center; justify-content:center; color:var(--blue-500); flex:none; }
+  .res__ico svg { width:24px; height:24px; }
+  .res__block { margin:1.8em 0 0; padding-top:1.2em; border-top:var(--border-1); }
+  .res__block h2 { margin:0 0 0.5em; }
+  @media print {
+    .adj-header, .ctaband, .adj-footer, .res__print { display:none !important; }
+    .phero { background:#fff !important; color:#000 !important; }
+    .phero h1, .phero__crumb, .phero__lead { color:#000 !important; }
+    .phero__mark { display:none !important; }
+    body { background:#fff; }
+  }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const BLOCKS = [
+  ['Photograph every room and all of the damage','Go room by room and photograph the entire space, not just the obvious damage. Capture floors, walls, ceilings, fixtures, and built-ins. A complete visual record helps show the condition of your property and the full extent of the loss.', [
+    'Photograph each affected room from every corner',
+    'Capture the damage itself and the source, if visible',
+    'Include undamaged rooms too — they help establish overall condition',
+  ]],
+  ['Capture wide shots and close-ups','Wide shots establish where damage is and how it relates to the rest of the room. Close-ups show texture, depth, and detail — water lines, soot, cracks, mold, warping. You want both for every area of damage.', [
+    'One wide shot showing the whole area',
+    'Several close-ups of specific damage',
+    'A reference object for scale where helpful',
+  ]],
+  ['Record video walkthroughs','A slow, narrated video walkthrough captures context that still photos miss. Walk through each room describing what you\'re seeing and when it happened. Keep the original files.', [
+    'Walk slowly, room to room, with the camera steady',
+    'Narrate what happened and what was affected',
+    'Save the original, full-resolution video files',
+  ]],
+  ['Create a contents inventory','List the damaged or destroyed belongings: what the item is, its approximate age, and its value or replacement cost. The more detail you can provide, the better. Add photos of items where possible.', [
+    'Item description (make/model if known)',
+    'Approximate age or purchase date',
+    'Estimated value or replacement cost',
+  ]],
+  ['Keep all receipts and estimates','Hold on to receipts for emergency repairs, temporary lodging, and any out-of-pocket costs related to the loss, plus any contractor estimates. These support both the damage and your additional expenses.', [
+    'Receipts for emergency mitigation and supplies',
+    'Lodging and additional living expense receipts',
+    'Contractor and repair estimates',
+  ]],
+  ['Log all communications with the insurer','Keep a running record of every interaction: the date, who you spoke with, and what was discussed or agreed. Save emails and letters. A clear communication log keeps your claim organized and protects you.', [
+    'Date, name, and role of each contact',
+    'A short summary of what was said',
+    'Copies of all written correspondence',
+  ]],
+  ['Save the policy and declarations page','Keep your full insurance policy and the declarations page together with your claim file. They define your coverages, limits, deductibles, and endorsements — the basis for everything in the claim.', [
+    'Full policy document',
+    'Declarations (coverage summary) page',
+    'Any endorsements or riders',
+  ]],
+  ['Note all dates and deadlines','Policies and claims often carry deadlines — for reporting the loss, submitting documentation, or other steps. Write down the date of loss and any deadlines your insurer references, and track them so nothing lapses.', [
+    'Date of loss',
+    'Date the claim was reported',
+    'Any submission or response deadlines',
+  ]],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="education.html">Education Center</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Free resource</span>
+          <h1>Insurance Claim Documentation Guide</h1>
+          <p className="phero__lead">How to photograph, inventory, and log your loss so your claim file tells the full story. Free to keep, print, or save.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="accent" icon="gift">100% free</Badge>
+            <Badge variant="outline" icon="camera" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>8-part guide</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <article className="prose wrap--narrow">
+          <div className="res__head">
+            <div className="res__ico"><i data-lucide="file-text"></i></div>
+            <div className="res__print"><Button variant="secondary" icon="download" onClick={()=>window.print()}>Print / Save as PDF</Button></div>
+          </div>
+          <p className="lede" style={{fontSize:'var(--fs-lead)',color:'var(--slate-600)',lineHeight:'1.6'}}>Good documentation is the backbone of a well-handled claim. The more completely and clearly you record your loss, the better your claim file represents what actually happened. This free guide covers the eight kinds of documentation that matter most.</p>
+
+          {BLOCKS.map(([t,d,items],i)=>(
+            <div className="res__block" key={i}>
+              <h2>{i+1}. {t}</h2>
+              <p>{d}</p>
+              <ul className="checklist" style={{marginTop:'14px'}}>
+                {items.map((it,j)=>(<li key={j}><i data-lucide="check"></i><span>{it}</span></li>))}
+              </ul>
+            </div>
+          ))}
+
+          <div style={{margin:'2em 0 0'}}>
+            <DisclaimerCallout title="Educational, not legal advice">This guide is free general information for property owners — it represents owners' interests, never insurers', and it is not legal advice. Every policy and loss is different, and we do not guarantee any claim outcome. For documentation specific to your situation, consult a licensed professional.</DisclaimerCallout>
+          </div>
+
+          <p style={{marginTop:'1.6em'}}>
+            <Button variant="primary" icon="download" onClick={()=>window.print()}>Print / Save as PDF</Button>
+          </p>
+        </article>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Want help documenting and presenting your claim?</h2>
+          <p>A licensed public adjuster can document the loss, interpret your policy, and advocate on your behalf — free review, no obligation, and always on your side.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="resource-emergency-checklist.html">See the emergency checklist</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

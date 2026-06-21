@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Types of losses we help with — wind, hail, fire, smoke, water, storm, hurricane, tornado, and more, across residential and commercial property. Adjustly advocates for property owners, never insurers.">
+<title>Types of Losses We Help With — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const PERILS = ['Wind Damage','Hail Damage','Fire','Smoke','Water Damage','Burst Pipes','Frozen Pipes','Roof Damage','Storm Damage','Hurricane Damage','Tornado Damage','Lightning','Tree Impact','Ice Damage','Collapse','Hidden Water Damage','Mold Related Damage','Flood (where applicable)','Equipment Breakdown','Vandalism','Theft','Vehicle Impact'];
+const COMMERCIAL = ['Commercial Property Losses','Apartment Complexes','Condominiums','Hotels','Retail','Industrial Facilities','Warehouses','Office Buildings','Churches','Schools','Business Interruption'];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero phero--split">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb"><a href="who-we-serve.html">Who We Serve</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Types of Losses</span>
+            <h1>If it damaged your property, we can help you document it.</h1>
+            <p className="phero__lead">From a single storm to a major commercial fire, property losses come in many forms — and so do the policies that cover them. Adjustly advocates for property owners across the full range of perils, residential and commercial. We represent owners, never insurers.</p>
+            <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'18px'}}>
+              <Badge variant="brand" icon="shield-check">Owners, not insurers</Badge>
+              <Badge variant="accent" icon="home">Residential</Badge>
+              <Badge variant="outline" icon="building-2" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Commercial</Badge>
+            </div>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+              {icon:'hand-coins', label:'Free, no-obligation review'},
+            ]} />
+          </div>
+          <div className="formcol">
+            <div className="phero__cta" style={{flexDirection:'column',alignItems:'stretch'}}>
+              <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right" fullWidth>Get a free claim review</Button>
+              <Button variant="secondary" size="lg" href="risk-assessment.html" fullWidth>Free Property Risk Assessment</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">Types of losses we help with</span>
+            <h2>Many causes, one question: is your claim being valued fairly?</h2>
+          </div>
+          <div className="prose">
+            <p>Property damage takes many forms — sudden and dramatic, or slow and hidden. Whatever the cause, the challenge for property owners is the same: understanding what the policy covers and making sure the loss is fully documented. Below are the types of losses we commonly help homeowners and commercial owners with. If you don't see your situation, reach out — this list isn't exhaustive.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Perils & property damage</span>
+            <h2>Damage we help document — residential & commercial.</h2>
+            <p>These perils affect homes and businesses alike. The right documentation and policy interpretation matter for every one of them.</p>
+          </div>
+          <div className="pills" style={{marginTop:'8px'}}>{PERILS.map((t,i)=>(<span className="pill" key={i}>{t}</span>))}</div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Commercial & complex losses</span>
+            <h2>Commercial property and business losses.</h2>
+            <p>Commercial claims add scale and complexity — larger losses, intricate policies, and income on the line. We help owners across these property types and situations.</p>
+          </div>
+          <div className="pills" style={{marginTop:'8px'}}>{COMMERCIAL.map((t,i)=>(<span className="pill" key={i}>{t}</span>))}</div>
+          <div style={{marginTop:'28px',display:'flex',gap:'14px',flexWrap:'wrap'}}>
+            <Button variant="primary" href="commercial.html" icon="arrow-right" iconPosition="right">For commercial owners</Button>
+            <Button variant="secondary" href="business-interruption.html" icon="arrow-right" iconPosition="right">Business interruption</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--navy">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap--narrow" style={{position:'relative'}}>
+          <span className="u-eyebrow" style={{color:'var(--sky-300)'}}>Two paths to advocacy</span>
+          <h2 style={{margin:'10px 0 14px'}}>Find the help that fits your property.</h2>
+          <p style={{color:'var(--text-on-inverse-muted)',fontSize:'var(--fs-lead)',lineHeight:'1.6',maxWidth:'64ch',marginBottom:'22px'}}>Whether you own a home or a commercial property, the next step is the same — talk to an advocate who works only for you.</p>
+          <div style={{display:'flex',gap:'14px',flexWrap:'wrap'}}>
+            <Button variant="inverse" size="lg" href="residential.html" icon="home" iconPosition="left">For homeowners</Button>
+            <Button variant="secondary" size="lg" href="commercial.html" icon="building-2" iconPosition="left">For commercial owners</Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="Educational, not legal advice">This page lists common types of property losses in general terms and is not legal or insurance advice. Whether any particular loss is covered depends on your specific policy and the facts of the loss. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company and does not guarantee any claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Whatever the loss, you don't have to face it alone.</h2>
+          <p>Talk to a licensed public adjuster about your damage and your claim. Free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="services-public-adjusting.html">How public adjusting works</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

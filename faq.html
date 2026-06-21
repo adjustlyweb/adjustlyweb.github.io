@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Adjustly FAQ — clear, honest answers about public adjusters, the insurance claims process, settlement audits, appraisal and umpire services, replacement cost vs. actual cash value, depreciation, commercial claims, and how to verify our license.">
+<title>FAQ — Adjustly Property Damage Advocacy Group</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What does a public adjuster do?","acceptedAnswer":{"@type":"Answer","text":"A public adjuster is a licensed insurance professional who works for the policyholder — not the insurance company. They help inspect and document property damage, interpret the insurance policy, prepare and present the claim, and negotiate with the insurance carrier toward a fair resolution based on the policy."}},
+    {"@type":"Question","name":"Who does a public adjuster work for?","acceptedAnswer":{"@type":"Answer","text":"A public adjuster works exclusively for the policyholder. Adjustly represents property owners, never insurance companies."}},
+    {"@type":"Question","name":"How is a public adjuster different from the insurance company's adjuster?","acceptedAnswer":{"@type":"Answer","text":"The insurance company's adjuster is paid by and represents the insurance company. A public adjuster is licensed to represent the policyholder, advocating for the property owner's interests throughout the claim."}},
+    {"@type":"Question","name":"Is the policy review really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Our initial claim review, Property Risk Assessment, and Claim Settlement Audit are genuinely free with no obligation. If you choose to engage Adjustly for public adjusting services after that, any applicable fees are disclosed clearly and up front before you sign anything."}},
+    {"@type":"Question","name":"What does it cost to work with Adjustly?","acceptedAnswer":{"@type":"Answer","text":"The initial review is free with no obligation. Public adjuster fees, where they apply, are regulated and are explained and agreed to in writing before any engagement begins — never as a surprise."}},
+    {"@type":"Question","name":"Should I call before or after a loss?","acceptedAnswer":{"@type":"Answer","text":"Both are good times. Before a loss, a free Property Risk Assessment can help you understand your coverage and document your property. After a loss, the sooner you speak with a licensed adjuster, the more thoroughly the claim can be documented from the start."}},
+    {"@type":"Question","name":"What is a Property Risk Assessment?","acceptedAnswer":{"@type":"Answer","text":"It is a free, no-obligation review we offer before a loss — covering a coverage-gap review, claim education, a property health and risk inspection, digital property documentation, and personalized recommendations to help you prepare."}},
+    {"@type":"Question","name":"What is a Claim Settlement Audit?","acceptedAnswer":{"@type":"Answer","text":"A free review of a claim you've already been paid on. Our experienced claim professionals examine your settlement and documentation to determine whether your claim may qualify for additional compensation. Every claim is different and no additional recovery can be guaranteed."}},
+    {"@type":"Question","name":"Can you help if my claim was denied or underpaid?","acceptedAnswer":{"@type":"Answer","text":"Often, yes. Many claims are underpaid because damage was overlooked, estimates were incomplete, or policy benefits were never applied. We review the facts and explain your options honestly. No specific outcome can be guaranteed."}},
+    {"@type":"Question","name":"What is the appraisal process?","acceptedAnswer":{"@type":"Answer","text":"Appraisal is a dispute-resolution process written into many property policies. When the policyholder and insurer disagree on the amount of loss, each side selects a competent appraiser, and the two appraisers select an umpire. It is a way to resolve valuation disputes without litigation."}},
+    {"@type":"Question","name":"What is an umpire?","acceptedAnswer":{"@type":"Answer","text":"In the appraisal process, the umpire is a neutral third party selected by the two appraisers. When the appraisers disagree, the umpire helps decide the disputed amount. An agreement signed by any two of the three is typically binding as to the amount of loss."}},
+    {"@type":"Question","name":"What is the difference between Replacement Cost and Actual Cash Value?","acceptedAnswer":{"@type":"Answer","text":"Replacement Cost Value (RCV) is the cost to repair or replace damaged property with new materials of like kind and quality. Actual Cash Value (ACV) is the replacement cost minus depreciation. Which one applies depends on your specific policy."}},
+    {"@type":"Question","name":"How does depreciation work?","acceptedAnswer":{"@type":"Answer","text":"Depreciation reflects the loss in value of property due to age, wear, and condition. On replacement-cost policies, insurers often pay the actual cash value first and may release the recoverable depreciation after repairs are completed and documented, subject to policy terms."}},
+    {"@type":"Question","name":"Do you handle commercial claims and business interruption?","acceptedAnswer":{"@type":"Answer","text":"Yes. We handle residential and commercial claims, including complex commercial losses and business interruption, where income loss often extends well beyond the physical damage itself."}},
+    {"@type":"Question","name":"How do I verify your license?","acceptedAnswer":{"@type":"Answer","text":"Every Pennsylvania public adjuster is licensed by the Pennsylvania Insurance Department, and the public can verify any license at insurance.pa.gov. Our principal is Pennsylvania Resident Public Adjuster #1289230."}}
+  ]
+}
+</script>
+<style>
+  .verify-link { display:inline-flex; align-items:center; gap:6px; margin-top:6px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); text-decoration: none; }
+  .verify-link:hover { text-decoration: underline; }
+  .verify-link svg { width: 14px; height: 14px; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, FaqAccordion, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const FAQS = [
+  ['What does a public adjuster do?',
+   "A public adjuster is a licensed insurance professional who works for the policyholder — not the insurance company. We help inspect and document property damage, interpret your insurance policy, prepare and present your claim, and negotiate with the insurance carrier toward a fair resolution based on your policy."],
+  ['Who does a public adjuster work for?',
+   "A public adjuster works exclusively for the policyholder. Adjustly represents property owners, never insurance companies. Our only obligation is to you."],
+  ["How is a public adjuster different from the insurance company's adjuster?",
+   "The insurance company's adjuster is paid by, and represents the interests of, the insurance company. A public adjuster is licensed to represent the policyholder. Both are licensed professionals — the difference is whose side they're on."],
+  ['Is the policy review really free?',
+   "Yes. Our initial claim review, our Property Risk Assessment, and our Claim Settlement Audit are genuinely free, with no obligation. \"Free\" means free — there's no catch and no commitment to engage us afterward."],
+  ['What does it cost to work with Adjustly?',
+   "The initial review is free with no obligation. If you choose to engage Adjustly for public adjusting services, public adjuster fees — where they apply — are regulated, and we explain and agree to them in writing up front, before any engagement begins. You'll never be surprised by a fee."],
+  ['Should I call before or after a loss?',
+   "Both are good times to talk to us. Before a loss, a free Property Risk Assessment helps you understand your coverage and document your property in advance. After a loss, the sooner you speak with a licensed adjuster, the more thoroughly your claim can be documented from the very beginning."],
+  ['What is a Property Risk Assessment?',
+   "It's a free, no-obligation service we offer before a loss ever happens. It includes a coverage-gap review, claim education, a property health and risk inspection, digital documentation of your property, and personalized recommendations — so you're prepared if disaster strikes."],
+  ['What is a Claim Settlement Audit?',
+   "It's a free review of a claim you've already been paid on. Our experienced claim professionals examine your settlement and documentation to determine whether your claim may qualify for additional compensation. Every claim is different, and no additional recovery can be guaranteed — but many owners are surprised by what a thorough review can find."],
+  ['Can you help if my claim was denied or underpaid?',
+   "Often, yes. Many claims are underpaid because damage was overlooked, estimates were incomplete, hidden damage was missed, or policy benefits were never applied. We review the facts of your loss and your policy, then explain your options honestly. No specific outcome can be guaranteed, but you deserve to know where you stand."],
+  ['What is the appraisal process?',
+   "Appraisal is a dispute-resolution process built into many property insurance policies. When the policyholder and the insurer disagree on the amount of the loss, each side selects a competent, independent appraiser, and the two appraisers select a neutral umpire. It's a way to resolve a disagreement over value without going to court."],
+  ['What is an umpire?',
+   "In the appraisal process, the umpire is the neutral third party selected by the two appraisers. When the appraisers can't agree on the amount of loss, the umpire helps decide the disputed items. An agreement signed by any two of the three is generally binding as to the amount of the loss."],
+  ['What is the difference between Replacement Cost and Actual Cash Value?',
+   "Replacement Cost Value (RCV) is the cost to repair or replace your damaged property with new materials of like kind and quality. Actual Cash Value (ACV) is the replacement cost minus depreciation. Which standard applies to your loss depends on the specific terms of your policy."],
+  ['How does depreciation work?',
+   "Depreciation reflects the loss in value of property due to age, wear, and condition. On a replacement-cost policy, the insurer often pays the actual cash value first and may release the remaining \"recoverable depreciation\" after repairs are completed and documented — subject to your policy's terms and deadlines."],
+  ['Do you handle commercial claims and business interruption?',
+   "Yes. We handle both residential and commercial claims, including complex commercial losses and business interruption. For business owners, the income loss after a covered event often extends well beyond the physical damage, and those losses need to be identified and documented carefully."],
+  ['How do I verify your license?',
+   "Every Pennsylvania public adjuster is licensed by the Pennsylvania Insurance Department, and the public can verify any license at insurance.pa.gov using \"Find Insurance Professional.\" Our principal is Pennsylvania Resident Public Adjuster #1289230. We encourage you to confirm it — almost no competitor invites you to."],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),120); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap" style={{position:'relative', paddingTop:'clamp(48px,6vw,92px)', paddingBottom:'clamp(48px,6vw,92px)'}}>
+          <span className="phero__crumb">Frequently asked questions</span>
+          <h1>Answers, before you ask.</h1>
+          <p className="phero__lead" style={{maxWidth:'58ch'}}>Clear, honest answers about public adjusters, the claims process, and how Adjustly works for property owners. No hype, no guarantees — just the information you need.</p>
+          <div style={{marginTop:'18px'}}>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'shield-check', label:'We represent owners, not insurers'},
+              {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+            ]} />
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">FAQ library</span>
+            <h2>The questions property owners ask us most.</h2>
+          </div>
+          <FaqAccordion items={FAQS.map(([q,a])=>({q,a}))} defaultOpen={[0]} />
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="A note on these answers" variant="default">This FAQ is general education, not legal advice, and it does not promise any specific result. Coverage, deadlines, and outcomes depend on your individual policy and the facts of your loss. Experience referenced here is attributed to our licensed principal — Pennsylvania Resident Public Adjuster #{A.LICENSE.number} — and a second-generation family of public adjusters; Adjustly is a new, independent company and guarantees no claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Still have a question?</h2>
+          <p>Ask a licensed public adjuster directly. Your first review is free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="education.html">Visit the Education Center</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

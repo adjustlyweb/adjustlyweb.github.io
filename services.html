@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Adjustly's services for property owners — public adjusting, damage appraisal, umpire services, property damage consultation, claim review, and commercial claims. We represent owners, never insurers.">
+<title>Our Services — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 900px){ .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid rgba(91,164,214,0.45); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--sky-300); letter-spacing: 0.08em; }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 6px; }
+  .step p { color: var(--text-on-inverse-muted); font-size: var(--fs-sm); margin: 0; line-height: 1.5; }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, ServiceCard, Button, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const PROCESS = [
+  ['Schedule Your Free Consultation','A licensed advocate reviews your situation — free, with no obligation.'],
+  ['Property Inspection','We document the loss thoroughly, including damage that may not be immediately visible.'],
+  ['Policy Review','We read your policy to identify applicable coverages, endorsements, and provisions.'],
+  ['Damage Documentation','Detailed reports, estimates, photographs, and inventories support your claim.'],
+  ['Claim Preparation','We assemble and present the claim the way the policy and the facts require.'],
+  ['Insurance Company Negotiation','We negotiate directly with the carrier to pursue a fair resolution.'],
+  ['Settlement Resolution','We work toward a settlement based on your coverage and the documented loss.'],
+  ['Restoration Support','Our network of restoration professionals can help you rebuild and recover.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <span className="phero__crumb"><a href="index.html">Home</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Services</span>
+          <h1>Our services — how we advocate for property owners.</h1>
+          <p className="phero__lead">Insurance companies have teams of adjusters, engineers, and consultants working their side of every claim. Adjustly puts experienced professionals on yours. Every claim is documented and valued by people who answer to you — never your insurance company.</p>
+          <div className="phero__cta">
+            <Button variant="primary" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a Free Claim Review</Button>
+            <Button variant="secondary" size="lg" href="contact.html#start">Schedule a Consultation</Button>
+          </div>
+          <div style={{marginTop:'22px'}}>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'shield-check', label:'We represent owners, not insurers'},
+              {icon:'file-check', label:'Residential & commercial claims'},
+            ]} />
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">What we do</span>
+            <h2>Six ways Adjustly works for you.</h2>
+          </div>
+          <div className="grid grid-3" style={{marginTop:'28px'}}>
+            <ServiceCard icon="file-check" title="Public Adjusting" href="services-public-adjusting.html">Professional claim representation from inspection through settlement.</ServiceCard>
+            <ServiceCard icon="scale" title="Damage Appraisal" href="services-damage-appraisal.html">Independent appraisal representation when claim disputes arise.</ServiceCard>
+            <ServiceCard icon="gavel" title="Umpire Services" href="services-umpire.html">Experienced neutral umpire professionals for insurance appraisal proceedings.</ServiceCard>
+            <ServiceCard icon="search" title="Property Damage Consultation" href="services-consultation.html">Not sure if you have damage? We help property owners understand their options.</ServiceCard>
+            <ServiceCard icon="file-search" title="Claim Review" href="services-claim-review.html">Already received a settlement? We'll review your documentation to determine whether additional benefits may still be available.</ServiceCard>
+            <ServiceCard icon="building-2" title="Commercial Claims" href="services-commercial.html">Large-loss specialists — business interruption, income loss, and complex claims.</ServiceCard>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--navy">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap" style={{position:'relative'}}>
+          <div className="shead">
+            <div className="shead__num">08</div>
+            <div className="shead__txt"><span className="u-eyebrow" style={{color:'var(--sky-300)'}}>Our process</span>
+              <h2>One clear path, from first damage to final recovery.</h2>
+              <p>However you come to us, the engagement follows the same disciplined steps — so nothing about your claim is left to chance.</p>
+            </div>
+          </div>
+          <div className="steps">
+            {PROCESS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="Educational, not legal advice">Adjustly represents property owners, never insurers. This page is educational and is not legal advice, and we do not guarantee any claim outcome.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Not sure which service you need?</h2>
+          <p>Start with a free, no-obligation review. A licensed public adjuster will help you understand your options.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a Free Claim Review</Button>
+            <Button variant="secondary" size="lg" href="settlement-audit.html">Already had a loss? Get a free audit</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

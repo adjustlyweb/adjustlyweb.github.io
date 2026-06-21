@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="About Adjustly — the new, independent venture of Don Martin Jr., a Pennsylvania Resident Public Adjuster (#1289230) and part of a second-generation family of public adjusters. We represent property owners, never insurance companies.">
+<title>About — Adjustly Property Damage Advocacy Group</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .verify-link { display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); text-decoration: none; }
+  .verify-link:hover { text-decoration: underline; }
+  .verify-link svg { width: 14px; height: 14px; }
+  .section--navy .verify-link { color: var(--sky-300); }
+  .steps { display: grid; grid-template-columns: repeat(4,1fr); gap: clamp(16px,2vw,28px); }
+  @media (max-width: 900px){ .steps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px){ .steps { grid-template-columns: 1fr; } }
+  .step { position: relative; padding-top: 18px; border-top: 2px solid var(--sky-300); }
+  .section--navy .step { border-top-color: rgba(91,164,214,0.45); }
+  .step__n { font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--blue-500); letter-spacing: 0.08em; }
+  .section--navy .step__n { color: var(--sky-300); }
+  .step h3 { font-size: var(--fs-h5); margin: 6px 0 4px; }
+  .step p { color: var(--text-on-inverse-muted); font-size: var(--fs-sm); line-height: 1.5; margin: 0; }
+  .founderbox { background: var(--surface-tint); border: var(--border-1); border-radius: var(--radius-lg); padding: clamp(22px,2.4vw,32px); }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, DisclaimerCallout, LicenseBadge } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const NETWORK = [
+  'Licensed Public Adjusters','Damage Appraisers','Insurance Appraisal Umpires','General Contractors',
+  'Roofing Specialists','Water Mitigation','Fire Restoration','Mold Remediation','HVAC','Plumbers',
+  'Electricians','Structural Engineers','Home Inspectors','Commercial Restoration','Mortgage Professionals',
+  'Real Estate Professionals','Attorneys (when appropriate)','Financial Professionals','Contents Restoration',
+  'Temporary Housing','Disaster Recovery',
+];
+
+const PROCESS = [
+  ['Schedule Your Free Consultation','We listen to what happened and explain how the claims process works — at no cost.'],
+  ['Property Inspection','We document the property and the damage thoroughly and professionally.'],
+  ['Policy Review','We review your coverage to identify the benefits, endorsements, and provisions that may apply.'],
+  ['Damage Documentation','We prepare detailed reports, estimates, and inventories to support the claim.'],
+  ['Claim Preparation','We organize and present the claim clearly and completely.'],
+  ['Insurance Company Negotiation','We advocate directly with the carrier — always on your behalf, never theirs.'],
+  ['Settlement Resolution','We work toward a fair resolution based on your policy and the facts of the loss.'],
+  ['Restoration Support','We help connect you with trusted restoration professionals from our network.'],
+];
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),120); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero" id="top">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap" style={{position:'relative', paddingTop:'clamp(48px,6vw,92px)', paddingBottom:'clamp(48px,6vw,92px)'}}>
+          <span className="phero__crumb">About Adjustly</span>
+          <h1>We are property damage advocates.</h1>
+          <p className="phero__lead" style={{maxWidth:'58ch'}}>Insurance companies have teams of experts working to evaluate every claim. We believe property owners deserve experienced professionals on their side too.</p>
+          <div style={{marginTop:'18px'}}>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'shield-check', label:'We represent owners, not insurers'},
+              {icon:'users', label:'Second-generation family of public adjusters'},
+              {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+            ]} />
+          </div>
+        </div>
+      </section>
+
+      {/* WHO WE ARE */}
+      <section className="section">
+        <div className="wrap">
+          <div className="shead">
+            <div className="shead__num">01</div>
+            <div className="shead__txt"><span className="u-eyebrow">Who we are</span>
+              <h2>Built around one mission.</h2>
+            </div>
+          </div>
+          <div className="prose">
+            <p>Adjustly was created with one mission — to ensure every property owner understands their rights and has access to experienced professionals who can help them recover everything they're entitled to under their policy.</p>
+            <p>Insurance companies employ teams of adjusters, engineers, consultants, and attorneys to evaluate claims. Property owners deserve experienced professionals on their side too. That's why Adjustly exists: to put knowledgeable, independent advocates in the corner of homeowners, business owners, and commercial property owners.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* FOUNDER STORY */}
+      <section className="section section--tint">
+        <div className="wrap split">
+          <div className="split__aside">
+            <span className="u-eyebrow">Our founder</span>
+            <h2 style={{marginTop:'8px'}}>A second-generation family of public adjusters.</h2>
+            <div className="prose" style={{marginTop:'16px'}}>
+              <p>Adjustly is the new, independent venture of <strong>Don Martin Jr.</strong>, a Pennsylvania Resident Public Adjuster (license #{A.LICENSE.number}). Don Jr. is part of a second-generation family of public adjusters with [YEARS]+ years of combined experience advocating for property owners.</p>
+              <p>That lineage is rare for a new brand — and it's the foundation of how Adjustly works: education first, advocacy always, and a posture of honesty about what a claim can and can't deliver. Adjustly is a brand-new, independent company; its experience is attributed to Don Jr. and to the family of public adjusters behind him, not to the entity itself.</p>
+            </div>
+          </div>
+          <div className="founderbox">
+            <span className="u-eyebrow">Licensed & verifiable</span>
+            <h3 style={{margin:'8px 0 16px'}}>You can confirm our license.</h3>
+            <p style={{color:'var(--slate-600)', fontSize:'var(--fs-base)', lineHeight:1.6, marginTop:0}}>Every Pennsylvania public adjuster is licensed by the Pennsylvania Insurance Department, and the public can verify any license directly. We encourage you to check ours.</p>
+            <div style={{marginTop:'18px'}}><LicenseBadge number={A.LICENSE.number} state={A.LICENSE.label} /></div>
+            <a className="verify-link" href={A.LICENSE.verifyUrl} target="_blank" rel="noopener"><i data-lucide="external-link"></i>Verify license #{A.LICENSE.number} at the PA Insurance Department</a>
+          </div>
+        </div>
+      </section>
+
+      {/* MISSION / VISION */}
+      <section className="section">
+        <div className="wrap">
+          <div className="shead">
+            <div className="shead__num">02</div>
+            <div className="shead__txt"><span className="u-eyebrow">What drives us</span>
+              <h2>Our mission and vision.</h2>
+            </div>
+          </div>
+          <div className="split split--even">
+            <div className="split__aside">
+              <span className="u-eyebrow">Our mission</span>
+              <p>To educate property owners about their rights under their insurance policies while providing access to experienced advocates who help ensure every covered loss is fully investigated, properly documented, professionally negotiated, and fairly resolved.</p>
+            </div>
+            <div className="split__aside">
+              <span className="u-eyebrow">Our vision</span>
+              <p>To become America's most trusted property damage advocacy organization by connecting homeowners, businesses, and commercial property owners with experienced claims professionals and restoration experts.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHAT MAKES ADJUSTLY DIFFERENT + NETWORK */}
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead">
+            <div className="shead__num">03</div>
+            <div className="shead__txt"><span className="u-eyebrow">What makes us different</span>
+              <h2>An entire team — not just a negotiator.</h2>
+              <p>Recovering from property damage takes more than one person at a negotiating table. Clients need an entire team of professionals working together. Adjustly is built on collaboration: we coordinate a network of experienced specialists so the right expertise is available at every stage of a claim.</p>
+            </div>
+          </div>
+          <span className="u-eyebrow">Our professional network</span>
+          <div className="pills" style={{marginTop:'16px'}}>{NETWORK.map((t,i)=>(<span className="pill" key={i}>{t}</span>))}</div>
+        </div>
+      </section>
+
+      {/* WHY THE NETWORK MATTERS */}
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">Why our network matters</span>
+            <h2>Local expertise, national resources, one coordinated team.</h2>
+          </div>
+          <div className="prose">
+            <p>Property damage is local — every loss happens in a specific home or building, governed by a specific policy and local conditions. But recovering fully often requires resources that a single office can't provide alone. Adjustly pairs local, on-the-ground expertise with a national network of professionals, all coordinated as one advocacy team working for you.</p>
+            <p>That means the contractor, the appraiser, the engineer, and the public adjuster aren't working in isolation — they're aligned around a single goal: a thorough, well-documented claim and a fair resolution for the property owner.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* OUR PROCESS — 8 STEPS */}
+      <section className="section section--navy">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="wrap" style={{position:'relative'}}>
+          <div className="shead">
+            <div className="shead__num">04</div>
+            <div className="shead__txt"><span className="u-eyebrow" style={{color:'var(--sky-300)'}}>Our process</span>
+              <h2>One clear path, from first damage to final recovery.</h2>
+              <p>You're not walking it alone. Here's how an Adjustly engagement works, step by step.</p>
+            </div>
+          </div>
+          <div className="steps">
+            {PROCESS.map(([t,d],i)=>(
+              <div className="step" key={i}>
+                <div className="step__n">Step {String(i+1).padStart(2,'0')}</div>
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DISCLAIMER */}
+      <section className="section section--tint">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="On experience" variant="default">Adjustly is a new, independent company. All experience referenced on this site is attributed to our licensed principal — Pennsylvania Resident Public Adjuster #{A.LICENSE.number} — and to a second-generation family of public adjusters. Adjustly does not operate under, inherit the record of, or guarantee any claim outcome. Every claim is different, and no additional recovery can be guaranteed.</DisclaimerCallout>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Have a question about your claim?</h2>
+          <p>A licensed public adjuster will review your situation — free, with no obligation.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href={A.CTA.href} icon="arrow-right" iconPosition="right">Get a free claim review</Button>
+            <Button variant="secondary" size="lg" href="services.html">Explore our services</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>
