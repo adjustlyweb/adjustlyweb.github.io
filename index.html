@@ -8,6 +8,15 @@
 <link rel="stylesheet" href="./site.css">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
+  /* BRAND WORDMARK BAND (homepage, directly below sticky header) */
+  .brandband { background: var(--surface-page); border-bottom: 1px solid var(--line-200); text-align: center;
+    padding: clamp(10px,1.4vw,16px) var(--gutter); }
+  .brandband__name { font-family: var(--font-display); font-weight: var(--fw-display); color: var(--navy-900);
+    font-size: clamp(1.45rem,1.2rem+1vw,1.9rem); line-height: 1; letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 36; margin: 0; }
+  .brandband__sub { font-family: var(--font-sans); color: var(--navy-700); font-size: var(--fs-xs);
+    text-transform: uppercase; letter-spacing: var(--ls-eyebrow); margin: 5px 0 0; opacity: 0.9; }
+
   /* HERO (homepage-specific) */
   .hero { position: relative; overflow: hidden; background: var(--navy-900); border-bottom: var(--border-1); isolation: isolate; }
   .hero__media { position: absolute; inset: 0; z-index: 0; background: var(--navy-900); }
@@ -70,6 +79,13 @@
   .leadcta__copy .u-eyebrow { color: var(--sky-300); }
   .leadcta__copy h2 { color: #fff; margin: 16px 0 16px; }
   .leadcta__copy p { color: var(--text-on-inverse-muted); max-width: 46ch; margin: 0 0 24px; }
+  /* Trust statement under the trust bar (47-states + verifiable principal license) */
+  .truststmt { max-width: 64ch; margin: 22px auto 0; text-align: center; }
+  .truststmt p { color: var(--slate-600); font-size: var(--fs-base); line-height: 1.55; margin: 0; }
+  .truststmt__verify { display:inline-flex; align-items:center; gap:6px; margin-top:10px; font-family: var(--font-mono);
+    font-size: var(--fs-xs); color: var(--blue-600); text-decoration: none; }
+  .truststmt__verify:hover { text-decoration: underline; }
+  .truststmt__verify svg { width: 14px; height: 14px; }
   .verify-link { display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--sky-300); text-decoration: none; }
   .verify-link:hover { text-decoration: underline; }
   .verify-link svg { width: 14px; height: 14px; }
@@ -112,7 +128,7 @@ function Hero(){
       </div>
       <div className="hero__grid">
         <div>
-          <span {...r(0,'u-eyebrow hero__eyebrow')}>Protect · Prepare · Recover</span>
+          <span {...r(0,'u-eyebrow hero__eyebrow')}>Commercial · Residential</span>
           <h1 {...r(1)}>Property Damage Happens. Don't Face Your Insurance Company Alone.</h1>
           <p {...r(2,'u-lead hero__lead')}>Adjustly helps homeowners, business owners, and commercial property owners maximize their insurance claim recovery — through experienced public adjusters, damage appraisers, umpires, and a nationwide network of restoration professionals. We represent property owners, never insurance companies.</p>
           <div {...r(3,'hero__cta')}>
@@ -165,7 +181,12 @@ function App(){
   React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),120); return ()=>clearTimeout(t); });
   return (
     <div>
-      <SiteHeader logoSrc={A.LOGO_NAVY} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+      <SiteHeader logoSrc={A.MARK} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+      {/* Brand wordmark band — wording matches the logo lockup exactly */}
+      <div className="brandband">
+        <p className="brandband__name">Adjustly</p>
+        <p className="brandband__sub">Property Damage Advocacy Group</p>
+      </div>
       <Hero/>
 
       <div className="wrap"><TrustBar items={[
@@ -173,7 +194,17 @@ function App(){
         {icon:'users', label:'Second-Generation Family of Adjusters'},
         {icon:'map-pin', label:'Nationwide Network'},
         {icon:'hand-coins', label:'Free, No-Obligation Review'},
-      ]} /></div>
+      ]} />
+        {/* [VERIFY before public] — "47 states" is a regulated licensing claim; confirm the exact
+            count of states with active licensure / network coverage with counsel before going public.
+            The principal license below (#1289230, PA) is real and publicly verifiable. */}
+        <div className="truststmt">
+          <p>Throughout our advocacy group, we have licensed professionals in 47 states across the United States.</p>
+          <a className="truststmt__verify" href={A.LICENSE.verifyUrl} target="_blank" rel="noopener">
+            <i data-lucide="badge-check"></i>Verify our principal license #{A.LICENSE.number} ({A.LICENSE.label}) at the PA Insurance Department
+          </a>
+        </div>
+      </div>
 
       {/* THREE WAYS WE HELP */}
       <section className="section section--tint" id="how">

@@ -25,6 +25,7 @@ window.ADJUSTLY = (function () {
       { label: 'Residential', href: 'residential.html' },
       { label: 'Commercial', href: 'commercial.html' },
     ] },
+    { label: 'Partner Network', href: 'home-services-partners.html' },
     { label: 'Education Center', href: 'education.html' },
     { label: 'About', href: 'about.html' },
     { label: 'FAQ', href: 'faq.html' },

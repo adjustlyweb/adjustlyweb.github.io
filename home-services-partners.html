@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Adjustly's advocacy network refers property owners to vetted home-services partners — roofing, plumbing, water mitigation, fire and mold restoration, HVAC, electrical, contracting, and more. Referral partners, not Adjustly employees.">
+<title>Partner Network — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  .pcard { background: var(--surface-card); border: var(--border-1); border-radius: var(--radius-lg);
+    padding: clamp(22px,2.2vw,30px); display: flex; flex-direction: column; box-shadow: var(--shadow-sm); }
+  .pcard__icon { width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--navy-700); border-radius: var(--radius-sm); color: var(--navy-700);
+    background: var(--ice-100); margin-bottom: 16px; }
+  .pcard__icon svg { width: 24px; height: 24px; }
+  .pcard h3 { margin: 0 0 8px; font-size: var(--fs-h5); }
+  .pcard p { color: var(--slate-600); font-size: var(--fs-base); line-height: 1.55; margin: 0 0 18px; flex: 1; }
+  .pcard__cta { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-sm); color: var(--blue-600);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; }
+  .pcard__cta:hover { color: var(--navy-700); }
+  .pcard__cta svg { width: 16px; height: 16px; transition: transform var(--dur-fast) var(--ease-out); }
+  .pcard__cta:hover svg { transform: translateX(3px); }
+</style></head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, TrustBar, Badge, Button, Field, DisclaimerCallout } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+// Partner categories — sourced from the professional network list (Adjustly_Info_dump.txt, "Our Professional
+// Network Includes"). These are independent, vetted referral partners — NOT Adjustly employees, and no
+// outcome is guaranteed by a referral.
+const PARTNERS = [
+  ['house','Roofing','Storm, hail, wind, and fire roof damage — inspection, repair, and full replacement specialists who document conditions thoroughly for your claim.'],
+  ['wrench','Plumbing','Licensed plumbers for burst pipes, supply-line failures, sewer backups, and water-loss source repair when fast action protects your property.'],
+  ['droplets','Water Mitigation','Emergency water extraction, structural drying, and moisture control to help prevent secondary damage after a water loss.'],
+  ['flame','Fire & Smoke Restoration','Soot, smoke, and char cleanup, odor remediation, and structural restoration after a fire loss.'],
+  ['biohazard','Mold Remediation','Containment, removal, and remediation of mold conditions that often follow water intrusion or hidden leaks.'],
+  ['thermometer','HVAC','Heating, ventilation, and air-conditioning professionals for systems damaged by fire, water, smoke, or storm events.'],
+  ['zap','Electrical','Licensed electricians to assess and repair wiring, panels, and systems affected by water, fire, or storm damage.'],
+  ['hard-hat','General Contracting','Full-scope rebuild and repair contractors to coordinate restoration from demolition through final finishes.'],
+  ['construction','Emergency Board-Up & Tarp','Rapid board-up, roof tarping, and temporary protection to secure your property and limit further damage.'],
+  ['tree-pine','Tree Removal','Removal of fallen and hazardous trees and limbs after storms, and cleanup of resulting property damage.'],
+  ['ruler','Structural Engineering','Licensed engineers to evaluate structural integrity and provide documentation when damage raises safety questions.'],
+  ['sofa','Contents Restoration','Cleaning, deodorizing, inventory, and restoration of damaged personal property, furnishings, and belongings.'],
+];
+
+const CATEGORY_OPTIONS = ['Select the help you need'].concat(
+  PARTNERS.map(p => p[1]), ['Something else / not sure']
+);
+
+function ReferralForm(){
+  return (
+    <form id="request" className="adj-leadform adj-leadform--inverse" noValidate
+          onSubmit={(e)=>{e.preventDefault(); A.submitLead(e,'New Adjustly lead — Home-services partner referral request');}}>
+      <div className="adj-leadform__eyebrow"><i data-lucide="handshake" aria-hidden="true"></i>Request a referral</div>
+      <h3 className="adj-leadform__title">Get connected with a vetted partner</h3>
+      <p className="adj-leadform__sub">Tell us what you need. We'll refer you to a trusted professional in our network — no cost, no obligation.</p>
+      <div className="adj-leadform__grid">
+        <Field label="Full name" name="name" autoComplete="name" required inverse placeholder="Jordan Rivera" />
+        <Field label="Phone" name="phone" type="tel" autoComplete="tel" required inverse placeholder="(555) 010-2837" />
+        <div style={{gridColumn:'1 / -1'}}><Field label="Email" name="email" type="email" autoComplete="email" required inverse placeholder="you@email.com" /></div>
+        <div style={{gridColumn:'1 / -1'}}><Field label="Property address" name="address" autoComplete="street-address" inverse placeholder="123 Main St, City, State ZIP" /></div>
+        <div style={{gridColumn:'1 / -1'}}><Field label="Type of help needed" name="service_needed" as="select" inverse options={CATEGORY_OPTIONS} /></div>
+        <div style={{gridColumn:'1 / -1'}}><Field label="Tell us about the situation" name="details" as="textarea" inverse placeholder="What happened, and how can we help?" /></div>
+      </div>
+      <div className="adj-leadform__actions">
+        <Button type="submit" variant="inverse" size="lg" fullWidth icon="arrow-right" iconPosition="right">Request a referral</Button>
+        <p className="adj-leadform__note">Free and no obligation. Partners are independent professionals in our referral network — not Adjustly employees. We do not guarantee any outcome.</p>
+      </div>
+    </form>
+  );
+}
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  React.useEffect(()=>{ window.lucide&&window.lucide.createIcons(); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.MARK} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} currentHref="home-services-partners.html" />
+
+      <section className="phero phero--split">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner">
+          <div>
+            <span className="phero__crumb"><a href="index.html">Adjustly</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Partner Network</span>
+            <h1>One trusted network, from the day damage occurs.</h1>
+            <p className="phero__lead">Recovering from property damage takes more than a claim — it takes an entire team. Adjustly connects property owners with experienced, vetted home-services partners across the full restoration process, so you have a single trusted resource from first damage to fully restored.</p>
+            <div style={{display:'flex',gap:'10px',flexWrap:'wrap',marginBottom:'18px'}}>
+              <Badge variant="brand" icon="users">Vetted referral network</Badge>
+              <Badge variant="accent" icon="gift">No cost to you</Badge>
+              <Badge variant="outline" icon="shield-check" style={{color:'#DDE8F3',borderColor:'var(--border-on-inverse)'}}>Owners, not insurers</Badge>
+            </div>
+            <TrustBar inverse bordered={false} separators items={[
+              {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+              {icon:'map-pin', label:'Nationwide network'},
+            ]} />
+          </div>
+          <div className="formcol"><ReferralForm /></div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap wrap--text">
+          <div className="shead shead--plain"><span className="u-eyebrow">What makes us different</span>
+            <h2>Built around collaboration, not just negotiation.</h2>
+          </div>
+          <div className="prose">
+            <p>Unlike traditional public adjusting firms, Adjustly is built around a coordinated network. When property damage occurs, owners often need much more than someone to negotiate an insurance claim — they need an entire team of experienced professionals.</p>
+            <p>Adjustly connects clients with that team. The partners below are independent, vetted home-services professionals in our referral network — not Adjustly employees. We refer you to them; the work and any agreement are between you and the partner.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--tint">
+        <div className="wrap">
+          <div className="shead shead--plain"><span className="u-eyebrow">Our professional network</span>
+            <h2>Vetted partners across the full restoration process.</h2>
+            <p>Whatever the loss involves, we can refer you to an experienced professional. Choose a category to request a referral.</p>
+          </div>
+          <div className="grid grid-3" style={{marginTop:'8px'}}>
+            {PARTNERS.map((p,i)=>(
+              <div className="pcard" key={i}>
+                <span className="pcard__icon"><i data-lucide={p[0]} aria-hidden="true"></i></span>
+                <h3>{p[1]}</h3>
+                <p>{p[2]}</p>
+                <a className="pcard__cta" href="#request">Request a referral<i data-lucide="arrow-right" aria-hidden="true"></i></a>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap--narrow">
+          <DisclaimerCallout title="About our referral network">The professionals listed above are independent, vetted partners in Adjustly's referral network — not Adjustly employees, agents, or subsidiaries. A referral is an introduction only; any services, contracts, and payment are arranged directly between you and the partner. Adjustly does not guarantee any repair, restoration, or claim outcome. Experience is attributed to our licensed principal — Pennsylvania Public Adjuster #1289230 — and a second-generation family of public adjusters. Adjustly is a new, independent company.</DisclaimerCallout>
+        </div>
+      </section>
+
+      <section className="ctaband">
+        <img className="navy__mark" src={A.MARK_WHITE} alt="" />
+        <div className="ctaband__inner">
+          <h2>Are you a vetted home-services professional?</h2>
+          <p>We're always growing our network of trusted roofing, restoration, contracting, and trade partners who share our standard of doing right by property owners. If that's you, we'd like to hear from you.</p>
+          <div className="ctaband__cta">
+            <Button variant="inverse" size="lg" href="contact.html#start" icon="arrow-right" iconPosition="right">Become a partner</Button>
+            <Button variant="secondary" size="lg" href="#request">Request a referral</Button>
+          </div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>
