@@ -20,10 +20,14 @@
   /* HERO (homepage-specific) */
   .hero { position: relative; overflow: hidden; background: var(--navy-900); border-bottom: var(--border-1); isolation: isolate; }
   .hero__media { position: absolute; inset: 0; z-index: 0; background: var(--navy-900); }
-  .hero__media > img, .hero__media > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 80% 50%; display: block; }
-  .hero__media > img { z-index: 0; }
-  .hero__media > video { z-index: 1; }
-  @media (prefers-reduced-motion: reduce){ .hero__media > video { display: none; } }
+  /* Four stacked media layers (2 stills + 2 videos). Crossfade via opacity; the incoming layer
+     is raised above the outgoing (is-front) so there is no navy dip between clips. All layers sit
+     below the navy scrim (::after, z-index:2) and the headline grid. */
+  .hero__layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 80% 50%; display: block; z-index: 0; opacity: 0; }
+  .hero__still { transition: opacity .8s ease; }
+  .hero__vid   { transition: opacity 1s ease; }
+  .hero__layer.is-active { opacity: 1; }
+  .hero__layer.is-front  { z-index: 1; }
   .hero__media::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none;
     background:
       linear-gradient(96deg, rgba(11,37,69,0.95) 0%, rgba(11,37,69,0.88) 22%, rgba(11,37,69,0.66) 44%, rgba(11,37,69,0.34) 64%, rgba(11,37,69,0.12) 82%, rgba(11,37,69,0.03) 100%),
@@ -111,20 +115,125 @@ const {
   ServiceCard, ArticleCard, Button, LeadForm, DisclaimerCallout, LicenseBadge
 } = window.AdjustlyDesignSystem_e51731;
 const A = window.ADJUSTLY;
-const POSTER = './assets/img/kitchen-hero-poster.jpg';
-const VIDEO  = './assets/video/kitchen-hero.mp4';
+const POSTER_RES = './assets/img/kitchen-hero-poster.jpg';
+const POSTER_COM = './assets/img/commercial-hero-poster.jpg';
+const VIDEO_RES  = './assets/video/kitchen-hero.mp4';
+const VIDEO_COM  = './assets/video/commercial-hero.mp4';
 
 function Hero(){
   const [on,setOn] = React.useState(false);
+  const resStill = React.useRef(null), comStill = React.useRef(null);
+  const resVid   = React.useRef(null), comVid   = React.useRef(null);
   React.useEffect(()=>{ const t=setTimeout(()=>setOn(true),60); return ()=>clearTimeout(t); },[]);
   const r = (d, base='')=>({ className:`${base?base+' ':''}adj-reveal${on?' adj-reveal--on':''}`, 'data-delay':String(d) });
+
+  // Device/motion-aware hero background. Pure DOM/classList control (no React re-render):
+  //  • reduced-motion → residential still only, no video, no mp4 loaded
+  //  • ≤900px (mobile) → crossfade the two stills, never request an mp4
+  //  • >900px (desktop) → crossfade residential ↔ commercial video, loop, pause when tab hidden
+  React.useEffect(()=>{
+    const RS=resStill.current, CS=comStill.current, RV=resVid.current, CV=comVid.current;
+    if(!RS||!CS||!RV||!CV) return;
+    const FADE_STILL=800, HOLD_STILL=4000, VID_FADE=1000, TAIL=1.0; // TAIL = seconds before clip end
+    let timers=[], interval=null, desktopCleanup=null;
+    const clearTimers=()=>{ timers.forEach(clearTimeout); timers=[]; if(interval){clearInterval(interval); interval=null;} };
+
+    // Raise `inc` above `out` and fade it in; once covered, drop `out`. Only `inc` animates → no dip.
+    const swap=(inc,out,fadeMs)=>{
+      inc.classList.add('is-front','is-active');
+      timers.push(setTimeout(()=>{ if(out){ out.classList.remove('is-active','is-front'); } }, fadeMs));
+    };
+    const reset=()=>{
+      clearTimers();
+      if(desktopCleanup){ desktopCleanup(); desktopCleanup=null; }
+      [RS,CS,RV,CV].forEach(el=>el.classList.remove('is-active','is-front'));
+      RS.classList.add('is-active','is-front');          // residential still is the resting base
+      [RV,CV].forEach(v=>{ try{ v.pause(); }catch(e){} });
+    };
+
+    const startMobile=()=>{
+      RV.removeAttribute('src'); CV.removeAttribute('src'); // guarantee zero mp4 network requests
+      let showingRes=true;
+      interval=setInterval(()=>{
+        if(document.hidden) return;
+        if(showingRes) swap(CS,RS,FADE_STILL); else swap(RS,CS,FADE_STILL);
+        showingRes=!showingRes;
+      }, HOLD_STILL+FADE_STILL);
+    };
+
+    const startDesktop=()=>{
+      RV.muted=true; CV.muted=true;
+      let switching=false;
+      const play=v=>{ const p=v.play(); if(p&&p.catch)p.catch(()=>{}); };
+      if(RV.getAttribute('src')!==VIDEO_RES) RV.src=VIDEO_RES;
+      const onResReady=()=>swap(RV,RS,VID_FADE);          // fade video in over the still once it paints
+      RV.addEventListener('playing', onResReady, {once:true});
+      RV.currentTime=0; play(RV);
+
+      const toCom=()=>{
+        if(switching || !RV.duration || RV.currentTime < RV.duration-TAIL) return;
+        switching=true;
+        if(CV.getAttribute('src')!==VIDEO_COM) CV.src=VIDEO_COM;
+        CV.currentTime=0; play(CV);
+        const go=()=>{ swap(CV,RV,VID_FADE);
+          timers.push(setTimeout(()=>{ try{RV.pause();RV.currentTime=0;}catch(e){} switching=false; }, VID_FADE)); };
+        if(CV.readyState>=2) go(); else CV.addEventListener('playing', go, {once:true});
+      };
+      const toRes=()=>{
+        if(switching || !CV.duration || CV.currentTime < CV.duration-TAIL) return;
+        switching=true;
+        RV.currentTime=0; play(RV);
+        swap(RV,CV,VID_FADE);
+        timers.push(setTimeout(()=>{ try{CV.pause();CV.currentTime=0;}catch(e){} switching=false; }, VID_FADE));
+      };
+      RV.addEventListener('timeupdate', toCom);
+      CV.addEventListener('timeupdate', toRes);
+      const onVis=()=>{ if(document.hidden){ try{RV.pause();}catch(e){} try{CV.pause();}catch(e){} }
+        else { play(CV.classList.contains('is-active')?CV:RV); } };
+      document.addEventListener('visibilitychange', onVis);
+      desktopCleanup=()=>{
+        RV.removeEventListener('timeupdate', toCom); CV.removeEventListener('timeupdate', toRes);
+        RV.removeEventListener('playing', onResReady); document.removeEventListener('visibilitychange', onVis);
+      };
+    };
+
+    const reduceMQ=window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mobileMQ=window.matchMedia('(max-width: 900px)');
+    const apply=()=>{
+      reset();
+      if(reduceMQ.matches){ RV.removeAttribute('src'); CV.removeAttribute('src'); return; } // still only
+      if(mobileMQ.matches){ startMobile(); return; }
+      startDesktop();
+    };
+    apply();
+
+    let rt=null;
+    const onResize=()=>{ clearTimeout(rt); rt=setTimeout(apply,200); };
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onResize);
+    const mqChange=()=>apply();
+    if(reduceMQ.addEventListener){ reduceMQ.addEventListener('change',mqChange); mobileMQ.addEventListener('change',mqChange); }
+    return ()=>{
+      clearTimers();
+      if(desktopCleanup) desktopCleanup();
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('orientationchange', onResize);
+      clearTimeout(rt);
+      if(reduceMQ.removeEventListener){ reduceMQ.removeEventListener('change',mqChange); mobileMQ.removeEventListener('change',mqChange); }
+    };
+  },[]);
+
   return (
     <section className="hero" id="top">
       <div className="hero__media">
-        <img src={POSTER} alt="Smoke- and water-damaged kitchen with a fire-scorched laundry-room doorway" />
-        <video autoPlay muted loop playsInline preload="auto" poster={POSTER} aria-hidden="true" tabIndex={-1}>
-          <source src={VIDEO} type="video/mp4" />
-        </video>
+        <img ref={resStill} className="hero__layer hero__still hero__still--res is-active is-front"
+             src={POSTER_RES} alt="Smoke- and water-damaged kitchen with a fire-scorched laundry-room doorway" aria-hidden="true" />
+        <img ref={comStill} className="hero__layer hero__still hero__still--com"
+             src={POSTER_COM} alt="" aria-hidden="true" />
+        <video ref={resVid} className="hero__layer hero__vid hero__vid--res" muted playsInline preload="auto"
+               data-src={VIDEO_RES} aria-hidden="true" tabIndex={-1}></video>
+        <video ref={comVid} className="hero__layer hero__vid hero__vid--com" muted playsInline preload="none"
+               data-src={VIDEO_COM} aria-hidden="true" tabIndex={-1}></video>
       </div>
       <div className="hero__grid">
         <div>
