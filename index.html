@@ -83,13 +83,30 @@
   .leadcta__copy .u-eyebrow { color: var(--sky-300); }
   .leadcta__copy h2 { color: #fff; margin: 16px 0 16px; }
   .leadcta__copy p { color: var(--text-on-inverse-muted); max-width: 46ch; margin: 0 0 24px; }
-  /* Trust statement under the trust bar (47-states + verifiable principal license) */
-  .truststmt { max-width: 64ch; margin: 22px auto 0; text-align: center; }
-  .truststmt p { color: var(--slate-600); font-size: var(--fs-base); line-height: 1.55; margin: 0; }
-  .truststmt__verify { display:inline-flex; align-items:center; gap:6px; margin-top:10px; font-family: var(--font-mono);
-    font-size: var(--fs-xs); color: var(--blue-600); text-decoration: none; }
-  .truststmt__verify:hover { text-decoration: underline; }
-  .truststmt__verify svg { width: 14px; height: 14px; }
+  /* TRUST BAND — institutional navy band that continues the hero (proof points + reach + license verify) */
+  .trustband { background: var(--navy-900); color: #fff; position: relative; overflow: hidden;
+    margin-top: -1px; border-top: 1px solid rgba(201,162,39,0.40); }
+  .trustband__inner { max-width: var(--container-wide); margin-inline: auto;
+    padding: clamp(26px,3.4vw,48px) var(--gutter);
+    display: flex; flex-direction: column; align-items: center; gap: clamp(18px,2.4vw,28px); }
+  .trustband .adj-trustbar { justify-content: center; }
+  .trustband__rule { width: min(240px, 64%); height: 1px; border: 0; margin: 0;
+    background: linear-gradient(90deg, transparent, rgba(201,162,39,0.55), transparent); }
+  .trustband__reach { font-family: var(--font-display); font-weight: var(--fw-display); color: #fff;
+    font-size: clamp(1.15rem, 1rem + 0.85vw, 1.6rem); line-height: 1.3; letter-spacing: -0.01em;
+    text-align: center; max-width: 38ch; margin: 0; font-variation-settings: "opsz" 32; }
+  .trustband__verify { display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--font-sans); font-size: var(--fs-sm); font-weight: 500; line-height: 1.35;
+    color: #fff; text-decoration: none; text-align: left;
+    padding: 11px 18px; border-radius: var(--radius-md);
+    border: 1px solid var(--gold-500, #C9A227); background: rgba(201,162,39,0.07);
+    transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast); }
+  .trustband__verify:hover { background: rgba(201,162,39,0.15); border-color: #D9B94A; }
+  .trustband__verify svg { width: 17px; height: 17px; color: var(--gold-500, #C9A227); flex: none; }
+  @media (max-width: 560px){
+    .trustband__verify { font-size: var(--fs-xs); padding: 10px 14px; align-items: flex-start; }
+    .trustband__verify svg { margin-top: 1px; }
+  }
   .verify-link { display:inline-flex; align-items:center; gap:6px; margin-top:14px; font-family: var(--font-mono); font-size: var(--fs-xs); color: var(--sky-300); text-decoration: none; }
   .verify-link:hover { text-decoration: underline; }
   .verify-link svg { width: 14px; height: 14px; }
@@ -298,22 +315,25 @@ function App(){
       </div>
       <Hero/>
 
-      <div className="wrap"><TrustBar items={[
-        {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
-        {icon:'users', label:'Second-Generation Family of Adjusters'},
-        {icon:'map-pin', label:'Nationwide Network'},
-        {icon:'hand-coins', label:'Free, No-Obligation Review'},
-      ]} />
-        {/* [VERIFY before public] — "47 states" is a regulated licensing claim; confirm the exact
-            count of states with active licensure / network coverage with counsel before going public.
-            The principal license below (#1289230, PA) is real and publicly verifiable. */}
-        <div className="truststmt">
-          <p>Throughout our advocacy group, we have licensed professionals in 47 states across the United States.</p>
-          <a className="truststmt__verify" href={A.LICENSE.verifyUrl} target="_blank" rel="noopener">
-            <i data-lucide="badge-check"></i>Verify our principal license #{A.LICENSE.number} ({A.LICENSE.label}) at the PA Insurance Department
+      {/* TRUST BAND — institutional navy band continuing the hero */}
+      <section className="trustband">
+        <div className="trustband__inner">
+          <TrustBar inverse center bordered={false} items={[
+            {icon:'badge-check', label:'Licensed PA Public Adjuster #1289230'},
+            {icon:'users', label:'Second-Generation Family of Adjusters'},
+            {icon:'map-pin', label:'Nationwide Network'},
+            {icon:'hand-coins', label:'Free, No-Obligation Review'},
+          ]} />
+          <hr className="trustband__rule" />
+          {/* [VERIFY before public] — "47 states" is a regulated licensing claim; confirm the exact
+              count of states with active licensure / network coverage with counsel before going public.
+              The principal license below (#1289230, PA) is real and publicly verifiable. */}
+          <p className="trustband__reach">Throughout our advocacy group, we have licensed professionals in 47 states across the United States.</p>
+          <a className="trustband__verify" href={A.LICENSE.verifyUrl} target="_blank" rel="noopener">
+            <i data-lucide="shield-check"></i>Verify our principal license #{A.LICENSE.number} ({A.LICENSE.label}) at the PA Insurance Department
           </a>
         </div>
-      </div>
+      </section>
 
       {/* THREE WAYS WE HELP */}
       <section className="section section--tint" id="how">
