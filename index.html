@@ -55,8 +55,8 @@
   .crisis__step span:last-child { font-size: var(--fs-sm); color: #DDE8F3; line-height:1.4; }
 
   /* Three Ways We Help */
-  .ways { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--grid-gap); }
-  @media (max-width: 880px){ .ways { grid-template-columns: 1fr; } }
+  .ways { display: grid; grid-template-columns: repeat(2,1fr); gap: var(--grid-gap); }
+  @media (max-width: 720px){ .ways { grid-template-columns: 1fr; } }
   .way { background: #fff; border: var(--border-1); border-radius: var(--radius-lg); padding: clamp(24px,2.4vw,34px); display: flex; flex-direction: column; box-shadow: var(--shadow-sm); }
   .way__tag { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--blue-500); }
   .way h3 { margin: 10px 0 8px; }
@@ -341,8 +341,8 @@ function App(){
           <div className="shead">
             <div className="shead__num">01</div>
             <div className="shead__txt"><span className="u-eyebrow">Protect · Prepare · Recover</span>
-              <h2>Three ways we help property owners.</h2>
-              <p>Every other public adjuster says "call us after you have damage." Adjustly is with you before the loss, during the claim, and after the insurer has already paid.</p>
+              <h2>Four ways we help property owners.</h2>
+              <p>Every other public adjuster says "call us after you have damage." Adjustly is with you before the loss, during the claim, after the insurer has already paid, and when it's time to restore your property.</p>
             </div>
           </div>
           <div className="ways">
@@ -354,7 +354,7 @@ function App(){
             </div>
             <div className="way">
               <span className="way__tag">During the claim</span>
-              <h3>Professional Claim Representation</h3>
+              <h3>Professional Claims Representation</h3>
               <p>Our licensed public adjusters advocate on your behalf throughout the insurance claims process — never for the insurer.</p>
               <Button variant="secondary" href="services-public-adjusting.html" icon="arrow-right" iconPosition="right">Learn more</Button>
             </div>
@@ -363,6 +363,12 @@ function App(){
               <h3>Free Claim Settlement Audit</h3>
               <p>Already received an insurance payment? We'll review it to determine whether additional compensation may still be available.</p>
               <Button variant="primary" href="settlement-audit.html" icon="arrow-right" iconPosition="right">Request your audit</Button>
+            </div>
+            <div className="way">
+              <span className="way__tag">Restore and rebuild</span>
+              <h3>Connect With a Vetted Contractor</h3>
+              <p>When it's time to rebuild, we connect you with a professional, vetted contractor or restoration company from our network — so you have a trusted team from first damage to fully restored.</p>
+              <Button variant="secondary" href="home-services-partners.html" icon="arrow-right" iconPosition="right">Explore our network</Button>
             </div>
           </div>
         </div>
