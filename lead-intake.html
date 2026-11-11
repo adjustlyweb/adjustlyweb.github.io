@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>New Lead Intake — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  body { background: var(--surface-tint, #F8FAFC); }
+  .li-bar { background: var(--navy-800, #0B2545); padding: 14px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+  .li-bar img { height: 30px; width:auto; }
+  .li-bar span { font-family: var(--font-mono); font-size: var(--fs-xs); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--sky-300, #9CC3E6); }
+  .li-wrap { max-width: 640px; margin: 0 auto; padding: 22px 16px 60px; }
+  .li-wrap h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); margin: 0 0 6px; }
+  .li-intro { color: var(--slate-600); margin: 0 0 18px; }
+  .li-wrap .adj-leadform__grid { grid-template-columns: 1fr; }
+  .li-wrap .adj-field__control { font-size: 16px; padding: 0.85em 0.9em; } /* 16px stops iOS zoom */
+  .li-wrap .adj-btn { min-height: 52px; }
+  .li-ref { display:flex; gap:10px; align-items:center; padding:12px 14px; border-radius: var(--radius-md); background:#fff; border:1px solid var(--slate-200); margin-bottom:16px; font-size: var(--fs-sm); }
+  .li-ref svg { color: var(--blue-500); flex:none; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+/* INTERNAL PAGE — never link this from the public site, nav, sitemap or robots.txt.
+   Advocates get it as lead-intake.html?ref=THEIRCODE ; the team can use it without a code. */
+const { Button, Field } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STATES = ['','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+const LOSSES = ['','Water','Fire','Smoke','Wind','Hail','Storm / hurricane','Roof','Frozen pipes','Mold','Lightning','Tree damage','Theft / vandalism','Collapse','Vehicle impact','Business interruption','Other'];
+
+const REF = (new URLSearchParams(window.location.search).get('ref') || '').replace(/[^A-Za-z0-9-]/g,'').slice(0,64);
+
+function LeadForm(){
+  React.useEffect(()=>{ window.lucide && window.lucide.createIcons(); });
+  return (
+    <form className="adj-leadform" noValidate
+      onSubmit={(e)=>{ e.preventDefault(); A.submitLead(e,'New lead intake','lead',{
+        success:'Lead received — the Adjustly team has been notified.' }); }}>
+
+      {REF
+        ? <div className="li-ref"><i data-lucide="link" aria-hidden="true"></i><span>Submitting with referral code <strong>{REF}</strong></span></div>
+        : null}
+      <input type="hidden" name="ref" defaultValue={REF} />
+
+      <div className="adj-leadform__grid">
+        <p className="adj-formsec">Submitted by</p>
+        {!REF && <Field label="Referral code" name="ref_entry" optional hint="Leave blank if you're on the Adjustly team." autoComplete="off" />}
+        <Field label="Your name" name="submitter_name" autoComplete="name" required />
+        <Field label="Your email" name="submitter_email" type="email" autoComplete="email" required />
+        <Field label="Your phone" name="submitter_phone" type="tel" autoComplete="tel" optional />
+
+        <p className="adj-formsec">Property owner (new lead)</p>
+        <Field label="Owner's full name" name="owner_name" required autoComplete="off" />
+        <Field label="Owner's phone" name="owner_phone" type="tel" required autoComplete="off" />
+        <Field label="Owner's email" name="owner_email" type="email" optional autoComplete="off" />
+
+        <p className="adj-formsec">The loss</p>
+        <Field label="Property address" name="property_address" required placeholder="Street, city, ZIP" autoComplete="off" />
+        <Field label="Property state" name="property_state" as="select" required options={STATES} />
+        <Field label="Property type" name="property_type" as="select" required options={['','Residential','Commercial','Multi-family / HOA','Other']} />
+        <Field label="Type of loss" name="loss_type" as="select" required options={LOSSES} />
+        <Field label="Date of loss" name="date_of_loss" type="date" required />
+        <Field label="Insurance company" name="carrier" optional placeholder="e.g. State Farm" />
+        <Field label="Has a claim been filed?" name="claim_filed" as="select" required options={['','Yes','No','Not sure']} />
+        <Field label="What happened?" name="description" as="textarea" optional placeholder="Short description of the damage" />
+      </div>
+
+      <div className="adj-upload">
+        <label htmlFor="dec_page" className="adj-upload__label"><i data-lucide="file-text" aria-hidden="true"></i>Declarations page <span className="adj-upload__opt">(optional — can send later)</span></label>
+        <input id="dec_page" type="file" name="declarations" data-kind="declarations" accept="image/*,application/pdf" />
+        <span className="adj-upload__hint">PDF or a photo of the page.</span>
+      </div>
+      <div className="adj-upload">
+        <label htmlFor="photos" className="adj-upload__label"><i data-lucide="camera" aria-hidden="true"></i>Damage photos <span className="adj-upload__opt">(optional)</span></label>
+        <input id="photos" type="file" name="photos" data-kind="photo" accept="image/*" multiple />
+        <span className="adj-upload__hint">Up to 12 photos. They're resized on your phone before sending.</span>
+      </div>
+
+      <div className="adj-leadform__grid" style={{marginTop:'14px'}}>
+        <label className="adj-check adj-consent">
+          <input type="checkbox" name="owner_consent" required data-label="Owner agreed to be contacted" />
+          The property owner agreed that Adjustly may contact them about this claim.
+        </label>
+        <div className="adj-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabIndex="-1" autoComplete="off" /></label></div>
+      </div>
+
+      <div className="adj-leadform__actions">
+        <Button type="submit" variant="primary" size="lg" fullWidth icon="send" iconPosition="right">Submit lead</Button>
+        <p className="adj-leadform__note">Internal intake for Adjustly advocates and team. Please don't share this page publicly.</p>
+      </div>
+    </form>
+  );
+}
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  return (
+    <div>
+      <div className="li-bar"><img src={A.LOGO_WHITE} alt="Adjustly" /><span>Internal</span></div>
+      <main className="li-wrap">
+        <h1>New lead intake</h1>
+        <p className="li-intro">Send us a property owner with damage. We'll review the claim and follow up.</p>
+        <LeadForm />
+      </main>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

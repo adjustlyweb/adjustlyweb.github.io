@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Apply to join the Adjustly advocate network — as a claim referral advocate, a contractor advocate, or both.">
+<title>Become an Advocate — Adjustly</title>
+<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="./site.css">
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="./_ds_bundle.js"></script>
+<script src="./site-common.js"></script>
+<script type="text/babel">
+const { SiteHeader, SiteFooter, Badge, Button, Field } = window.AdjustlyDesignSystem_e51731;
+const A = window.ADJUSTLY;
+
+const STATES = ['','Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming'];
+const TRADES = ['Emergency water mitigation','Fire & smoke restoration','Mold remediation','Board-up & tarping','Roofing','Plumbing','Electrical','HVAC','General contracting / rebuild','Tree removal','Other'];
+const TYPES = [
+  { key:'claim', label:'Claim Referral Advocate', sub:'You meet property owners with damage and refer their claims to us (claim referral & claim prep).' },
+  { key:'contractor', label:'Contractor Advocate', sub:'Emergency services and permanent-repair trades who want work from our network.' },
+  { key:'both', label:'Both', sub:'You refer claims and you are also a contractor.' },
+];
+
+function Checks({ legend, name, items, required }){
+  return (
+    <fieldset className="adj-checks">
+      <legend>{legend}{required && <span className="adj-field__req" aria-hidden="true">*</span>}</legend>
+      <div className="adj-checks__grid">
+        {items.map((t,i)=>(
+          <label className="adj-check" key={i}><input type="checkbox" name={name} value={t} required={required && i===0} data-label={legend} />{t}</label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
+function initialType(){
+  const h = (window.location.hash || '').replace('#','');
+  return ['claim','contractor','both'].includes(h) ? h : 'claim';
+}
+
+function ApplicationForm(){
+  const [type, setType] = React.useState(initialType);
+  const [done, setDone] = React.useState(false);
+  React.useEffect(()=>{ window.lucide && window.lucide.createIcons(); });
+  React.useEffect(()=>{
+    const onHash = ()=>{ setType(initialType()); setDone(false); };
+    window.addEventListener('hashchange', onHash);
+    return ()=>window.removeEventListener('hashchange', onHash);
+  }, []);
+  const showClaim = type === 'claim' || type === 'both';
+  const showContractor = type === 'contractor' || type === 'both';
+  const label = TYPES.find(t=>t.key===type).label;
+
+  return (
+    <form className="adj-leadform" noValidate id="apply"
+      onSubmit={(e)=>{ e.preventDefault(); A.submitLead(e,'New advocate application','advocate',{
+        success:'Thank you — your application was received. Our team reviews every application personally and will follow up by email.',
+        onSuccess:()=>setDone(true) }); }}>
+      <div className="adj-leadform__eyebrow"><i data-lucide="user-plus" aria-hidden="true"></i>Advocate application</div>
+      <h3 className="adj-leadform__title">Apply to join the network</h3>
+      <p className="adj-leadform__sub">Choose how you'd like to work with us. It takes about three minutes.</p>
+
+      <div className="adj-toggle" role="group" aria-label="Advocate type">
+        {TYPES.map(t=>(
+          <button type="button" key={t.key} className="adj-toggle__opt" aria-pressed={type===t.key}
+            onClick={()=>{ setType(t.key); setDone(false); history.replaceState(null,'','#'+t.key); }}>
+            <strong>{t.label}</strong><span>{t.sub}</span>
+          </button>
+        ))}
+      </div>
+      <input type="hidden" name="applying_as" value={label} data-label="Applying as" />
+
+      <div className="adj-leadform__grid">
+        <p className="adj-formsec">About you</p>
+        <Field label="Full name" name="name" autoComplete="name" required placeholder="Jordan Rivera" />
+        <Field label="Phone" name="phone" type="tel" autoComplete="tel" required placeholder="(555) 010-2837" />
+        <div className="adj-span2"><Field label="Email" name="email" type="email" autoComplete="email" required placeholder="you@email.com" /></div>
+        <Field label="City" name="city" autoComplete="address-level2" required placeholder="Philadelphia" />
+        <Field label="State" name="state" as="select" required options={STATES} />
+        <Field label="Company / business name" name="company" optional placeholder="If applicable" />
+        <Field label="What do you do?" name="profession" required placeholder="e.g. Roofer, realtor, insurance agent" />
+        <Field label="Business type" name="business_type" as="select" required
+          options={['','Individual','Sole proprietor','Company (LLC / Inc.)','Other']} />
+        <Field label="Years of experience" name="years" type="number" min="0" optional placeholder="e.g. 8" />
+        <div className="adj-span2"><Field label="Website or social link" name="website_url" optional placeholder="https://" /></div>
+
+        <div hidden={!showClaim} className="adj-span2" style={{display: showClaim ? 'contents' : undefined}}>
+          <p className="adj-formsec">Claim referral advocate</p>
+          <div className="adj-span2"><Field label="How do you come into contact with property owners who have damage?" name="contact_method" as="textarea" required placeholder="e.g. I'm a roofer and see storm damage daily; I'm a property manager…" /></div>
+          <div className="adj-span2"><Field label="Areas you cover (states, counties or cities)" name="claim_areas" required placeholder="e.g. Bucks & Montgomery County, PA" /></div>
+          <Field label="Insurance-related licenses you hold" name="licenses_held" optional placeholder="e.g. adjuster, agent, contractor — or none" />
+          <Field label="Referrals you expect per month" name="expected_referrals" as="select" optional options={['','1–2','3–5','6–10','More than 10','Not sure']} />
+        </div>
+
+        <div hidden={!showContractor} className="adj-span2" style={{display: showContractor ? 'contents' : undefined}}>
+          <p className="adj-formsec">Contractor advocate</p>
+          <Checks legend="Trades / services you provide" name="trades" items={TRADES} required />
+          <div className="adj-span2"><Field label="Service area (counties, cities or ZIP codes)" name="service_area" required placeholder="e.g. Bucks, Montgomery and Philadelphia counties" /></div>
+          <Field label="24/7 emergency response?" name="emergency_247" as="select" required options={['','Yes','No','Some services']} />
+          <Field label="Crew size" name="crew_size" as="select" optional options={['','Just me','2–5','6–15','16–50','More than 50']} />
+          <Field label="Trade license number(s) and state(s)" name="trade_licenses" optional placeholder="If required in your state" />
+          <Field label="General liability insurance?" name="liability_insurance" as="select" required options={['','Yes','No']} />
+          <Field label="Workers' comp coverage?" name="workers_comp" as="select" optional options={['','Yes','No','Not required (no employees)']} />
+          <Field label="Years in business" name="years_in_business" type="number" min="0" optional placeholder="e.g. 12" />
+        </div>
+
+        <p className="adj-formsec">Anything else</p>
+        <Field label="How did you hear about Adjustly?" name="heard_from" optional placeholder="Referral, search, event…" />
+        <Field label="Referred by (name)" name="referred_by" optional placeholder="If someone referred you" />
+        <div className="adj-span2"><Field label="Anything else we should know?" name="notes" as="textarea" optional /></div>
+
+        <label className="adj-check adj-consent">
+          <input type="checkbox" name="consent" required data-label="OK to contact about application" />
+          I agree that Adjustly may contact me by phone or email about this application.
+        </label>
+        <div className="adj-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabIndex="-1" autoComplete="off" /></label></div>
+      </div>
+
+      <div className="adj-leadform__actions">
+        <Button type="submit" variant="primary" size="lg" fullWidth icon="arrow-right" iconPosition="right">Submit application</Button>
+        <p className="adj-leadform__note">Applying is free and creates no obligation. Approved advocates receive next steps by email.</p>
+      </div>
+      {done && <p className="adj-leadform__note" style={{marginTop:'6px'}}>You can close this page, or <a href="index.html">return home</a>.</p>}
+    </form>
+  );
+}
+
+function App(){
+  React.useEffect(()=>{ const t=setTimeout(()=>window.lucide&&window.lucide.createIcons(),100); return ()=>clearTimeout(t); });
+  return (
+    <div>
+      <SiteHeader logoSrc={A.MARK} links={A.NAV} phone={A.PHONE} ctaLabel={A.CTA.label} ctaHref={A.CTA.href} />
+
+      <section className="phero">
+        <img className="phero__mark" src={A.MARK_WHITE} alt="" />
+        <div className="phero__inner" style={{display:'block'}}>
+          <span className="phero__crumb"><a href="index.html">Home</a><i data-lucide="chevron-right" style={{width:'13px',height:'13px'}}></i> Become an Advocate</span>
+          <h1>Become an Adjustly advocate.</h1>
+          <p className="phero__lead">Property owners deserve experienced people on their side. If you meet owners dealing with damage, or you're a contractor who does right by them, we'd like to work with you.</p>
+          <div style={{display:'flex',gap:'10px',flexWrap:'wrap'}}>
+            <Badge variant="accent" icon="users">Claim referral advocates</Badge>
+            <Badge variant="brand" icon="hammer">Contractor advocates</Badge>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="wrap split">
+          <div className="split__aside">
+            <span className="u-eyebrow">How it works</span>
+            <h2 style={{marginTop:'8px'}}>Apply, get approved, start helping owners.</h2>
+            <ul className="checklist" style={{marginTop:'18px'}}>
+              <li><i data-lucide="file-text"></i><span><strong>Apply</strong> — tell us who you are and how you work with property owners.</span></li>
+              <li><i data-lucide="search-check"></i><span><strong>Review</strong> — our team reviews every application personally.</span></li>
+              <li><i data-lucide="pen-line"></i><span><strong>Agreement</strong> — approved advocates receive an agreement to review and sign.</span></li>
+              <li><i data-lucide="handshake"></i><span><strong>Get started</strong> — you'll receive your own referral link and a short guide to working with us.</span></li>
+            </ul>
+            <p style={{marginTop:'18px'}}>Questions first? <a href="contact.html">Contact us</a>.</p>
+          </div>
+          <div><ApplicationForm /></div>
+        </div>
+      </section>
+
+      <SiteFooter logoSrc={A.LOGO_WHITE} />
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+setTimeout(()=>window.lucide&&window.lucide.createIcons(), 140);
+</script>
+</body></html>

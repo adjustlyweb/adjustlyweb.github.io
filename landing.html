@@ -60,42 +60,10 @@ const NAVY = A.LOGO_NAVY;
 const WHITE = A.LOGO_WHITE;
 const MARKW = A.MARK_WHITE;
 
-/* Web3Forms access key — PUBLIC client-side key (safe in HTML, not a secret).
-   Replace the placeholder with the real key from web3forms.com to make forms deliver. */
-const WEB3FORMS_KEY = '[WEB3FORMS_KEY]';
-
-async function submitLead(e){
-  const form = e.target;
-  let status = form.querySelector('.adj-lead-status');
-  if(!status){
-    status = document.createElement('p');
-    status.className = 'adj-lead-status';
-    status.setAttribute('role','status');
-    status.setAttribute('aria-live','polite');
-    form.appendChild(status);
-  }
-  // Staging guard: until a real key is pasted in, don't hit the API — show a clear notice instead.
-  if(WEB3FORMS_KEY.charAt(0) === '['){
-    status.textContent = 'Staging preview — online submission isn’t live yet. To reach a licensed public adjuster now, please email us and we’ll respond personally.';
-    return;
-  }
-  status.textContent = 'Sending…';
-  const data = new FormData(form);                 // all input is treated as untrusted; Web3Forms sanitizes server-side
-  data.append('access_key', WEB3FORMS_KEY);
-  data.append('subject', 'New Adjustly lead — Storm & hurricane claim review');
-  data.append('from_name', 'Adjustly Website');
-  try{
-    const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
-    const json = await res.json();
-    if(json.success){
-      status.textContent = 'Thank you — a licensed public adjuster will review your storm claim and reach out. No cost, no obligation.';
-      form.reset();
-    } else {
-      status.textContent = 'Something went wrong sending your request. Please try again, or email us directly.';
-    }
-  }catch(err){
-    status.textContent = 'Network error — please try again, or email us directly.';
-  }
+/* Submissions go to the shared Adjustly forms backend (site-common.js → Google Sheet). */
+function submitLead(e){
+  return A.submitLead(e, 'New Adjustly lead — Storm & hurricane claim review', 'storm',
+    { success: 'Thank you — a licensed public adjuster will review your storm claim and reach out. No cost, no obligation.' });
 }
 
 function App(){

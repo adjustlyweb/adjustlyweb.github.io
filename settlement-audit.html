@@ -27,7 +27,7 @@ const A = window.ADJUSTLY;
 
 function AuditForm(){
   return (
-    <form className="adj-leadform adj-leadform--inverse" noValidate onSubmit={(e)=>{e.preventDefault(); A.submitLead(e,'New Adjustly lead — Free Claim Settlement Audit');}}>
+    <form className="adj-leadform adj-leadform--inverse" noValidate onSubmit={(e)=>{e.preventDefault(); A.submitLead(e,'New Adjustly lead — Free Claim Settlement Audit','audit');}}>
       <div className="adj-leadform__eyebrow"><i data-lucide="file-search" aria-hidden="true"></i>Free claim settlement audit</div>
       <h3 className="adj-leadform__title">Request your free audit</h3>
       <p className="adj-leadform__sub">Already received a payment? Let's make sure you received everything you were entitled to.</p>
@@ -40,9 +40,10 @@ function AuditForm(){
         <Field label="Claim number" name="claim_number" inverse placeholder="Optional" />
         <div style={{gridColumn:'1 / -1'}}><Field label="Date of loss" name="date_of_loss" type="date" inverse /></div>
       </div>
-      <div className="uploadnote">
-        <i data-lucide="paperclip" aria-hidden="true"></i>
-        <span><strong>Have documents?</strong> After you submit, you'll get a reply with a secure email address — please send your insurance estimate, photos, and any insurance letters there. (Document upload is coming soon.)</span>
+      <div className="adj-upload adj-upload--inverse">
+        <label htmlFor="audit_docs" className="adj-upload__label"><i data-lucide="paperclip" aria-hidden="true"></i>Upload documents <span className="adj-upload__opt">(optional)</span></label>
+        <input id="audit_docs" type="file" name="documents" data-kind="document" multiple accept="image/*,application/pdf" />
+        <span className="adj-upload__hint">Your insurance estimate, photos, and any insurance letters — PDF or photos, up to 10 MB each. You can also send them later.</span>
       </div>
       <div className="adj-leadform__actions">
         <Button type="submit" variant="inverse" size="lg" fullWidth icon="arrow-right" iconPosition="right">Submit audit request</Button>
