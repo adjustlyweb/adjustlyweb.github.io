@@ -181,6 +181,13 @@ window.ADJUSTLY = (function () {
 
   function isHidden(el) { return !!el.closest('[hidden]'); }
 
+  // A dropdown still on its placeholder ("Select one", "Choose…") counts as not answered.
+  function fieldValue(el) {
+    var v = String(el.value || '').trim();
+    if (el.tagName === 'SELECT' && /^(select|choose)\b/i.test(v)) return '';
+    return v;
+  }
+
   function labelFor(form, el) {
     if (el.getAttribute('data-label')) return el.getAttribute('data-label');
     if (el.id) {
@@ -202,7 +209,7 @@ window.ADJUSTLY = (function () {
       var v;
       if (el.type === 'checkbox') { if (!el.checked) return; v = el.value === 'on' ? 'Yes' : el.value; }
       else if (el.type === 'radio') { if (!el.checked) return; v = el.value; }
-      else v = el.value;
+      else v = fieldValue(el);
       if (String(v).trim()) map[el.name].value.push(String(v).trim());
     });
     return order.map(function (k) { return { key: k, label: map[k].label, value: map[k].value.join(', ') }; });
@@ -218,7 +225,7 @@ window.ADJUSTLY = (function () {
         var group = form.querySelectorAll('input[type="checkbox"][name="' + el.name + '"]');
         var any = Array.prototype.some.call(group, function (c) { return c.checked; });
         if (!any) return el;
-      } else if (el.type === 'file' ? !el.files.length : !String(el.value || '').trim()) {
+      } else if (el.type === 'file' ? !el.files.length : !fieldValue(el)) {
         return el;
       }
     }
