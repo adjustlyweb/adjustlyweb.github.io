@@ -73,6 +73,8 @@ function LeadForm(){
         <Field label="Insurance company" name="carrier" optional placeholder="e.g. State Farm" />
         <Field label="Has a claim been filed?" name="claim_filed" as="select" required options={['','Yes','No','Not sure']} />
         <Field label="What happened?" name="description" as="textarea" optional placeholder="Short description of the damage" />
+        <Field label="How did the owner first hear about Adjustly?" name="heard_about" as="select" required
+          options={['','I referred them personally','They found the Adjustly website','They called or emailed us','Other / not sure']} />
       </div>
 
       <div className="adj-upload">

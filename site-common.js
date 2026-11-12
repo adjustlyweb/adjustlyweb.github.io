@@ -3,6 +3,96 @@
    Exposes window.ADJUSTLY so nav/IA, brand assets, CTA, license,
    and the lead-form handler live in ONE place.
    ============================================================ */
+/* ---- Lead credit: special links like /cullen or ?ref=cullen ----
+   Runs immediately on every page. Stores up to 5 link visits (code + time + landing path, nothing personal)
+   in this browser for 180 days. The backend gives credit to the FIRST active code; no code = Website - Direct.
+   ?ref_check=1 shows what this browser is credited to. ?ref_reset=1 clears it (test site only). */
+window.ADJUSTLY_REF = (function () {
+  var KEY = 'adj_ref_v1', DAYS = 180, MAX = 5, CODE_RE = /^[a-z0-9][a-z0-9-]{1,39}$/;
+  var isTest = /\.github\.io$/.test(location.hostname) || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+
+  function readCookie() {
+    var m = document.cookie.match(/(?:^|;\s*)adj_ref_v1=([^;]*)/);
+    return m ? decodeURIComponent(m[1]) : '';
+  }
+  function parse(raw) { try { var v = JSON.parse(raw || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; } }
+  function fresh(list) {
+    var now = Date.now();
+    return list.filter(function (v) {
+      var t = Date.parse(v && v.t);
+      return v && CODE_RE.test(String(v.c || '')) && !isNaN(t) && now - t < DAYS * 86400000;
+    }).slice(0, MAX);
+  }
+  function read() {
+    var raw = '';
+    try { raw = localStorage.getItem(KEY) || ''; } catch (e) {}
+    if (!raw) { try { raw = sessionStorage.getItem(KEY) || ''; } catch (e) {} }
+    if (!raw) raw = readCookie();
+    return fresh(parse(raw));
+  }
+  function write(list) {
+    var raw = JSON.stringify(list);
+    try { localStorage.setItem(KEY, raw); } catch (e) {}
+    try { sessionStorage.setItem(KEY, raw); } catch (e) {}
+    try {
+      var first = list.length ? Date.parse(list[0].t) : Date.now();
+      var left = Math.max(0, Math.floor((first + DAYS * 86400000 - Date.now()) / 1000));
+      document.cookie = KEY + '=' + encodeURIComponent(raw) + '; max-age=' + left + '; path=/; SameSite=Lax' +
+        (location.protocol === 'https:' ? '; Secure' : '');
+    } catch (e) {}
+  }
+  function clear() {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    try { sessionStorage.removeItem(KEY); } catch (e) {}
+    try { document.cookie = KEY + '=; max-age=0; path=/'; } catch (e) {}
+  }
+  function strip(names) {
+    try {
+      var u = new URL(location.href);
+      names.forEach(function (n) { u.searchParams.delete(n); });
+      history.replaceState(history.state, '', u.pathname + (u.search ? u.search : '') + u.hash);
+    } catch (e) {}
+  }
+
+  // Capture (synchronously, before the page renders).
+  try {
+    var qs = new URLSearchParams(location.search);
+    var onLeadPage = /lead-intake(\.html)?$/.test(location.pathname); // advocate's own page: never store
+    if (qs.get('ref_reset') === '1') {
+      if (isTest) clear();
+      strip(['ref_reset', 'ref']); // never store a new code on the same visit as a reset
+    } else if (!onLeadPage) {
+      var code = String(qs.get('ref') || '').trim().toLowerCase();
+      if (code && CODE_RE.test(code)) {
+        var list = read();
+        if (!list.some(function (v) { return v.c === code; }) && list.length < MAX) {
+          list.push({ c: code, t: new Date().toISOString(), p: location.pathname });
+          write(list);
+        }
+        strip(['ref']);
+      }
+    }
+  } catch (e) {}
+
+  // ?ref_check=1 : small banner showing this browser's credit (for testing).
+  try {
+    if (new URLSearchParams(location.search).get('ref_check') === '1') {
+      document.addEventListener('DOMContentLoaded', function () {
+        var l = read(), b = document.createElement('div');
+        var fmt = function (ms) { return new Date(ms).toLocaleDateString(); };
+        b.textContent = l.length
+          ? 'Link credit in this browser: "' + l[0].c + '" since ' + fmt(Date.parse(l[0].t)) + ' (until ' +
+            fmt(Date.parse(l[0].t) + DAYS * 86400000) + ')' + (l.length > 1 ? ' — later links: ' + l.slice(1).map(function (v) { return v.c; }).join(', ') : '')
+          : 'No link credit in this browser — forms here count as Website - Direct.';
+        b.style.cssText = 'position:fixed;left:12px;bottom:12px;z-index:99999;background:#0B2545;color:#fff;padding:10px 14px;border-radius:8px;font:14px/1.4 Arial,sans-serif;max-width:92vw;box-shadow:0 4px 16px rgba(0,0,0,.25)';
+        document.body.appendChild(b);
+      });
+    }
+  } catch (e) {}
+
+  return { visits: read, clear: clear };
+})();
+
 window.ADJUSTLY = (function () {
   var L = './assets/logo/';
 
@@ -220,6 +310,7 @@ window.ADJUSTLY = (function () {
       var json = await postJson({
         action: 'submit', sid: sid, form: key, subject: subject || '',
         website: honey ? honey.value : '', ref: String(refValue).trim(),
+        attr: key === 'lead' ? null : { visits: window.ADJUSTLY_REF ? window.ADJUSTLY_REF.visits() : [], page: location.pathname },
         fields: collectFields(form)
       });
       if (json.ok) {

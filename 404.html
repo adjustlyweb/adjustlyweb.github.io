@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Adjustly</title>
+<script>
+  // Short links typed with capitals or extra slashes (e.g. /Cullen, /cullen/x) -> homepage with ?ref=cullen.
+  (function () {
+    var segs = location.pathname.split('/').filter(Boolean);
+    var slug = (segs[0] || '').toLowerCase();
+    var reserved = /\.(html?|js|css|png|jpe?g|svg|ico|json|txt|xml|webp)$/i.test(segs[segs.length - 1] || '');
+    if (segs.length >= 1 && /^[a-z0-9][a-z0-9-]{1,39}$/.test(slug) && !reserved) {
+      location.replace('/?ref=' + slug + location.hash);
+    }
+  })();
+</script>
+</head><body style="font-family:Arial,sans-serif;padding:32px;color:#0F172A">
+<h1 style="color:#0B2545">Page not found</h1>
+<p><a href="/">Go to the Adjustly homepage</a></p>
+</body></html>
