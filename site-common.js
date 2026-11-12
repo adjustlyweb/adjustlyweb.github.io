@@ -93,6 +93,29 @@ window.ADJUSTLY_REF = (function () {
   return { visits: read, clear: clear };
 })();
 
+/* ---- Spam trap: add a hidden "website" field to every lead form that doesn't already have one.
+   Real people never see or fill it; bots that fill every field are silently ignored by the backend. ---- */
+(function () {
+  function addTrap(form) {
+    if (!form || form.querySelector('[name="website"]')) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'adj-hp';
+    wrap.setAttribute('aria-hidden', 'true');
+    wrap.style.cssText = 'position:absolute!important;left:-10000px;width:1px;height:1px;overflow:hidden';
+    var input = document.createElement('input');
+    input.type = 'text'; input.name = 'website'; input.tabIndex = -1; input.autocomplete = 'off';
+    wrap.appendChild(input);
+    form.appendChild(wrap);
+  }
+  function scan() { Array.prototype.forEach.call(document.querySelectorAll('form.adj-leadform'), addTrap); }
+  try {
+    document.addEventListener('DOMContentLoaded', function () {
+      scan();
+      if (window.MutationObserver) new MutationObserver(scan).observe(document.body, { childList: true, subtree: true });
+    });
+  } catch (e) {}
+})();
+
 window.ADJUSTLY = (function () {
   var L = './assets/logo/';
 
@@ -273,7 +296,10 @@ window.ADJUSTLY = (function () {
     }
 
     var key = formKey || 'review';
-    var sid = newSid();
+    // One submission ID per form fill: a retry after a network error re-sends the SAME ID,
+    // so the backend recognises it instead of creating a duplicate row and alert.
+    if (!form.dataset.sid) form.dataset.sid = newSid();
+    var sid = form.dataset.sid;
     var btn = form.querySelector('[type="submit"]');
     form.dataset.sending = '1';
     if (btn) btn.disabled = true;
@@ -318,6 +344,7 @@ window.ADJUSTLY = (function () {
         if (skipped.length) msg += ' These files were not attached — please email them to us: ' + skipped.join(', ') + '.';
         status.textContent = msg;
         form.reset();
+        delete form.dataset.sid; // next fill-out is a new submission
         if (typeof opts.onSuccess === 'function') opts.onSuccess(json);
       } else {
         status.textContent = 'Something went wrong sending your request. Please try again, or email us directly.';
