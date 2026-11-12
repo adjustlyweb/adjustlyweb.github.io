@@ -58,7 +58,7 @@ const CATEGORY_OPTIONS = ['Select the help you need'].concat(
 function ReferralForm(){
   return (
     <form id="request" className="adj-leadform adj-leadform--inverse" noValidate
-          onSubmit={(e)=>{e.preventDefault(); A.submitLead(e,'New Adjustly lead — Home-services partner referral request','partner');}}>
+          onSubmit={(e)=>{e.preventDefault(); A.submitLead(e,'New Adjustly lead — Home-services partner referral request','partner',{ success: 'Thank you — someone from our team will connect you with a vetted contractor from our network and reach out shortly.' });}}>
       <div className="adj-leadform__eyebrow"><i data-lucide="handshake" aria-hidden="true"></i>Request a referral</div>
       <h3 className="adj-leadform__title">Get connected with a vetted partner</h3>
       <p className="adj-leadform__sub">Tell us what you need. We'll refer you to a trusted professional in our network — no cost, no obligation.</p>
